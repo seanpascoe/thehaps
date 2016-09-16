@@ -24,7 +24,12 @@ class NavBar extends React.Component {
         </div>
       );
     } else {
-      return (<li><Link to="/login">Login</Link></li>);
+      return (
+        <div>
+          <li><Link to="/login">Login</Link></li>
+          <li><Link to="/signup">Sign Up</Link></li>
+        </div>
+      );
     }
   }
 
@@ -35,6 +40,7 @@ class NavBar extends React.Component {
           <a href="#!" className="brand-logo center">My App</a>
           <a href="#" data-activates="mobile" className="button-collapse show-on-large"><i className="material-icons">menu</i></a>
           <ul className="side-nav" id="mobile">
+            <li><Link to="/about">About</Link></li>
            {this.links()}
           </ul>
         </div>
