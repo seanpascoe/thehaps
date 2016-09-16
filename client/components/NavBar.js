@@ -1,0 +1,50 @@
+import React from 'react';
+import { Link } from 'react-router';
+import { connect } from 'react-redux';
+import { logout } from '../actions/userauth';
+
+class NavBar extends React.Component {
+  constructor(props) {
+    super(props);
+    this.links = this.links.bind(this);
+  }
+
+  componentDidMount() {
+    window.jQuery('.button-collapse').sideNav({
+      closeOnClick: true
+    });
+  }
+
+  links() {
+    if (this.props.auth.isAuthenticated) {
+      return (
+        <div>
+          <li><Link to="/home">Home</Link></li>
+          <li><a onClick={() => this.props.dispatch(logout())}>Logout</a></li>
+        </div>
+      );
+    } else {
+      return (<li><Link to="/login">Login</Link></li>);
+    }
+  }
+
+  render() {
+    return (
+      <nav>
+        <div className="nav-wrapper">
+          <a href="#!" className="brand-logo center">My App</a>
+          <a href="#" data-activates="mobile" className="button-collapse show-on-large"><i className="material-icons">menu</i></a>
+          <ul className="side-nav" id="mobile">
+           {this.links()}
+          </ul>
+        </div>
+      </nav>
+    );
+  }
+}
+
+const mapStateToProps = (state) => {
+  return { auth: state.auth };
+};
+
+export default connect(mapStateToProps)(NavBar);
