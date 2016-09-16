@@ -10,8 +10,8 @@ const enhancers = compose(
   window.devToolsExtension ? window.devToolsExtension() : f => f
 );
 
-const store = createStore(rootReducer, {}, enhancers)
+const store = createStore(rootReducer, {}, enhancers);
 
-export const history = syncHistoryWithStore(browserHistory, store)
+export const history = syncHistoryWithStore(browserHistory, store);
 
-export default store
+export default store;

@@ -37,7 +37,7 @@ class NavBar extends React.Component {
     return (
       <nav>
         <div className="nav-wrapper">
-          <a href="#!" className="brand-logo center">My App</a>
+          <a href="#!" className="brand-logo center">The Haps</a>
           <a href="#" data-activates="mobile" className="button-collapse show-on-large"><i className="material-icons">menu</i></a>
           <ul className="side-nav" id="mobile">
             <li><Link to="/about">About</Link></li>

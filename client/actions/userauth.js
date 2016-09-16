@@ -1,8 +1,6 @@
 import $ from 'jquery';
 
-const getToken = () => {
-  return Math.random().toString(36).substring(7);
-};
+const getToken = () => Math.random().toString(36).substring(7);
 
 export const login = (email, password, history, redirect) => {
   return (dispatch) => {
