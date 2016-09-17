@@ -1,4 +1,4 @@
-# js_capstone_starter
+<!-- # js_capstone_starter
 Starter Project for DPL universal JavaScript class capstone projects
 
 ## Getting started
@@ -7,4 +7,4 @@ Starter Project for DPL universal JavaScript class capstone projects
 3. git init
 4. npm install
 5. bower install
-6. npm start
+6. npm start -->
