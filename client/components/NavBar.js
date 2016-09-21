@@ -41,7 +41,8 @@ class NavBar extends React.Component {
           <a href="#" data-activates="mobile" className="button-collapse show-on-large"><i className="material-icons">menu</i></a>
           <ul className="side-nav" id="mobile">
             <li><Link to="/about">About</Link></li>
-           {this.links()}
+            <li className="divider"></li>
+            {this.links()}
           </ul>
         </div>
       </nav>
