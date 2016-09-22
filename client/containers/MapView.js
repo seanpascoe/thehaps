@@ -3,6 +3,7 @@ import React from 'react';
 import Map from '../components/mapview/Map';
 import Marker from '../components/mapview/Marker';
 import InfoWindow from '../components/mapview/InfoWindow';
+import { connect } from 'react-redux';
 
 export class MapView extends React.Component {
   constructor(props) {
@@ -12,11 +13,11 @@ export class MapView extends React.Component {
     this.onInfoWindowClose = this.onInfoWindowClose.bind(this);
 
     this.state = {
-      events: [
-        {name: 'Church', key: 123424, position: {lat: 40.7726241, lng: -111.8923509}},
-        {name: 'Convention Center', key: 25467456, position: {lat: 40.7668879, lng: -111.8961526}},
-        {name: 'Mazza', key: 345675467, position: {lat: 40.7494759, lng: -111.8649065}}
-      ],
+      // events: [
+      //   {name: 'Church', key: 123424, position: {lat: 40.7726241, lng: -111.8923509}},
+      //   {name: 'Convention Center', key: 25467456, position: {lat: 40.7668879, lng: -111.8961526}},
+      //   {name: 'Mazza', key: 345675467, position: {lat: 40.7494759, lng: -111.8649065}}
+      // ],
       showingInfoWindow: false,
       activeMarker: {},
       selectedEvent: {name:'', position:''}
@@ -48,8 +49,8 @@ export class MapView extends React.Component {
   }
 
   render() {
-    let myMarkers = this.state.events.map(poi => (
-      <Marker key={poi.key} id={poi.key} onClick={this.onMarkerClick} name={poi.name} position={poi.position} />
+    let myMarkers = this.props.events.map(event => (
+      <Marker key={event._id} id={event._id} onClick={this.onMarkerClick} name={event.title} lat={parseFloat(event.lat)} lng={parseFloat(event.lng)} />
     ));
 
     if(!this.props.loaded) {
@@ -66,8 +67,8 @@ export class MapView extends React.Component {
             onClose={this.onInfoWindowClose}>
             <div>
               <p>{this.state.selectedEvent.name}</p>
-              <p>Lat: {this.state.selectedEvent.position.lat}</p>
-              <p>Lat: {this.state.selectedEvent.position.lng}</p>
+              {/* <p>Lat: {this.state.selectedEvent.lat}</p>
+              <p>Lat: {this.state.selectedEvent.lng}</p> */}
             </div>
           </InfoWindow>
         </Map>
@@ -76,7 +77,11 @@ export class MapView extends React.Component {
   }
 }
 
-export default MapView;
+const mapStateToProps = (state) => {
+  return { events: state.events };
+};
+
+export default connect(mapStateToProps)(MapView);
 
 // export default GoogleApiWrapper({
 //   apiKey: "AIzaSyBVclnbSo5qaDo0AUjCAHn7C0b_YGCBdWM"
