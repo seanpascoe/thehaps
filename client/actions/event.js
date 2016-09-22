@@ -25,7 +25,7 @@ export const addEvent = (title, category, address,
                          url, lat, lng) => {
   return(dispatch) => {
     $.ajax({
-      url: '/events',
+      url: '/eventssdfbsdfb',
       type: 'POST',
       data: { title, category, address,
               city, state, description,
@@ -33,7 +33,10 @@ export const addEvent = (title, category, address,
               url, lat, lng}
     }).done( data => {
       console.log(data);
+      Materialize.toast('Your event has been successfully submitted!', 4000);
       dispatch(event('ADD_EVENT', data));
+    }).fail( data => {
+      Materialize.toast('Uh, oh! There was a problem.', 4000);
     });
   };
 };
