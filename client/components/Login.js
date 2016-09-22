@@ -6,7 +6,7 @@ class Login extends React.Component {
   constructor(props) {
     super(props);
     this.signIn = this.signIn.bind(this);
-    let redirect = this.props.location.query.redirect || '/home';
+    let redirect = this.props.location.query.redirect || '/';
     this.state = { error: false, redirect };
   }
 

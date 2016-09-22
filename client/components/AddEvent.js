@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { addEvent } from '../actions/event.js';
 
-class Home extends React.Component {
+class AddEvent extends React.Component {
   constructor(props) {
     super(props);
     this.addEvent = this.addEvent.bind(this);
@@ -72,4 +72,4 @@ class Home extends React.Component {
   }
 }
 
-export default connect()(Home);
+export default connect()(AddEvent);

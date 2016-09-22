@@ -67,8 +67,8 @@ export class MapView extends React.Component {
             onClose={this.onInfoWindowClose}>
             <div>
               <p>{this.state.selectedEvent.name}</p>
-              {/* <p>Lat: {this.state.selectedEvent.lat}</p>
-              <p>Lat: {this.state.selectedEvent.lng}</p> */}
+              <p>Lat: {this.state.selectedEvent.lat}</p>
+              <p>Lat: {this.state.selectedEvent.lng}</p>
             </div>
           </InfoWindow>
         </Map>

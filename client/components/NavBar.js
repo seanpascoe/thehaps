@@ -19,13 +19,14 @@ class NavBar extends React.Component {
     if (this.props.auth.isAuthenticated) {
       return (
         <div>
-          <li><Link to="/home">Home</Link></li>
+          <li><Link to="/add-event">Add Event</Link></li>
           <li><a onClick={() => this.props.dispatch(logout())}>Logout</a></li>
         </div>
       );
     } else {
       return (
         <div>
+          <li><Link to="/add-event">Add Event</Link></li>
           <li><Link to="/login">Login</Link></li>
           <li><Link to="/signup">Sign Up</Link></li>
         </div>

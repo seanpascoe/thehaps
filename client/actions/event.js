@@ -25,7 +25,7 @@ export const addEvent = (title, category, address,
                          url, lat, lng) => {
   return(dispatch) => {
     $.ajax({
-      url: '/eventssdfbsdfb',
+      url: '/events',
       type: 'POST',
       data: { title, category, address,
               city, state, description,
