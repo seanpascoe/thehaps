@@ -1,10 +1,10 @@
 import React from 'react';
-import {GoogleApiWrapper} from 'google-maps-react';
+//import {GoogleApiWrapper} from 'google-maps-react';
 import Map from '../components/mapview/Map';
 import Marker from '../components/mapview/Marker';
 import InfoWindow from '../components/mapview/InfoWindow';
 
-export class Container extends React.Component {
+export class MapView extends React.Component {
   constructor(props) {
     super(props);
     this.onMarkerClick = this.onMarkerClick.bind(this);
@@ -76,6 +76,8 @@ export class Container extends React.Component {
   }
 }
 
-export default GoogleApiWrapper({
-  apiKey: "AIzaSyBVclnbSo5qaDo0AUjCAHn7C0b_YGCBdWM"
-})(Container)
+export default MapView;
+
+// export default GoogleApiWrapper({
+//   apiKey: "AIzaSyBVclnbSo5qaDo0AUjCAHn7C0b_YGCBdWM"
+// })(MapView)

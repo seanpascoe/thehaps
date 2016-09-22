@@ -14,7 +14,9 @@ class Map extends React.Component {
     const {lat, lng} = this.props.initialCenter;
     this.state = {
       userLocation: {lat, lng},
-      mapCenter: {}
+      mapCenter: {},
+      // trying to not reload gmap
+      // mapViewMap: {}
     }
   }
 
@@ -74,6 +76,9 @@ class Map extends React.Component {
         streetViewControl: false
       })
       this.map = new maps.Map(node, mapConfig);
+
+      //trying to not reload gmap
+      // this.setState({mapViewMap: this.map});
 
       // this.map.addListener('dragend', () => this.setMapCenter(this.map));
 
