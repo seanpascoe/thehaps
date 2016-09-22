@@ -10,13 +10,13 @@ let Event = new Schema({
   address: { type: String, required: true },
   city: { type: String, required: true },
   state: { type: String, required: true },
-  lat: String,
-  lng: String,
   description: String,
   date: String,
   startTime: String,
   endTime: String,
   url: String,
+  lat: String,
+  lng: String,
 });
 
 

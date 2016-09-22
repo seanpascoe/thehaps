@@ -12,6 +12,7 @@ router.get('/', (req, res) => {
 
 // POST creates a event
 router.post('/', (req, res) => {
+  console.log(req);
   new Event({
     title: req.body.title,
     category: req.body.category,
@@ -19,6 +20,11 @@ router.post('/', (req, res) => {
     address: req.body.address,
     city: req.body.city,
     state: req.body.state,
+    description: req.body.description,
+    date: req.body.date,
+    startTime: req.body.startTime,
+    endTime: req.body.endTime,
+    url: req.body.url,
     lat: req.body.lat,
     lng: req.body.lng
   }).save((err, event) => {

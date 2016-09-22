@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import NavBar from '../components/NavBar';
+import { fetchEvents } from '../actions/event';
 
 
 class App extends React.Component {
@@ -9,6 +10,7 @@ class App extends React.Component {
   }
 
   componentWillMount() {
+    this.props.dispatch(fetchEvents());
     if (!this.props.auth.isAuthenticated) {
       if (sessionStorage.userId && sessionStorage.token) {
         this.props.dispatch({
@@ -31,7 +33,8 @@ class App extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  return { auth: state.auth };
+  return { auth: state.auth,
+           events: state.events };
 };
 
 export default connect(mapStateToProps)(App);
