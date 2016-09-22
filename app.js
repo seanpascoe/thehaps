@@ -12,6 +12,7 @@ mongoose.connect( 'mongodb://localhost/thehaps' );
 
 var routes = require('./routes/index');
 var auth = require('./routes/auth');
+var events = require('./routes/events');
 
 var app = express();
 
@@ -51,6 +52,7 @@ passport.deserializeUser(User.deserializeUser());
 
 // API ROUTES
 app.use('/api/auth', auth);
+app.use('/events', events);
 
 // error handlers
 
