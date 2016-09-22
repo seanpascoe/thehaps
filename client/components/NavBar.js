@@ -42,6 +42,7 @@ class NavBar extends React.Component {
           <ul className="side-nav" id="mobile">
             <li><Link to="/about">About</Link></li>
             <li className="divider"></li>
+            <li><Link to="/">Map</Link></li>
             {this.links()}
           </ul>
         </div>
