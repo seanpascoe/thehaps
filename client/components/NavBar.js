@@ -40,7 +40,7 @@ class NavBar extends React.Component {
         <div className="nav-wrapper">
           <Link to="/" className="brand-logo center">The Haps</Link>
           <a href="#" data-activates="mobile" className="button-collapse show-on-large"><i className="material-icons">menu</i></a>
-          <Link to="/list" className="right"><i className="material-icons">view_list</i></Link>
+          <Link to={this.props.view.path} className="right"><i style={{fontSize: '2.7rem'}} className="material-icons">{this.props.view.icon}</i></Link>
           <ul className="side-nav" id="mobile">
             <li><Link to="/about">About</Link></li>
             <li className="divider"></li>
@@ -54,7 +54,7 @@ class NavBar extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  return { auth: state.auth };
+  return { auth: state.auth, view: state.view };
 };
 
 export default connect(mapStateToProps)(NavBar);

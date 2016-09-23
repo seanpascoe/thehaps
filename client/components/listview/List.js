@@ -4,8 +4,13 @@ import { Link } from 'react-router';
 
 class List extends React.Component {
   constructor(props) {
-    super(props)
-    this.state = { }
+    super(props);
+  }
+
+
+  componentDidMount() {
+    //change navbar icon and path
+    this.props.dispatch({type: 'LIST_VIEW'});
   }
 
   render() {

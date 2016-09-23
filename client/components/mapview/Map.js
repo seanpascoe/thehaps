@@ -16,14 +16,21 @@ class Map extends React.Component {
     this.state = {
       userLocation: {lat, lng},
       mapCenter: {},
-      // trying to not reload gmap
-      // mapViewMap: {}
     }
+  }
+
+  componentWillUnmount() {
+    debugger
   }
 
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.google !== this.props.google) {
+      console.log("componentDidUpdate if statement in map.js ran!!!!!! find out what caused it!!");
       this.loadMap();
+    }
+
+    if (prevProps.events !== this.props.events) {
+      this.renderChildren();
     }
 
     // if (prevState.userLocation !== this.state.userLocation) {
@@ -31,6 +38,13 @@ class Map extends React.Component {
     //   this.setMapCenter(this.map);
     // }
   }
+
+  // trying to get map to not reload
+  // componentWillMount() {
+  //   if(this.props.map.googleMap) {
+  //     this.map = this.props.map.googleMap;
+  //   }
+  // }
 
   componentDidMount() {
     if (this.props.centerAroundCurrentLocation && !this.props.map.userLocation) {
@@ -52,10 +66,14 @@ class Map extends React.Component {
 
           this.map.panTo(this.state.userLocation);
           this.setMapCenter(this.map);
+
         });
       }
     }
-    this.loadMap();
+    //trying to prevent map reload
+    // if(!this.props.map.googleMap) {
+      this.loadMap();
+
   }
 
   setMapCenter(map) {
@@ -101,6 +119,10 @@ class Map extends React.Component {
       });
       evtNames.forEach(e => Map.propTypes[camelize(e)] = React.PropTypes.func);
     }
+
+    //add this.map to redux store???
+    // let googleMap = this.map;
+    // this.props.dispatch({type: 'ADD_MAP_TO_STORE', googleMap});
   }
 
   handleEvent(evtName) {
@@ -142,7 +164,6 @@ class Map extends React.Component {
     const {children} = this.props;
 
     if (!children) return;
-
     return React.Children.map(children, c => {
       return React.cloneElement(c, {
         map: this.map,
@@ -184,7 +205,7 @@ Map.defaultProps = {
 };
 
 const mapStateToProps = (state) => {
-  return { map: state.map };
+  return { map: state.map, events: state.events };
 };
 
 export default connect(mapStateToProps)(Map);

@@ -16,6 +16,11 @@ const map = (state = {}, action) => {
           lng: action.lng
         }
       };
+    case 'ADD_MAP_TO_STORE':
+      return {
+        ...state,
+        googleMap: action.googleMap
+      };
     default:
       return state;
   }

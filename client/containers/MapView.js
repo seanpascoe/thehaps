@@ -1,6 +1,8 @@
 import React from 'react';
-//import {GoogleApiWrapper} from 'google-maps-react';
 import Map from '../components/mapview/Map';
+
+import {GoogleApiWrapper} from 'google-maps-react';
+
 import Marker from '../components/mapview/Marker';
 import InfoWindow from '../components/mapview/InfoWindow';
 import { connect } from 'react-redux';
@@ -13,15 +15,15 @@ export class MapView extends React.Component {
     this.onInfoWindowClose = this.onInfoWindowClose.bind(this);
 
     this.state = {
-      // events: [
-      //   {name: 'Church', key: 123424, position: {lat: 40.7726241, lng: -111.8923509}},
-      //   {name: 'Convention Center', key: 25467456, position: {lat: 40.7668879, lng: -111.8961526}},
-      //   {name: 'Mazza', key: 345675467, position: {lat: 40.7494759, lng: -111.8649065}}
-      // ],
       showingInfoWindow: false,
       activeMarker: {},
       selectedEvent: {name:'', position:''}
     };
+  }
+
+  componentDidMount() {
+    //change navbar icon and path
+    this.props.dispatch({type: 'MAP_VIEW'});
   }
 
   onMapClick() {
@@ -81,8 +83,6 @@ const mapStateToProps = (state) => {
   return { events: state.events };
 };
 
-export default connect(mapStateToProps)(MapView);
-
-// export default GoogleApiWrapper({
-//   apiKey: "AIzaSyBVclnbSo5qaDo0AUjCAHn7C0b_YGCBdWM"
-// })(MapView)
+export default GoogleApiWrapper({
+  apiKey: "AIzaSyBVclnbSo5qaDo0AUjCAHn7C0b_YGCBdWM"
+})(connect(mapStateToProps)(MapView));
