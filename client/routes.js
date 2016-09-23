@@ -1,7 +1,6 @@
 import React from 'react';
 import { Route, IndexRoute } from 'react-router';
 import { UserAuthWrapper } from 'redux-auth-wrapper';
-import { apiKey } from './apiKey';
 import {GoogleApiWrapper} from 'google-maps-react';
 import App from './containers/App';
 import MapView from './containers/MapView';
