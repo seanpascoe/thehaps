@@ -9,6 +9,7 @@ import AddEvent from './components/AddEvent';
 import Login from './components/Login';
 import Signup from './components/Signup';
 import About from './components/About';
+import List from './components/listview/List';
 
 const UserIsAuthenticated = UserAuthWrapper({
   authSelector: state => state.auth,
@@ -27,6 +28,7 @@ export default (
     <Route path="/" component={App}>
       <IndexRoute component={GoogleApi(MapView)} />
       <Route path="/add-event" component={UserIsAuthenticated(AddEvent)} />
+      <Route path="/list" component={List} />      
       <Route path="/login" component={Login} />
       <Route path="/signup" component={Signup} />
       <Route path="/about" component={About} />
