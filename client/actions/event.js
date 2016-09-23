@@ -56,5 +56,5 @@ export const fetchEvents = () => {
     }).done( events => {
       dispatch(getEvents(events));
     });
-  }
-}
+  };
+};
