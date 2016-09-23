@@ -33,7 +33,7 @@ class Map extends React.Component {
   }
 
   componentDidMount() {
-    if (this.props.centerAroundCurrentLocation) {
+    if (this.props.centerAroundCurrentLocation && !this.props.map.userLocation) {
       if (navigator && navigator.geolocation) {
         navigator.geolocation.getCurrentPosition((pos) => {
           const coords = pos.coords;
@@ -76,8 +76,10 @@ class Map extends React.Component {
       const mapRef = this.refs.map;
       const node = ReactDOM.findDOMNode(mapRef);
 
-      let {initialCenter, zoom} = this.props;
-      const {lat, lng} = this.state.userLocation;
+      let { zoom } = this.props;
+
+      const {lat, lng} = this.props.map.mapCenter || this.state.userLocation;
+
       const center = new maps.LatLng(lat, lng);
       const mapConfig = Object.assign({}, {
         center: center,
@@ -181,4 +183,8 @@ Map.defaultProps = {
   }
 };
 
-export default connect()(Map);
+const mapStateToProps = (state) => {
+  return { map: state.map };
+};
+
+export default connect(mapStateToProps)(Map);
