@@ -3,26 +3,26 @@ const events = (state = [], action) => {
     case 'GET_EVENTS':
       return action.events;
     case 'ADD_EVENT':
-      debugger;
-      return [...state,
-      {
-        id: action._id,
-        title: action.title,
-        category: action.category,
-        address: action.address,
-        city: action.city,
-        state: action.state,
-        description: action.description,
-        date: action.date,
-        startTime: action.startTime,
-        endTime: action.endTime,
-        url: action.url,
-        lat: action.lat,
-        lng: action.lng
-      }
-    ];
-  default:
-    return state;
+      return [
+        ...state,
+        {
+          id: action._id,
+          title: action.title,
+          category: action.category,
+          address: action.address,
+          city: action.city,
+          state: action.state,
+          description: action.description,
+          date: action.date,
+          startTime: action.startTime,
+          endTime: action.endTime,
+          url: action.url,
+          lat: action.lat,
+          lng: action.lng
+        }
+      ];
+    default:
+      return state;
   }
 };
 

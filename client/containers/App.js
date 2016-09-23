@@ -11,6 +11,7 @@ class App extends React.Component {
 
   componentWillMount() {
     this.props.dispatch(fetchEvents());
+    
     if (!this.props.auth.isAuthenticated) {
       if (sessionStorage.userId && sessionStorage.token) {
         this.props.dispatch({

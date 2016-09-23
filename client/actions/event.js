@@ -1,8 +1,8 @@
 import $ from 'jquery';
 
 const event = (type, data) => {
-	return {
-		type,
+  return {
+    type,
     id: data._id,
     title: data.title,
     category: data.category,
@@ -16,8 +16,8 @@ const event = (type, data) => {
     url: data.url,
     lat: data.lat,
     lng: data.lng
-	}
-}
+  };
+};
 
 export const addEvent = (title, category, address,
                          city, state, description,

@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import mapstyle from './mapstyle';
+import { connect } from 'react-redux';
 
 const camelize = function(str) {
   return str.split(' ').map(function(word){
@@ -24,6 +25,7 @@ class Map extends React.Component {
     if (prevProps.google !== this.props.google) {
       this.loadMap();
     }
+
     // if (prevState.userLocation !== this.state.userLocation) {
     //   this.recenterMap();
     //   this.setMapCenter(this.map);
@@ -35,15 +37,22 @@ class Map extends React.Component {
       if (navigator && navigator.geolocation) {
         navigator.geolocation.getCurrentPosition((pos) => {
           const coords = pos.coords;
+
+          let lat = coords.latitude;
+          let lng = coords.longitude;
+
           this.setState({
             userLocation: {
               lat: coords.latitude,
               lng: coords.longitude
             }
-          })
+          });
+
+          this.props.dispatch({type: 'SET_USERLOCATION', lat, lng});
+
           this.map.panTo(this.state.userLocation);
           this.setMapCenter(this.map);
-        })
+        });
       }
     }
     this.loadMap();
@@ -54,6 +63,8 @@ class Map extends React.Component {
     let lat = location.lat();
     let lng = location.lng();
     this.setState({ mapCenter: {lat, lng} });
+
+    this.props.dispatch({type: 'SET_MAPCENTER', lat, lng});
   }
 
   loadMap() {
@@ -65,7 +76,7 @@ class Map extends React.Component {
       const mapRef = this.refs.map;
       const node = ReactDOM.findDOMNode(mapRef);
 
-      let {initialCenter, zoom} = this.props
+      let {initialCenter, zoom} = this.props;
       const {lat, lng} = this.state.userLocation;
       const center = new maps.LatLng(lat, lng);
       const mapConfig = Object.assign({}, {
@@ -74,7 +85,7 @@ class Map extends React.Component {
         styles: mapstyle.styles,
         mapTypeControl: false,
         streetViewControl: false
-      })
+      });
       this.map = new maps.Map(node, mapConfig);
 
       //trying to not reload gmap
@@ -86,14 +97,14 @@ class Map extends React.Component {
       evtNames.forEach(e => {
         this.map.addListener(e, this.handleEvent(e));
       });
-      evtNames.forEach(e => Map.propTypes[camelize(e)] = React.PropTypes.func)
+      evtNames.forEach(e => Map.propTypes[camelize(e)] = React.PropTypes.func);
     }
   }
 
   handleEvent(evtName) {
     const handlerName = `on${camelize(evtName)}`;
 
-    if (evtName === "dragend") {
+    if (evtName === 'dragend') {
       let timeout;
       return (e) => {
         if (timeout) {
@@ -101,14 +112,14 @@ class Map extends React.Component {
           timeout = null;
         }
         timeout = setTimeout(() => {
-          this.setMapCenter(this.map)
+          this.setMapCenter(this.map);
           // if (this.props[handlerName]) {
           //   this.props[handlerName](this.props, this.map, e);
           // }
         }, 1000);
-      }
+      };
     } else {
-      return (e) => this.props[handlerName](this.props, this.map, e)
+      return (e) => this.props[handlerName](this.props, this.map, e);
     }
   }
 
@@ -135,16 +146,16 @@ class Map extends React.Component {
         map: this.map,
         google: this.props.google
       });
-    })
+    });
   }
 
   render() {
     return (
-      <div id="g-map" ref='map' style={{height: "100%", width: "100%", position: "absolute"}}>
+      <div id="g-map" ref='map' style={{height: '100%', width: '100%', position: 'absolute'}}>
         Loading map...
         {this.renderChildren()}
       </div>
-    )
+    );
   }
 }
 
@@ -153,7 +164,7 @@ Map.propTypes = {
   zoom: React.PropTypes.number,
   initialCenter: React.PropTypes.object,
   onMove: React.PropTypes.func
-}
+};
 
 Map.defaultProps = {
   zoom: 11,
@@ -168,6 +179,6 @@ Map.defaultProps = {
   onRightclick: function() {
     console.log('right-click, bitch!')
   }
-}
+};
 
-export default Map;
+export default connect()(Map);
