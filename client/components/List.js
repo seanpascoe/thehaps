@@ -51,7 +51,7 @@ class List extends React.Component {
       );
     });
     return (
-      <div>
+      <div style={{display: this.props.view.listDisplay}}>
         <h3>Events</h3>
         <ul className="collection">
           {events}
@@ -62,7 +62,7 @@ class List extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  return { events: state.events };
+  return { events: state.events, view: state.view };
 };
 
 export default connect(mapStateToProps)(List);

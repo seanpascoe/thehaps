@@ -6,7 +6,7 @@ body, html {
   height: 100%;
 }
 
-#g-map-wrapper{
+#g-map-wrapper, #map-list-wrapper{
   height: 100%;
 }
 

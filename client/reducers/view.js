@@ -1,14 +1,10 @@
-const view = (state={}, action) => {
+const view = (state={mapDisplay: 'block', listDisplay: 'none', icon: 'view_list'}, action) => {
   switch (action.type) {
-    case 'MAP_VIEW':
+    case 'VIEW_CHANGE':
       return {
-        icon: 'view_list',
-        path: '/list'
-      };
-    case 'LIST_VIEW':
-      return {
-        icon: 'map',
-        path: '/'
+        icon: action.icon,
+        mapDisplay: action.mapDisplay,
+        listDisplay: action.listDisplay
       };
     default:
       return state;
