@@ -2,6 +2,8 @@ import React from 'react';
 import {GoogleMapLoader, GoogleMap, InfoWindow, Marker} from 'react-google-maps';
 import { connect } from 'react-redux';
 import List from './List';
+import mapstyle from './mapstyle';
+import Filter from './Filter';
 
 export class MapView extends React.Component {
   constructor(props) {
@@ -19,6 +21,11 @@ export class MapView extends React.Component {
     //change navbar icon and path
     this.props.dispatch({type: 'MAP_VIEW'});
 
+    window.jQuery('.filter-sideNav').sideNav({
+      edge: 'right', // Choose the horizontal origin
+      closeOnClick: true // Closes side-nav on <a> clicks, useful for Angular/Meteor
+    });
+
     if (navigator && navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((pos) => {
         const coords = pos.coords;
@@ -31,9 +38,6 @@ export class MapView extends React.Component {
         this.refs.map.panTo(this.state.center);
       });
     }
-
-
-
   }
 
   //Toggle to 'true' to show InfoWindow and re-renders component
@@ -63,19 +67,14 @@ export class MapView extends React.Component {
       <InfoWindow
         key={`${ref}_info_window`}
         onCloseclick={this.handleMarkerClose.bind(this, event)} >
-
         <div>
           <div>{event.title}</div>
           <a className="modal-trigger"
              onClick={() => this.eventDetails(event._id)}
              style={{ cursor: 'pointer' }}>event details</a>
-
         </div>
-
       </InfoWindow>
-
     );
-
   }
 
   render() {
@@ -98,6 +97,13 @@ export class MapView extends React.Component {
     });
     return (
       <div id="map-list-wrapper">
+        <a className="btn-floating btn-large waves-effect waves-light red filter-sideNav"
+           data-activates="slide-out1"
+           style={{ position: 'fixed', bottom: '10px', right: '10px' }}
+           onClick={this.filterOption}>
+          <i className="material-icons">filter_list</i>
+        </a>
+        <Filter />
         <div id="g-map-wrapper" style={{display: this.props.view.mapDisplay}}>
           <GoogleMapLoader
             containerElement={
@@ -112,7 +118,16 @@ export class MapView extends React.Component {
               <GoogleMap
                 center={mapCenter || this.state.center}
                 defaultZoom={11}
-                ref='map'>
+                ref='map'
+                defaultOptions={{
+                  mapTypeControl: false,
+                  streetViewControl: false,
+                  styles: mapstyle.styles,
+                  zoomControlOptions: {
+                    position: google.maps.ControlPosition.LEFT_TOP
+                  }
+                }}
+              >
                 {events}
               </GoogleMap>
             }
