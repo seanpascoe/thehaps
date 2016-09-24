@@ -13,10 +13,18 @@ class EventDetail extends React.Component {
     let event = this.props.events.filter(e => {
       return e._id === id;
     });
+    event = event[0];
     return(
-      <div>
-        Hello
-        {event[0].title}
+      <div className="container">
+        <h2 className="center">{event.title}</h2>
+        <h3>{event.date}</h3>
+        <p>Time: {event.startTime} - {event.endTime}</p>
+        <br />
+        <p>LOCATION NAME HERE</p>
+        <p>{event.address}</p>
+        <p>{event.city}, {event.state}</p>
+        <br />
+        <p>Description: {event.description}</p>
       </div>
     )
   }
