@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import mapstyle from './mapstyle';
+import Marker from './Marker';
+import InfoWindow from './InfoWindow';
 import { connect } from 'react-redux';
 
 const camelize = function(str) {
@@ -19,18 +21,10 @@ class Map extends React.Component {
     }
   }
 
-  componentWillUnmount() {
-    debugger
-  }
-
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.google !== this.props.google) {
       console.log("componentDidUpdate if statement in map.js ran!!!!!! find out what caused it!!");
       this.loadMap();
-    }
-
-    if (prevProps.events !== this.props.events) {
-      this.renderChildren();
     }
 
     // if (prevState.userLocation !== this.state.userLocation) {
@@ -162,7 +156,7 @@ class Map extends React.Component {
 
   renderChildren() {
     const {children} = this.props;
-
+    debugger;
     if (!children) return;
     return React.Children.map(children, c => {
       return React.cloneElement(c, {
@@ -173,10 +167,24 @@ class Map extends React.Component {
   }
 
   render() {
+    let myMarkers = this.props.events.map(event => (
+      <Marker map={this.map} google={this.props.google} key={event._id} id={event._id} onClick={this.onMarkerClick} name={event.title} lat={parseFloat(event.lat)} lng={parseFloat(event.lng)} />
+    ));
     return (
       <div id="g-map" ref='map' style={{height: '100%', width: '100%', position: 'absolute'}}>
         Loading map...
-        {this.renderChildren()}
+        {/* {this.renderChildren()} */}
+        {myMarkers}
+        {/* <InfoWindow
+          marker={this.state.activeMarker}
+          visible={this.state.showingInfoWindow}
+          onClose={this.onInfoWindowClose}>
+          <div>
+            <p>{this.state.selectedEvent.name}</p>
+            <p>Lat: {this.state.selectedEvent.lat}</p>
+            <p>Lat: {this.state.selectedEvent.lng}</p>
+          </div>
+        </InfoWindow> */}
       </div>
     );
   }

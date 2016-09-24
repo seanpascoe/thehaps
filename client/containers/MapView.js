@@ -1,81 +1,101 @@
 import React from 'react';
-import Map from '../components/mapview/Map';
-
-import {GoogleApiWrapper} from 'google-maps-react';
-
-import Marker from '../components/mapview/Marker';
-import InfoWindow from '../components/mapview/InfoWindow';
+import {GoogleMapLoader, GoogleMap, InfoWindow, Marker} from 'react-google-maps';
 import { connect } from 'react-redux';
 
 export class MapView extends React.Component {
   constructor(props) {
     super(props);
-    this.onMarkerClick = this.onMarkerClick.bind(this);
-    this.onMapClick = this.onMapClick.bind(this);
-    this.onInfoWindowClose = this.onInfoWindowClose.bind(this);
-
     this.state = {
-      showingInfoWindow: false,
-      activeMarker: {},
-      selectedEvent: {name:'', position:''}
-    };
+      center: {
+        lat: 40.6142948,
+        lng: -111.8962744
+      }
+    }
   }
 
   componentDidMount() {
     //change navbar icon and path
     this.props.dispatch({type: 'MAP_VIEW'});
-  }
 
-  onMapClick() {
-    if (this.state.showingInfoWindow) {
-      this.setState({
-        showingInfoWindow: false,
-        activeMarker: null
+    if (navigator && navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition((pos) => {
+        const coords = pos.coords;
+        this.setState({
+          center: {
+            lat: coords.latitude,
+            lng: coords.longitude
+          }
+        });
+        this.refs.map.panTo(this.state.center);
       });
     }
+
   }
 
-  onInfoWindowClose() {
-    this.setState({
-      showingInfoWindow: false,
-      activeMarker: null
-    })
+  //Toggle to 'true' to show InfoWindow and re-renders component
+  handleMarkerClick(marker) {
+    marker.showInfo = true;
+    this.setState(this.state);
   }
 
-  onMarkerClick(props, marker, e) {
-    this.setState({
-      selectedEvent: props,
-      activeMarker: marker,
-      showingInfoWindow: true
-    });
+  handleMarkerClose(marker) {
+    marker.showInfo = false;
+    this.setState(this.state);
+  }
+
+  renderInfoWindow(ref, event) {
+    return (
+      //You can nest components inside of InfoWindow!
+      <InfoWindow
+        key={`${ref}_info_window`}
+        onCloseclick={this.handleMarkerClose.bind(this, event)} >
+
+        <div>{event.title}</div>
+
+      </InfoWindow>
+
+    );
+
   }
 
   render() {
-    let myMarkers = this.props.events.map(event => (
-      <Marker key={event._id} id={event._id} onClick={this.onMarkerClick} name={event.title} lat={parseFloat(event.lat)} lng={parseFloat(event.lng)} />
-    ));
-
-    if(!this.props.loaded) {
-      return <div>Loading...</div>
+    let mapCenter;
+    if(this.refs.map) {
+      mapCenter = this.refs.map.getCenter();
     }
 
+    let events = this.props.events.map((event, index) => {
+      const ref = `marker_${index}`;
+      return ( <Marker
+        key={event._id}
+        ref={ref}
+        icon={`/images/icons/soccer.png`}
+        position={{lat: parseFloat(event.lat), lng: parseFloat(event.lng)}}
+        onClick={this.handleMarkerClick.bind(this, event)} >
+        {event.showInfo ? this.renderInfoWindow(ref, event) : null}
+      </Marker> );
+
+    });
     return (
-      <div className="mapContainer">
-        <Map google={this.props.google} onClick={this.onMapClick}>
-          {myMarkers}
-          <InfoWindow
-            marker={this.state.activeMarker}
-            visible={this.state.showingInfoWindow}
-            onClose={this.onInfoWindowClose}>
-            <div>
-              <p>{this.state.selectedEvent.name}</p>
-              <p>Lat: {this.state.selectedEvent.lat}</p>
-              <p>Lat: {this.state.selectedEvent.lng}</p>
-            </div>
-          </InfoWindow>
-        </Map>
-      </div>
-    )
+      <GoogleMapLoader
+        containerElement={
+          <div
+            //no idea why this div needs props
+            // {...this.props}
+            id="g-map"
+            >
+          </div>
+        }
+        googleMapElement={
+          <GoogleMap
+            center={mapCenter || this.state.center}
+            defaultZoom={11}
+            ref='map'>
+            {events}
+          </GoogleMap>
+        }
+      />
+    );
   }
 }
 
@@ -83,6 +103,6 @@ const mapStateToProps = (state) => {
   return { events: state.events };
 };
 
-export default GoogleApiWrapper({
-  apiKey: "AIzaSyBVclnbSo5qaDo0AUjCAHn7C0b_YGCBdWM"
-})(connect(mapStateToProps)(MapView));
+export default connect(mapStateToProps)(MapView);
+
+// export default MapView;

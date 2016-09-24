@@ -2,14 +2,18 @@ body, html {
   height: 100%;
 }
 
+#g-map, #content{
+  height: 100%;
+}
+
 @media (max-width: 600px) {
-  #g-map {
+  div[data-reactroot] {
     height: calc(100% - 56px) !important;
   }
 }
 
 @media (min-width: 601px) {
-  #g-map {
+  div[data-reactroot] {
     height: calc(100% - 64px) !important;
   }
 }
