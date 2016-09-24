@@ -7,15 +7,19 @@ class List extends React.Component {
     super(props);
   }
 
-
   componentDidMount() {
     //change navbar icon and path
     this.props.dispatch({type: 'LIST_VIEW'});
-
   }
 
   eventDetails(id) {
-    window.jQuery(`#${id}`).openModal();
+    let event = this.props.events.filter(e => {
+      return e._id === id;
+    });
+    event = event[0];
+    this.props.dispatch({ type: 'SET_EVENT', eventDetail: event});
+
+    window.jQuery('#event-detail').openModal();
   }
 
   render() {
@@ -34,19 +38,6 @@ class List extends React.Component {
               <span className="secondary-content">{event.startTime}</span>
             </li>
           </a>
-          <div id={event._id} className="modal bottom-sheet">
-            <div className="modal-content">
-            <h2 className="center">{event.title}</h2>
-            <h3>{event.date}</h3>
-            <p>Time: {event.startTime} - {event.endTime}</p>
-            <p>LOCATION NAME HERE</p>
-            <p>{event.address}</p>
-            <p>{event.city}, {event.state}</p>
-            <br />
-            <p>Description: {event.description}</p>
-            <p>URL: <a href={event.url}>{event.url}</a></p>
-            </div>
-          </div>
         </div>
       );
     });
@@ -62,7 +53,7 @@ class List extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  return { events: state.events, view: state.view };
+  return { events: state.events, view: state.view, details: state.details };
 };
 
 export default connect(mapStateToProps)(List);

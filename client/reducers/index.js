@@ -4,7 +4,8 @@ import auth from './auth';
 import events from './events';
 import map from './map';
 import view from './view';
+import details from './details';
 
-const rootReducer = combineReducers({ auth, events, map, view, routing: routerReducer });
+const rootReducer = combineReducers({ auth, events, map, view, details, routing: routerReducer });
 
 export default rootReducer;

@@ -52,7 +52,7 @@ export class MapView extends React.Component {
       return e._id === id;
     });
     event = event[0];
-    this.setState({eventDetail: event});
+    this.props.dispatch({ type: 'SET_EVENT', eventDetail: event});
 
     window.jQuery('#event-detail').openModal();
   }
@@ -66,7 +66,9 @@ export class MapView extends React.Component {
 
         <div>
           <div>{event.title}</div>
-          <a className="modal-trigger" onClick={() => this.eventDetails(event._id)}>event details</a>
+          <a className="modal-trigger"
+             onClick={() => this.eventDetails(event._id)}
+             style={{ cursor: 'pointer' }}>event details</a>
 
         </div>
 
@@ -121,15 +123,15 @@ export class MapView extends React.Component {
 
         <div id="event-detail" className="modal bottom-sheet">
           <div className="modal-content">
-          <h2 className="center">{this.state.eventDetail.title}</h2>
-          <h3>{this.state.eventDetail.date}</h3>
-          <p>Time: {this.state.eventDetail.startTime} - {this.state.eventDetail.endTime}</p>
+          <h2 className="center">{this.props.details.eventDetail.title}</h2>
+          <h3>{this.props.details.eventDetail.date}</h3>
+          <p>Time: {this.props.details.eventDetail.startTime} - {this.props.details.eventDetail.endTime}</p>
           <p>LOCATION NAME HERE</p>
-          <p>{this.state.eventDetail.address}</p>
-          <p>{this.state.eventDetail.city}, {this.state.eventDetail.state}</p>
+          <p>{this.props.details.eventDetail.address}</p>
+          <p>{this.props.details.eventDetail.city}, {this.props.details.eventDetail.props}</p>
           <br />
-          <p>Description: {this.state.eventDetail.description}</p>
-          <p>URL: <a href={this.state.eventDetail.url}>{this.state.eventDetail.url}</a></p>
+          <p>Description: {this.props.details.eventDetail.description}</p>
+          <p>URL: <a href={this.props.details.eventDetail.url}>{this.props.details.eventDetail.url}</a></p>
           </div>
         </div>
 
@@ -139,7 +141,7 @@ export class MapView extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  return { events: state.events, view: state.view };
+  return { events: state.events, view: state.view, details: state.details };
 };
 
 export default connect(mapStateToProps)(MapView);

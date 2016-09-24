@@ -9,7 +9,6 @@ import Login from './components/Login';
 import Signup from './components/Signup';
 import About from './components/About';
 import List from './components/List';
-import EventDetail from './components/detailview/EventDetail';
 
 const UserIsAuthenticated = UserAuthWrapper({
   authSelector: state => state.auth,
@@ -24,8 +23,6 @@ export default (
     <Route path="/" component={App}>
       <IndexRoute component={MapView} />
       <Route path="/add-event" component={UserIsAuthenticated(AddEvent)} />
-      <Route path="/list" component={List} />
-      <Route path="/event/:id" components={EventDetail} />
       <Route path="/login" component={Login} />
       <Route path="/signup" component={Signup} />
       <Route path="/about" component={About} />
