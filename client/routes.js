@@ -1,15 +1,14 @@
 import React from 'react';
 import { Route, IndexRoute } from 'react-router';
 import { UserAuthWrapper } from 'redux-auth-wrapper';
-// import {GoogleApiWrapper} from 'google-maps-react';
 import App from './containers/App';
-import MapView from './containers/MapView';
+import MapView from './components/MapView';
 import NotFound from './components/NotFound';
 import AddEvent from './components/AddEvent';
 import Login from './components/Login';
 import Signup from './components/Signup';
 import About from './components/About';
-import List from './components/listview/List';
+import List from './components/List';
 import EventDetail from './components/detailview/EventDetail';
 
 const UserIsAuthenticated = UserAuthWrapper({
@@ -19,10 +18,6 @@ const UserIsAuthenticated = UserAuthWrapper({
   failureRedirectPath: '/login',
   wrapperDisplayName: 'UserIsAuthenticated'
 });
-
-// const GoogleApi = GoogleApiWrapper({
-//   apiKey: 'AIzaSyAo85WiE3UAlnbmPJppYUK2Zl3UuRF_9NU'
-// });
 
 export default (
   <Route>

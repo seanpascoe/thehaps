@@ -1,6 +1,7 @@
 import React from 'react';
 import {GoogleMapLoader, GoogleMap, InfoWindow, Marker} from 'react-google-maps';
 import { connect } from 'react-redux';
+import List from './List';
 
 export class MapView extends React.Component {
   constructor(props) {
@@ -48,7 +49,7 @@ export class MapView extends React.Component {
 
   eventDetails(id) {
     console.log(id)
-    window.jQuery('#modal1').openModal();
+    window.jQuery(`#${id}`).openModal();
   }
 
   renderInfoWindow(ref, event) {
@@ -108,12 +109,7 @@ export class MapView extends React.Component {
             </GoogleMap>
           }
         />
-        <div id="modal1" className="modal bottom-sheet">
-          <div className="modal-content">
-            <h4>Modal Header</h4>
-            <p>A bunch of text</p>
-          </div>
-        </div>
+        <List />
       </div>
     );
   }
