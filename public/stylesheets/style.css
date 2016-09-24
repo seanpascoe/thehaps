@@ -2,7 +2,15 @@ body, html {
   height: 100%;
 }
 
-#g-map, #content{
+#g-map{
+  height: 100%;
+}
+
+#g-map-wrapper{
+  height: 100%;
+}
+
+#content{
   height: 100%;
 }
 
