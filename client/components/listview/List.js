@@ -11,25 +11,11 @@ class List extends React.Component {
   componentDidMount() {
     //change navbar icon and path
     this.props.dispatch({type: 'LIST_VIEW'});
-    window.jQuery('.modal-trigger').leanModal({
-      dismissible: true,
-      opacity: .5, // Opacity of modal background
-      in_duration: 300, // Transition in duration
-      out_duration: 200, // Transition out duration
-      starting_top: '4%', // Starting top style attribute
-      ending_top: '10%', // Ending top style attribute
-    });
+
   }
 
   eventDetails(id) {
-    window.jQuery(`#${id}`).openModal({
-      dismissible: true,
-      opacity: .5, // Opacity of modal background
-      in_duration: 300, // Transition in duration
-      out_duration: 200, // Transition out duration
-      starting_top: '4%', // Starting top style attribute
-      ending_top: '10%', // Ending top style attribute
-    });
+    window.jQuery(`#${id}`).openModal();
   }
 
   render() {
