@@ -5,8 +5,11 @@ let Schema = mongoose.Schema;
 
 let Event = new Schema({
   title: { type: String, required: true },
-  category: { type: Array, required: true },
-  locationName: String,
+  primaryCategory: { type: String, required: true },
+  primarySubCategory: { type: String, required: true },
+  secondaryCategory: String,
+  secondarySubCategory: String,
+  locationName: { type: String, required: true },
   address: { type: String, required: true },
   city: { type: String, required: true },
   state: { type: String, required: true },
@@ -15,8 +18,10 @@ let Event = new Schema({
   startTime: String,
   endTime: String,
   url: String,
+  host: String,
+  contactNumber: String,
   lat: String,
-  lng: String,
+  lng: String
 });
 
 

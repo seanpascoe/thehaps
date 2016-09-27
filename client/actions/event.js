@@ -5,7 +5,11 @@ const event = (type, data) => {
     type,
     id: data._id,
     title: data.title,
-    category: data.category,
+    primCategory: data.primCategory,
+    primSubCategory: data.primSubCategory,
+    secCategory: data.secCategory,
+    secSubCategory: data.secSubCategory,
+    locationName: data.locationName,
     address: data.address,
     city: data.city,
     state: data.state,
@@ -14,23 +18,27 @@ const event = (type, data) => {
     startTime: data.startTime,
     endTime: data.endTime,
     url: data.url,
+    host: data.host,
+    contactNumber: data.contactNumber,
     lat: data.lat,
     lng: data.lng
   };
 };
 
-export const addEvent = (title, category, address,
-                         city, state, description,
-                         date, startTime, endTime,
-                         url, lat, lng) => {
+export const addEvent = (title, primCategory, primSubCategory,
+                           secCategory, secSubCategory, locationName,
+                           address, city, state, description,
+                           date, startTime, endTime,
+                           url, host, contactNumber, lat, lng) => {
   return(dispatch) => {
     $.ajax({
       url: '/events',
       type: 'POST',
-      data: { title, category, address,
-              city, state, description,
-              date, startTime, endTime,
-              url, lat, lng}
+      data: { title, primCategory, primSubCategory,
+               secCategory, secSubCategory, locationName,
+               address, city, state, description,
+               date, startTime, endTime,
+               url, host, contactNumber, lat, lng}
     }).done( data => {
       console.log(data);
       Materialize.toast('Your event has been successfully submitted!', 4000);

@@ -8,7 +8,11 @@ const events = (state = [], action) => {
         {
           id: action._id,
           title: action.title,
-          category: action.category,
+          primCategory: action.primCategory,
+          primSubCategory: action.primSubCategory,
+          secCategory: action.secCategory,
+          secSubCategory: action.secSubCategory,
+          locationName: action.locationName,
           address: action.address,
           city: action.city,
           state: action.state,
@@ -17,6 +21,8 @@ const events = (state = [], action) => {
           startTime: action.startTime,
           endTime: action.endTime,
           url: action.url,
+          host: action.host,
+          contactNumber: action.contactNumber,
           lat: action.lat,
           lng: action.lng
         }
