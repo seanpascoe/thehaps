@@ -1,8 +1,9 @@
 import React from 'react';
 import {GoogleMapLoader, GoogleMap, InfoWindow, Marker} from 'react-google-maps';
 import { connect } from 'react-redux';
-import List from './List';
 import mapstyle from './mapstyle';
+import List from './List';
+import DetailView from './DetailView';
 import Filter from './Filter';
 
 export class MapView extends React.Component {
@@ -12,15 +13,15 @@ export class MapView extends React.Component {
       center: {
         lat: 40.6142948,
         lng: -111.8962744
-      }, eventDetail: {}
-    }
+      },
+      eventDetail: {},
+      activeIW: ''
+    };
     this.eventDetails = this.eventDetails.bind(this);
+    this.handleMarkerClose = this.handleMarkerClose.bind(this);
   }
 
   componentDidMount() {
-    //change navbar icon and path
-    this.props.dispatch({type: 'MAP_VIEW'});
-
     window.jQuery('.filter-sideNav').sideNav({
       edge: 'right', // Choose the horizontal origin
       closeOnClick: true // Closes side-nav on <a> clicks, useful for Angular/Meteor
@@ -40,15 +41,12 @@ export class MapView extends React.Component {
     }
   }
 
-  //Toggle to 'true' to show InfoWindow and re-renders component
   handleMarkerClick(marker) {
-    marker.showInfo = true;
-    this.setState(this.state);
+    this.setState({activeIW: marker._id});
   }
 
-  handleMarkerClose(marker) {
-    marker.showInfo = false;
-    this.setState(this.state);
+  handleMarkerClose() {
+    this.setState({activeIW: ''});
   }
 
   eventDetails(id) {
@@ -56,17 +54,15 @@ export class MapView extends React.Component {
       return e._id === id;
     });
     event = event[0];
-    this.props.dispatch({ type: 'SET_EVENT', eventDetail: event});
+    this.props.dispatch({type: 'SET_EVENT', eventDetail: event});
 
     window.jQuery('#event-detail').openModal();
   }
 
-  renderInfoWindow(ref, event) {
+  renderInfoWindow(event) {
     return (
-      //You can nest components inside of InfoWindow!
       <InfoWindow
-        key={`${ref}_info_window`}
-        onCloseclick={this.handleMarkerClose.bind(this, event)} >
+        onCloseclick={this.handleMarkerClose} >
         <div>
           <div>{event.title}</div>
           <a className="modal-trigger"
@@ -83,16 +79,15 @@ export class MapView extends React.Component {
       mapCenter = this.refs.map.getCenter();
     }
 
-    let events = this.props.events.map((event, index) => {
-      const ref = `marker_${index}`;
-      return ( <Marker
-        key={event._id}
-        ref={ref}
-        icon={`/images/icons/soccer.png`}
-        position={{lat: parseFloat(event.lat), lng: parseFloat(event.lng)}}
-        onClick={this.handleMarkerClick.bind(this, event)} >
-        {event.showInfo ? this.renderInfoWindow(ref, event) : null}
-      </Marker> );
+    let events = this.props.events.map((event) => {
+      return (
+        <Marker
+          key={event._id}
+          icon={`/images/icons/soccer.png`}
+          position={{lat: parseFloat(event.lat), lng: parseFloat(event.lng)}}
+          onClick={this.handleMarkerClick.bind(this, event)} >
+          {this.state.activeIW === event._id ? this.renderInfoWindow(event): null}
+        </Marker> );
 
     });
     return (
@@ -100,26 +95,19 @@ export class MapView extends React.Component {
         <a className="btn-floating btn-large waves-effect waves-light red filter-sideNav"
            data-activates="slide-out1"
            style={{ position: 'fixed', bottom: '10px', right: '10px' }}
-           onClick={this.filterOption}>
+           onClick={() => this.filterOption(this)}>
           <i style={{fontSize: '2.3rem'}} className="material-icons">filter_list</i>
         </a>
         <Filter />
         <div id="g-map-wrapper" style={{display: this.props.view.mapDisplay}}>
           <GoogleMapLoader
-            containerElement={
-              <div
-                //no idea why this div needs these props
-                // {...this.props}
-                id="g-map"
-                >
-              </div>
-            }
+            containerElement={<div id="g-map"></div>}
             googleMapElement={
               <GoogleMap
                 center={mapCenter || this.state.center}
                 defaultZoom={11}
                 ref='map'
-                onClick={() => console.log('click!')}
+                onClick={this.handleMarkerClose}
                 defaultOptions={{
                   mapTypeControl: false,
                   streetViewControl: false,
@@ -135,22 +123,7 @@ export class MapView extends React.Component {
           />
         </div>
         <List />
-
-
-        <div id="event-detail" className="modal bottom-sheet">
-          <div className="modal-content">
-          <h2 className="center">{this.props.details.eventDetail.title}</h2>
-          <h3>{this.props.details.eventDetail.date}</h3>
-          <p>Time: {this.props.details.eventDetail.startTime} - {this.props.details.eventDetail.endTime}</p>
-          <p>LOCATION NAME HERE</p>
-          <p>{this.props.details.eventDetail.address}</p>
-          <p>{this.props.details.eventDetail.city}, {this.props.details.eventDetail.state}</p>
-          <br />
-          <p>Description: {this.props.details.eventDetail.description}</p>
-          <p>URL: <a href={this.props.details.eventDetail.url}>{this.props.details.eventDetail.url}</a></p>
-          </div>
-        </div>
-
+        <DetailView />
       </div>
     );
   }

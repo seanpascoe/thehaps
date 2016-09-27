@@ -59,13 +59,13 @@ class AddEvent extends React.Component {
   }
 
   render() {
-    let categories = this.state.categories
-    let categorySelect = []
+    let categories = this.state.categories;
+    let categorySelect = [];
     let rando = Math.floor(Math.random() * 1000);
 
     for(let parentCat in categories) {
       let subCat = categories[parentCat].map( cat => {
-        return(<option key={`${cat}-${rando}`} value={`${parentCat} ${cat}`}>{cat}</option>)
+        return(<option key={`${cat}-${rando}`} value={`${parentCat} ${cat}`}>{cat}</option>);
       });
 
       categorySelect.push(
@@ -83,7 +83,7 @@ class AddEvent extends React.Component {
           <input type="text" ref="title" placeholder="Title (Required)" />
           <div className="input-field col s12">
             <select ref="primaryCategory">
-              <option defaultValue="" disabled selected="selected">Choose your option</option>
+              <option defaultValue="" disabled selected>Choose your option</option>
               {categorySelect}
             </select>
             <label>Primary Category</label>
@@ -105,7 +105,7 @@ class AddEvent extends React.Component {
           <input type="time" ref="endTime" placeholder="End Time" />
           <input type="text" ref="host" placeholder="Host" />
           <input type="tel" ref="contactNumber" placeholder="Contact Phone #"/>
-          <input type="text" ref="url" placeholder="URL for Event" />
+          <input type="url" ref="url" placeholder="URL for Event" />
           <input type="text" ref="lat" placeholder="Lat" />
           <input type="text" ref="lng" placeholder="Lng" />
 
