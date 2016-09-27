@@ -25,20 +25,20 @@ class List extends React.Component {
   render() {
     let events = this.props.events.map(event => {
       return (
-        <div key={event._id}>
-          <a className="modal-trigger collection-item avatar"
-             onClick={ (e) => {e.preventDefault();this.eventDetails(event._id);}}
-             style={{ cursor: 'pointer' }}>
-            <li>
-              <img style={{borderRadius: '0'}} src="images/icons/soccer.png" alt="" className="circle" />
-              <span className="title">{event.title}</span>
-              <p>Location Name <br/>
-                 {event.category[0]}
-              </p>
-              <span className="secondary-content">{event.startTime}</span>
-            </li>
-          </a>
-        </div>
+        <a
+          key={event._id}
+          className="modal-trigger collection-item avatar"
+          onClick={ (e) => {e.preventDefault();this.eventDetails(event._id);}}
+          style={{ cursor: 'pointer' }}>
+          <li>
+            <img style={{borderRadius: '0'}} src="images/icons/soccer.png" alt="" className="circle" />
+            <span className="title">{event.title}</span>
+            <p>Location Name <br/>
+               {event.category[0]}
+            </p>
+            <span className="secondary-content">{event.startTime}</span>
+          </li>
+        </a>
       );
     });
     return (

@@ -56,8 +56,8 @@ class NavBar extends React.Component {
       <nav>
         <div className="nav-wrapper">
           <Link to="/" className="brand-logo center">The Haps</Link>
-          <a href="#" data-activates="mobile" className="button-collapse show-on-large"><i className="material-icons">menu</i></a>
-          <span className="right" onClick={this.viewChange} style={{cursor: 'pointer'}}><i style={{fontSize: '2.7rem'}} className="material-icons">{this.props.view.icon}</i></span>
+          <a href="#" data-activates="mobile" className="button-collapse show-on-large"><i style={{fontSize: '2.5rem'}} className="material-icons">menu</i></a>
+          <span className="right" onClick={this.viewChange} style={{cursor: 'pointer'}}><i style={{fontSize: '2.5rem'}} className="material-icons">{this.props.view.icon}</i></span>
           <ul className="side-nav" id="mobile">
             <li><Link to="/about">About</Link></li>
             <li className="divider"></li>

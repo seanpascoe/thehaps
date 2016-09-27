@@ -101,14 +101,14 @@ export class MapView extends React.Component {
            data-activates="slide-out1"
            style={{ position: 'fixed', bottom: '10px', right: '10px' }}
            onClick={this.filterOption}>
-          <i className="material-icons">filter_list</i>
+          <i style={{fontSize: '2.3rem'}} className="material-icons">filter_list</i>
         </a>
         <Filter />
         <div id="g-map-wrapper" style={{display: this.props.view.mapDisplay}}>
           <GoogleMapLoader
             containerElement={
               <div
-                //no idea why this div needs props
+                //no idea why this div needs these props
                 // {...this.props}
                 id="g-map"
                 >
