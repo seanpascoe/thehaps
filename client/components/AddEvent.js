@@ -17,7 +17,8 @@ class AddEvent extends React.Component {
     //Date picker
     window.jQuery('.datepicker').pickadate({
       selectMonths: true, // Creates a dropdown to control month
-      selectYears: 15 // Creates a dropdown of 15 years to control year
+      selectYears: 15, // Creates a dropdown of 15 years to control year
+      closeOnSelect: true
     });
 
     //Option Selector for category
@@ -54,7 +55,7 @@ class AddEvent extends React.Component {
                                  address, city, state, description,
                                  date, startTime, endTime,
                                  url, host, contactNumber, lat, lng));
-    // this.refs.form.reset();
+    this.refs.form.reset();
   }
 
   render() {

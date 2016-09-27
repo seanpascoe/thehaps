@@ -119,6 +119,7 @@ export class MapView extends React.Component {
                 center={mapCenter || this.state.center}
                 defaultZoom={11}
                 ref='map'
+                onClick={() => console.log('click!')}
                 defaultOptions={{
                   mapTypeControl: false,
                   streetViewControl: false,
@@ -143,7 +144,7 @@ export class MapView extends React.Component {
           <p>Time: {this.props.details.eventDetail.startTime} - {this.props.details.eventDetail.endTime}</p>
           <p>LOCATION NAME HERE</p>
           <p>{this.props.details.eventDetail.address}</p>
-          <p>{this.props.details.eventDetail.city}, {this.props.details.eventDetail.props}</p>
+          <p>{this.props.details.eventDetail.city}, {this.props.details.eventDetail.state}</p>
           <br />
           <p>Description: {this.props.details.eventDetail.description}</p>
           <p>URL: <a href={this.props.details.eventDetail.url}>{this.props.details.eventDetail.url}</a></p>

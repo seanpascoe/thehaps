@@ -40,10 +40,10 @@ export const addEvent = (title, primCategory, primSubCategory,
                date, startTime, endTime,
                url, host, contactNumber, lat, lng}
     }).done( data => {
-      console.log(data);
-      Materialize.toast('Your event has been successfully submitted!', 4000);
+      Materialize.toast('Your event has been successfully submitted for review!', 4000);
       dispatch(event('ADD_EVENT', data));
     }).fail( data => {
+      console.log(data);
       Materialize.toast('Uh, oh! There was a problem.', 4000);
     });
   };

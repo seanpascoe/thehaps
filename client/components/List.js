@@ -34,7 +34,7 @@ class List extends React.Component {
             <img style={{borderRadius: '0'}} src="images/icons/soccer.png" alt="" className="circle" />
             <span className="title">{event.title}</span>
             <p>Location Name <br/>
-               {event.category[0]}
+               {event.primCategory}
             </p>
             <span className="secondary-content">{event.startTime}</span>
           </li>

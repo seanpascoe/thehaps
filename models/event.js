@@ -5,10 +5,10 @@ let Schema = mongoose.Schema;
 
 let Event = new Schema({
   title: { type: String, required: true },
-  primaryCategory: { type: String, required: true },
-  primarySubCategory: { type: String, required: true },
-  secondaryCategory: String,
-  secondarySubCategory: String,
+  primCategory: { type: String, required: true },
+  primSubCategory: { type: String, required: true },
+  secCategory: String,
+  secSubCategory: String,
   locationName: { type: String, required: true },
   address: { type: String, required: true },
   city: { type: String, required: true },

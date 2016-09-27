@@ -8,7 +8,6 @@ import AddEvent from './components/AddEvent';
 import Login from './components/Login';
 import Signup from './components/Signup';
 import About from './components/About';
-import List from './components/List';
 
 const UserIsAuthenticated = UserAuthWrapper({
   authSelector: state => state.auth,
