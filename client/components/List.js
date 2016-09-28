@@ -41,6 +41,7 @@ class List extends React.Component {
         </a>
       );
     });
+    
     return (
       <div style={{display: this.props.view.listDisplay}}>
         <h3>Events</h3>

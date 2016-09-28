@@ -10,7 +10,11 @@ class Filter extends React.Component {
 
   componentDidMount() {
     //Option Selector for category
-    window.jQuery('select').material_select();
+    // window.jQuery('select').material_select();
+  }
+
+  capitalizeCat(cat) {
+    return cat.charAt(0).toUpperCase() + cat.slice(1);
   }
 
   catSelect(e) {
@@ -24,10 +28,10 @@ class Filter extends React.Component {
 
     for(let parentCat in categories) {
       categorySelect.push(
-        <option key={`${parentCat}-${rando}`} className="parCatFilter" style={{fontWeight: 'bold'}} value={parentCat}>{parentCat}</option>
+        <option key={`${parentCat}-${rando}`} className="parCatFilter" style={{fontWeight: 'bold'}} value={parentCat}>{this.capitalizeCat(parentCat)}</option>
       );
       categories[parentCat].forEach( cat => {
-        categorySelect.push(<option key={`${cat}-${rando}`} style={{marginLeft: '10px'}} value={cat}>{cat}</option>);
+        categorySelect.push(<option key={`${cat}-${rando}`} style={{marginLeft: '10px'}} value={cat}>--{cat}</option>);
       });
 
     }
