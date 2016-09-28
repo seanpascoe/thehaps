@@ -79,7 +79,21 @@ export class MapView extends React.Component {
       mapCenter = this.refs.map.getCenter();
     }
 
-    let events = this.props.events.map((event) => {
+    let filtCat = this.props.filter.selectedCategory;
+    let filteredEvents = this.props.events.filter(event => {
+      if (filtCat === 'all') {
+        return true;
+      } else {
+        return (
+          filtCat === event.primCategory ||
+          filtCat === event.primSubCategory ||
+          filtCat === event.secCategory ||
+          filtCat === event.secSubCategory);
+      }
+
+    });
+
+    let events = filteredEvents.map((event) => {
       return (
         <Marker
           key={event._id}
@@ -122,7 +136,7 @@ export class MapView extends React.Component {
             }
           />
         </div>
-        <List />
+        <List filteredEvents={filteredEvents} />
         <DetailView />
       </div>
     );
@@ -130,7 +144,7 @@ export class MapView extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  return { events: state.events, view: state.view, details: state.details };
+  return { events: state.events, view: state.view, details: state.details, filter: state.filter };
 };
 
 export default connect(mapStateToProps)(MapView);

@@ -5,7 +5,7 @@ import categories from './categories';
 class Filter extends React.Component {
   constructor(props) {
     super(props);
-    this.state= {categories, selectedCategory: ''};
+    this.state= {categories};
   }
 
   componentDidMount() {
@@ -18,25 +18,6 @@ class Filter extends React.Component {
   }
 
   render() {
-
-    let filtCat = this.props.filter.selectedCategory;
-    let filteredEvents = this.props.events.filter(event => {
-      // console.log(event.primCategory, event.primSubCategory, event.secCategory, event.secSubCategory)
-      return (
-        filtCat === event.primCategory ||
-        filtCat === event.primSubCategory ||
-        filtCat === event.secCategory ||
-        filtCat === event.secSubCategory)
-    });
-    console.log(filtCat)
-    
-    console.log(filteredEvents);
-
-
-
-
-
-
     let categories = this.state.categories;
     let categorySelect = [];
     let rando = Math.floor(Math.random() * 1000000000);
@@ -56,7 +37,7 @@ class Filter extends React.Component {
         <div className="col s12">
           <label>Filter By Category</label>
           <select onChange={(e) => this.catSelect(e)} value={this.props.filter.selectedCategory} className="browser-default">
-            <option defaultValue="" disabled selected>Choose a category</option>
+            <option value="all">All Categories</option>
             {categorySelect}
           </select>
         </div>

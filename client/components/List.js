@@ -13,7 +13,7 @@ class List extends React.Component {
   }
 
   eventDetails(id) {
-    let event = this.props.events.filter(e => {
+    let event = this.props.filteredEvents.filter(e => {
       return e._id === id;
     });
     event = event[0];
@@ -23,7 +23,7 @@ class List extends React.Component {
   }
 
   render() {
-    let events = this.props.events.map(event => {
+    let events = this.props.filteredEvents.map(event => {
       return (
         <a
           key={event._id}

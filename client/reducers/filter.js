@@ -1,4 +1,4 @@
-const filter = (state = { selectedCategory: '' }, action ) => {
+const filter = (state = { selectedCategory: 'all' }, action ) => {
   switch (action.type) {
     case 'SET_SELECTED_CATEGORY':
       return {
