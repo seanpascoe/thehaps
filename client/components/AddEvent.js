@@ -1,16 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { addEvent } from '../actions/event.js';
+import { addEvent } from '../actions/event';
+import categories from './categories';
 
 class AddEvent extends React.Component {
   constructor(props) {
     super(props);
     this.addEvent = this.addEvent.bind(this);
-    this.state = { categories:{ music: ['rock', 'blues', 'folk'],
-                                art: ['art show', 'poetry', 'theatre' ],
-                                sports: ['football', 'baseball', 'soccer']
-                              }
-                 };
+    this.state = {categories};
   }
 
   componentDidMount() {
@@ -61,7 +58,7 @@ class AddEvent extends React.Component {
   render() {
     let categories = this.state.categories;
     let categorySelect = [];
-    let rando = Math.floor(Math.random() * 1000);
+    let rando = Math.floor(Math.random() * 1000000000);
 
     for(let parentCat in categories) {
       let subCat = categories[parentCat].map( cat => {
