@@ -15,7 +15,8 @@ class AddEvent extends React.Component {
     window.jQuery('.datepicker').pickadate({
       selectMonths: true, // Creates a dropdown to control month
       selectYears: 15, // Creates a dropdown of 15 years to control year
-      closeOnSelect: true
+      closeOnSelect: true,
+      format: 'mmmm d, yyyy'
     });
 
     //Option Selector for category
@@ -47,12 +48,24 @@ class AddEvent extends React.Component {
     let contactNumber = this.refs.contactNumber.value;
     let lat = this.refs.lat.value;
     let lng = this.refs.lng.value;
-    this.props.dispatch(addEvent(title, primCategory, primSubCategory,
-                                 secCategory, secSubCategory, locationName,
-                                 address, city, state, description,
-                                 date, startTime, endTime,
-                                 url, host, contactNumber, lat, lng));
-    this.refs.form.reset();
+
+
+    let mdate = moment(`${date}, ${startTime}`, 'MMMM D, YYYY, HH:mm', true).format('x');
+
+    console.log(`${date}, ${startTime}`);
+    console.log(mdate);
+    console.log(startTime);
+    console.log(endTime);
+
+    let bdate = moment(parseInt(mdate));
+    console.log(bdate.format())
+
+    // this.props.dispatch(addEvent(title, primCategory, primSubCategory,
+    //                              secCategory, secSubCategory, locationName,
+    //                              address, city, state, description,
+    //                              date, startTime, endTime,
+    //                              url, host, contactNumber, lat, lng));
+    // this.refs.form.reset();
   }
 
   render() {
@@ -96,7 +109,10 @@ class AddEvent extends React.Component {
           <input type="text" ref="address" placeholder="Address (Required)" />
           <input type="text" ref="city" placeholder="City (Required)" />
           <input type="text" ref="state" placeholder="State (Required)" />
-          <textarea type="text" ref="description" placeholder="Description" />
+          <div className="input-field col s12">
+            <textarea ref="description" id="description" className="materialize-textarea" maxLength="2000"></textarea>
+            <label htmlFor="description">Description</label>
+          </div>
           <input type="date" ref="date" className="datepicker" placeholder="Date" />
           <input type="time" ref="startTime" placeholder="Start Time" />
           <input type="time" ref="endTime" placeholder="End Time" />

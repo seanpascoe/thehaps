@@ -28,10 +28,10 @@ class Filter extends React.Component {
 
     for(let parentCat in categories) {
       categorySelect.push(
-        <option key={`${parentCat}-${rando}`} className="parCatFilter" style={{fontWeight: 'bold'}} value={parentCat}>{this.capitalizeCat(parentCat)}</option>
+        <option key={`${parentCat}-${rando}`} className="parCatFilter" value={parentCat}>{this.capitalizeCat(parentCat)}</option>
       );
       categories[parentCat].forEach( cat => {
-        categorySelect.push(<option key={`${cat}-${rando}`} style={{marginLeft: '10px'}} value={cat}>--{cat}</option>);
+        categorySelect.push(<option key={`${cat}-${rando}`} value={cat}>--{cat}</option>);
       });
 
     }
