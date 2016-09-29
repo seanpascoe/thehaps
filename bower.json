@@ -17,7 +17,7 @@
     "tests"
   ],
   "dependencies": {
-    "Materialize": "materialize#^0.97.5",
-    "moment": "^2.11.2"
+    "Materialize": "materialize#^0.97.7",
+    "moment": "^2.15.1"
   }
 }

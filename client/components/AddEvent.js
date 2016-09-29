@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { addEvent } from '../actions/event';
 import categories from './categories';
+import $ from 'jquery';
 
 class AddEvent extends React.Component {
   constructor(props) {
@@ -46,26 +47,31 @@ class AddEvent extends React.Component {
     let url = this.refs.url.value;
     let host = this.refs.host.value;
     let contactNumber = this.refs.contactNumber.value;
-    let lat = this.refs.lat.value;
-    let lng = this.refs.lng.value;
 
+    // this returns a Unix Time Value of type string... so should be parseInt before storage
+    let timeValue = moment(`${date}, ${startTime}`, 'MMMM D, YYYY, HH:mm', true).format('x');
+    timeValue = parseInt(timeValue);
 
-    let mdate = moment(`${date}, ${startTime}`, 'MMMM D, YYYY, HH:mm', true).format('x');
+    // getting lat and long from address
+    let mapAddress = address.split('+');
+    let mapCity = city.split('+');
 
-    console.log(`${date}, ${startTime}`);
-    console.log(mdate);
-    console.log(startTime);
-    console.log(endTime);
-
-    let bdate = moment(parseInt(mdate));
-    console.log(bdate.format())
-
-    // this.props.dispatch(addEvent(title, primCategory, primSubCategory,
-    //                              secCategory, secSubCategory, locationName,
-    //                              address, city, state, description,
-    //                              date, startTime, endTime,
-    //                              url, host, contactNumber, lat, lng));
-    // this.refs.form.reset();
+    $.ajax({
+      url: `https://maps.googleapis.com/maps/api/geocode/json?address=${mapAddress},+${mapCity},+${state}&key=AIzaSyBDnrHjFasPDwXmFQ1XUAyt1Q1uAPju8TI`,
+      type: 'GET',
+      dataType: 'JSON'
+    }).done( data => {
+      let lat = data.results[0].geometry.location.lat;
+      let lng = data.results[0].geometry.location.lng;
+      this.props.dispatch(addEvent(title, primCategory, primSubCategory,
+        secCategory, secSubCategory, locationName,
+        address, city, state, description,
+        date, startTime, endTime, timeValue,
+        url, host, contactNumber, lat, lng));
+      this.refs.form.reset();
+    }).fail(data => {
+      Materialize.toast('Uh, oh! There was a problem.', 4000);
+    });
   }
 
   render() {
@@ -119,8 +125,6 @@ class AddEvent extends React.Component {
           <input type="text" ref="host" placeholder="Host" />
           <input type="tel" ref="contactNumber" placeholder="Contact Phone #"/>
           <input type="url" ref="url" placeholder="URL for Event" />
-          <input type="text" ref="lat" placeholder="Lat" />
-          <input type="text" ref="lng" placeholder="Lng" />
 
           <button className='btn' type="submit">Create Event</button>
         </form>

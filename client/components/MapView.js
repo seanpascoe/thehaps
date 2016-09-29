@@ -62,7 +62,7 @@ export class MapView extends React.Component {
   renderInfoWindow(event) {
     return (
       <InfoWindow
-        onCloseclick={this.handleMarkerClose} >
+        onCloseclick={this.handleMarkerClose} key={`iw-${event._id}`}>
         <div>
           <div>{event.title}</div>
           <a className="modal-trigger"

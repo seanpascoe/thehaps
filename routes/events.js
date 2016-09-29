@@ -3,9 +3,11 @@ var router = express.Router();
 var mongoose = require('mongoose');
 var Event = require('../models/event');
 
-// GET shows all events
+// GET events within start and end date
 router.get('/', (req, res) => {
-  Event.find((err, events) => {
+  let startDate = parseInt(req.query.startDate);
+  let endDate = parseInt(req.query.endDate);
+  Event.find({timeValue: {$gte:startDate, $lt:endDate} },(err, events) => {
     res.json(events);
   });
 });
@@ -26,6 +28,7 @@ router.post('/', (req, res) => {
     date: req.body.date,
     startTime: req.body.startTime,
     endTime: req.body.endTime,
+    timeValue: req.body.timeValue,
     url: req.body.url,
     host: req.body.host,
     contactNumber: req.body.contactNumber,

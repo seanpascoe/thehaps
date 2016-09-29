@@ -10,7 +10,11 @@ class App extends React.Component {
   }
 
   componentWillMount() {
-    this.props.dispatch(fetchEvents());
+    let startDate = moment().startOf('day').format('x');
+    let endDate = moment().startOf('day').add(4, 'days').format('x');
+
+
+    this.props.dispatch(fetchEvents(startDate, endDate));
 
     if (!this.props.auth.isAuthenticated) {
       if (sessionStorage.userId && sessionStorage.token) {
