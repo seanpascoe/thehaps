@@ -58,22 +58,35 @@ class AddEvent extends React.Component {
 
     debugger;
 
-    // $.ajax({
-    //   url: `https://maps.googleapis.com/maps/api/geocode/json?address=${mapAddress},+${mapCity},+${state}&key=AIzaSyBDnrHjFasPDwXmFQ1XUAyt1Q1uAPju8TI`,
-    //   type: 'GET',
-    //   dataType: 'JSON'
-    // }).done( data => {
-    //   let lat = data.results[0].geometry.location.lat;
-    //   let lng = data.results[0].geometry.location.lng;
-    //   this.props.dispatch(addEvent(title, primCategory, primSubCategory,
-    //     secCategory, secSubCategory, locationName,
-    //     address, city, state, description,
-    //     date, startTime, endTime, timeValue,
-    //     url, host, contactNumber, lat, lng));
-    //   this.refs.form.reset();
-    // }).fail(data => {
-    //   Materialize.toast('Uh, oh! There was a problem.', 4000);
-    // });
+    $.ajax({
+      url: `https://maps.googleapis.com/maps/api/geocode/json?address=${mapAddress},+${mapCity},+${state}&key=AIzaSyBDnrHjFasPDwXmFQ1XUAyt1Q1uAPju8TI`,
+      type: 'GET',
+      dataType: 'JSON'
+    }).done( data => {
+      let status = data.status
+      if (status === 'ZERO_RESULTS') {
+        Materialize.toast('No results from address. Please submit a valid address', 4000);
+      } else if (status === 'OVER_QUERY_LIMIT') {
+        Materialize.toast('Cannot make anymore google API calls', 4000);
+      } else if (status === 'REQUEST_DENIED') {
+        Materialize.toast('Request Denied', 4000);
+      } else if (status === 'INVALID_REQUEST') {
+        Materialize.toast('Missing address fields', 4000);
+      } else if (status === 'UNKNOWN_ERROR') {
+        Materialize.toast('Oops something went wrong', 4000);
+      } else {
+        let lat = data.results[0].geometry.location.lat;
+        let lng = data.results[0].geometry.location.lng;
+        this.props.dispatch(addEvent(title, primCategory, primSubCategory,
+          secCategory, secSubCategory, locationName,
+          address, city, state, description,
+          date, startTime, endTime, timeValue,
+          url, host, contactNumber, lat, lng));
+        this.refs.form.reset();
+      }
+    }).fail(data => {
+      Materialize.toast('Uh, oh! There was a problem.', 4000);
+    });
   }
 
   render() {
