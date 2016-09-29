@@ -27,9 +27,9 @@ class AddEvent extends React.Component {
   addEvent(e) {
     e.preventDefault();
     let primaryCategory = this.refs.primaryCategory.value;
-    let splitPrimCat = primaryCategory.split(' ');
+    let splitPrimCat = primaryCategory.split(',');
     let secondaryCategory = this.refs.secondaryCategory.value;
-    let splitSecCat = secondaryCategory.split(' ');
+    let splitSecCat = secondaryCategory.split(',');
 
     let title = this.refs.title.value;
     let primCategory = splitPrimCat[0];
@@ -56,22 +56,24 @@ class AddEvent extends React.Component {
     let mapAddress = address.split('+');
     let mapCity = city.split('+');
 
-    $.ajax({
-      url: `https://maps.googleapis.com/maps/api/geocode/json?address=${mapAddress},+${mapCity},+${state}&key=AIzaSyBDnrHjFasPDwXmFQ1XUAyt1Q1uAPju8TI`,
-      type: 'GET',
-      dataType: 'JSON'
-    }).done( data => {
-      let lat = data.results[0].geometry.location.lat;
-      let lng = data.results[0].geometry.location.lng;
-      this.props.dispatch(addEvent(title, primCategory, primSubCategory,
-        secCategory, secSubCategory, locationName,
-        address, city, state, description,
-        date, startTime, endTime, timeValue,
-        url, host, contactNumber, lat, lng));
-      this.refs.form.reset();
-    }).fail(data => {
-      Materialize.toast('Uh, oh! There was a problem.', 4000);
-    });
+    debugger;
+
+    // $.ajax({
+    //   url: `https://maps.googleapis.com/maps/api/geocode/json?address=${mapAddress},+${mapCity},+${state}&key=AIzaSyBDnrHjFasPDwXmFQ1XUAyt1Q1uAPju8TI`,
+    //   type: 'GET',
+    //   dataType: 'JSON'
+    // }).done( data => {
+    //   let lat = data.results[0].geometry.location.lat;
+    //   let lng = data.results[0].geometry.location.lng;
+    //   this.props.dispatch(addEvent(title, primCategory, primSubCategory,
+    //     secCategory, secSubCategory, locationName,
+    //     address, city, state, description,
+    //     date, startTime, endTime, timeValue,
+    //     url, host, contactNumber, lat, lng));
+    //   this.refs.form.reset();
+    // }).fail(data => {
+    //   Materialize.toast('Uh, oh! There was a problem.', 4000);
+    // });
   }
 
   render() {
@@ -81,7 +83,7 @@ class AddEvent extends React.Component {
 
     for(let parentCat in categories) {
       let subCat = categories[parentCat].map( cat => {
-        return(<option key={`${cat}-${rando}`} value={`${parentCat} ${cat}`}>{cat}</option>);
+        return(<option key={`${cat}-${rando}`} value={`${parentCat},${cat}`}>{cat}</option>);
       });
 
       categorySelect.push(
