@@ -27,7 +27,6 @@ class Filter extends React.Component {
 
   componentDidUpdate(prevProps) {
     if(!prevProps.filter.endDate) {
-      debugger;
       let picker = window.jQuery('.dpStartDate').pickadate('picker');
       picker.set('select', parseInt(this.props.filter.startDate));
     }

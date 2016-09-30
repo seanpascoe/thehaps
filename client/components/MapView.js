@@ -5,6 +5,7 @@ import mapstyle from './mapstyle';
 import List from './List';
 import DetailView from './DetailView';
 import Filter from './Filter';
+import FaSliders from 'react-icons/lib/fa/sliders';
 
 export class MapView extends React.Component {
   constructor(props) {
@@ -110,7 +111,7 @@ export class MapView extends React.Component {
            data-activates="slide-out1"
            style={{ position: 'fixed', bottom: '10px', right: '10px' }}
            onClick={() => this.filterOption(this)}>
-          <i style={{fontSize: '2.3rem'}} className="material-icons">filter_list</i>
+          <FaSliders size={'1.8rem'} />
         </a>
         <Filter />
         <div id="g-map-wrapper" style={{display: this.props.view.mapDisplay}}>

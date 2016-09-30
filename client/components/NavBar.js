@@ -2,6 +2,9 @@ import React from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import { logout } from '../actions/userauth';
+import FaBars from 'react-icons/lib/fa/bars';
+import FaList from 'react-icons/lib/fa/th-list';
+import FaMap from 'react-icons/lib/fa/map-o';
 
 class NavBar extends React.Component {
   constructor(props) {
@@ -46,18 +49,30 @@ class NavBar extends React.Component {
     } else {
       mapDisplay = 'block';
       listDisplay = 'none';
-      icon = 'view_list'
+      icon = 'view_list';
     }
-    this.props.dispatch({type: 'VIEW_CHANGE', mapDisplay, listDisplay, icon})
+    this.props.dispatch({type: 'VIEW_CHANGE', mapDisplay, listDisplay, icon});
   }
 
   render() {
+    let style = {
+      viewIcons:
+      {
+        paddingRight: '5px',
+        cursor: 'pointer'
+      }
+    };
+
     return (
       <nav>
         <div className="nav-wrapper">
           <Link to="/" className="brand-logo center">The Haps</Link>
-          <a href="#" data-activates="mobile" className="button-collapse show-on-large"><i style={{fontSize: '2.5rem'}} className="material-icons">menu</i></a>
-          <span className="right" onClick={this.viewChange} style={{cursor: 'pointer'}}><i style={{fontSize: '2.5rem'}} className="material-icons">{this.props.view.icon}</i></span>
+          <a href="#" data-activates="mobile" className="button-collapse show-on-large">
+            <FaBars size={'2rem'} />
+          </a>
+          <span style={style.viewIcons} className="right" onClick={this.viewChange}>
+            {this.props.view.icon === 'map' ? <FaMap size={'1.8rem'} /> : <FaList size={'1.8rem'} />}
+          </span>
           <ul className="side-nav" id="mobile">
             <li><Link to="/about">About</Link></li>
             <li className="divider"></li>
