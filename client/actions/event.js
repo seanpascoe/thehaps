@@ -50,10 +50,10 @@ export const addEvent = (title, primCategory, primSubCategory,
   };
 };
 
-const getEvents = (events) => {
+const getEvents = (events, startDate, endDate) => {
   return {
     type: 'GET_EVENTS',
-    events
+    events, startDate, endDate
   };
 };
 
@@ -64,7 +64,7 @@ export const fetchEvents = (startDate, endDate) => {
       type: 'GET',
       data: {startDate, endDate}
     }).done( events => {
-      dispatch(getEvents(events));
+      dispatch(getEvents(events, startDate, endDate));
     });
   };
 };

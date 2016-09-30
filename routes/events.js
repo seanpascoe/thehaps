@@ -7,7 +7,7 @@ var Event = require('../models/event');
 router.get('/', (req, res) => {
   let startDate = parseInt(req.query.startDate);
   let endDate = parseInt(req.query.endDate);
-  Event.find({timeValue: {$gte:startDate, $lt:endDate} },(err, events) => {
+  Event.find({timeValue: {$gte:startDate, $lte:endDate} },(err, events) => {
     res.json(events);
   });
 });

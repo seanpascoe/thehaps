@@ -15,7 +15,7 @@ class AddEvent extends React.Component {
     //Date picker
     window.jQuery('.datepicker').pickadate({
       selectMonths: true, // Creates a dropdown to control month
-      selectYears: 15, // Creates a dropdown of 15 years to control year
+      selectYears: 3, // Creates a dropdown of 15 years to control year
       closeOnSelect: true,
       format: 'mmmm d, yyyy'
     });
@@ -55,8 +55,6 @@ class AddEvent extends React.Component {
     // getting lat and long from address
     let mapAddress = address.split('+');
     let mapCity = city.split('+');
-
-    debugger;
 
     $.ajax({
       url: `https://maps.googleapis.com/maps/api/geocode/json?address=${mapAddress},+${mapCity},+${state}&key=AIzaSyBDnrHjFasPDwXmFQ1XUAyt1Q1uAPju8TI`,
