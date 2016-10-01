@@ -3,13 +3,13 @@ import { connect } from 'react-redux';
 
 const DetailView = (props) => {
   let styles = {
-    fontWeight: {fontWeight: '200'},
+    modalWrapper: {fontWeight: '200', maxHeight: "65%"},
     noMargin: {margin: '0px'},
     divMargin: {marginTop: '10px'}
   };
 
   return (
-    <div id="event-detail" className="modal bottom-sheet" style={styles.fontWeight}>
+    <div id="event-detail" className="modal bottom-sheet" style={styles.modalWrapper}>
       <div className="modal-content">
         <div className="row">
           <div className="col s12">

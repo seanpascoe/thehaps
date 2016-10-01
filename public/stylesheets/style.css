@@ -25,3 +25,7 @@ body, html {
     height: calc(100% - 64px) !important;
   }
 }
+
+.drag-target {
+  z-index: -1 !important;
+}

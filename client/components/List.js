@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router';
 
 class List extends React.Component {
   constructor(props) {
@@ -44,7 +43,7 @@ class List extends React.Component {
     });
 
     let styles = {
-      title: {fontSize: '30px'},
+      title: {fontSize: '25px', paddingTop: '10px'},
       listContainer: {display: this.props.view.listDisplay, fontWeight: '200'},
       ul: {marginBottom: 0}
     };
