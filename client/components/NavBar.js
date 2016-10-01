@@ -17,19 +17,23 @@ class NavBar extends React.Component {
   }
 
   links() {
+    let styles = {
+      fontWeight: {fontWeight: '200'}
+    };
+
     if (this.props.auth.isAuthenticated) {
       return (
         <div>
-          <li><Link to="/add-event">Add Event</Link></li>
-          <li><a onClick={() => this.props.dispatch(logout())}>Logout</a></li>
+          <li><Link to="/add-event" style={styles.fontWeight}>Add Event</Link></li>
+          <li><a onClick={() => this.props.dispatch(logout())} style={styles.fontWeight}>Logout</a></li>
         </div>
       );
     } else {
       return (
         <div>
-          <li><Link to="/add-event">Add Event</Link></li>
-          <li><Link to="/login">Login</Link></li>
-          <li><Link to="/signup">Sign Up</Link></li>
+          <li><Link to="/add-event" style={styles.fontWeight}>Add Event</Link></li>
+          <li><Link to="/login" style={styles.fontWeight}>Login</Link></li>
+          <li><Link to="/signup" style={styles.fontWeight}  >Sign Up</Link></li>
         </div>
       );
     }
@@ -46,22 +50,26 @@ class NavBar extends React.Component {
     } else {
       mapDisplay = 'block';
       listDisplay = 'none';
-      icon = 'view_list'
+      icon = 'view_list';
     }
-    this.props.dispatch({type: 'VIEW_CHANGE', mapDisplay, listDisplay, icon})
+    this.props.dispatch({type: 'VIEW_CHANGE', mapDisplay, listDisplay, icon});
   }
 
   render() {
+    let styles = {
+      fontWeight: {fontWeight: '200'}
+    };
+
     return (
       <nav>
         <div className="nav-wrapper">
           <Link to="/" className="brand-logo center">The Haps</Link>
           <a href="#" data-activates="mobile" className="button-collapse show-on-large"><i style={{fontSize: '2.5rem'}} className="material-icons">menu</i></a>
           <span className="right" onClick={this.viewChange} style={{cursor: 'pointer'}}><i style={{fontSize: '2.5rem'}} className="material-icons">{this.props.view.icon}</i></span>
-          <ul className="side-nav" id="mobile">
-            <li><Link to="/about">About</Link></li>
+          <ul className="side-nav" id="mobile" style={styles.fontWeight}>
+            <li><Link to="/about" style={styles.fontWeight}>About</Link></li>
             <li className="divider"></li>
-            <li><Link to="/">Map</Link></li>
+            <li><Link to="/" style={styles.fontWeight}>Map</Link></li>
             {this.links()}
           </ul>
         </div>

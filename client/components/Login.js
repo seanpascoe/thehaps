@@ -18,16 +18,23 @@ class Login extends React.Component {
   }
 
   render() {
+    let styles = {
+      fontWeight: {fontWeight: '200'},
+      fontSize: {fontSize: '30px'},
+      formBackground: {backgroundColor: 'rgba(128, 128, 128, 0.09)', borderRadius: '15px'}
+    }
     return (
-      <div className="container">
-        <h2 className="center">Login</h2>
-        <form onSubmit={this.signIn}>
-          <label><input type="email" ref="email" placeholder="email"/></label>
-          <label><input type="password" ref="password" placeholder="password" /></label><br />
-          <div className="center">
-            <button className="btn" type="submit">Login</button>
-          </div>
-        </form>
+      <div className="container" style={styles.fontWeight}>
+        <p style={styles.fontSize}>Login</p>
+        <div style={styles.formBackground}>
+          <form onSubmit={this.signIn} style={{padding: '20px'}}>
+            <label><input type="email" ref="email" placeholder="email"/></label>
+            <label><input type="password" ref="password" placeholder="password" /></label><br />
+            <div className="center">
+              <button className="btn" type="submit">Login</button>
+            </div>
+          </form>
+        </div>
       </div>
     );
   }

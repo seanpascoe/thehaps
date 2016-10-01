@@ -104,43 +104,51 @@ class AddEvent extends React.Component {
       );
     }
 
+    let styles = {
+      fontWeight: {fontWeight: '200'},
+      fontSize: {fontSize: '30px'},
+      formBackground: {backgroundColor: 'rgba(128, 128, 128, 0.09)', borderRadius: '15px',}
+    };
 
     return(
-      <div className="container">
-        <h2>Add Event</h2>
-        <form ref='form' onSubmit={this.addEvent}>
-          <input type="text" ref="title" placeholder="Title (Required)" />
-          <div className="input-field col s12">
-            <select ref="primaryCategory">
-              <option defaultValue="" disabled selected>Choose your option</option>
-              {categorySelect}
-            </select>
-            <label>Primary Category</label>
-          </div>
-          <div className="input-field col s12">
-            <select ref="secondaryCategory">
-              <option defaultValue="" disabled selected="selected">Choose your option</option>
-              {categorySelect}
-            </select>
-            <label>Secondary Category</label>
-          </div>
-          <input type="text" ref="locationName" placeholder="Location Name (Required)" />
-          <input type="text" ref="address" placeholder="Address (Required)" />
-          <input type="text" ref="city" placeholder="City (Required)" />
-          <input type="text" ref="state" placeholder="State (Required)" />
-          <div className="input-field col s12">
-            <textarea ref="description" id="description" className="materialize-textarea" maxLength="2000"></textarea>
-            <label htmlFor="description">Description</label>
-          </div>
-          <input type="date" ref="date" className="datepicker" placeholder="Date" />
-          <input type="time" ref="startTime" placeholder="Start Time" />
-          <input type="time" ref="endTime" placeholder="End Time" />
-          <input type="text" ref="host" placeholder="Host" />
-          <input type="tel" ref="contactNumber" placeholder="Contact Phone #"/>
-          <input type="url" ref="url" placeholder="URL for Event" />
-
-          <button className='btn' type="submit">Create Event</button>
-        </form>
+      <div className="container" style={styles.fontWeight}>
+        <p style={styles.fontSize}>Add Event</p>
+        <div style={styles.formBackground}>
+          <form ref='form' onSubmit={this.addEvent} style={{padding: '20px'}}>
+            <input style={{color: 'black'}} type="text" ref="title" placeholder="Title (Required)" />
+            <div className="input-field col s12">
+              <select ref="primaryCategory">
+                <option defaultValue="" disabled selected>Choose your option</option>
+                {categorySelect}
+              </select>
+              <label>Primary Category</label>
+            </div>
+            <div className="input-field col s12">
+              <select ref="secondaryCategory">
+                <option defaultValue="" disabled selected="selected">Choose your option</option>
+                {categorySelect}
+              </select>
+              <label>Secondary Category</label>
+            </div>
+            <input type="text" ref="locationName" placeholder="Location Name (Required)" />
+            <input type="text" ref="address" placeholder="Address (Required)" />
+            <input type="text" ref="city" placeholder="City (Required)" />
+            <input type="text" ref="state" placeholder="State (Required)" />
+            <div className="input-field col s12">
+              <textarea ref="description" id="description" className="materialize-textarea" maxLength="2000"></textarea>
+              <label htmlFor="description">Description</label>
+            </div>
+            <input type="date" ref="date" className="datepicker" placeholder="Date" />
+            <input type="time" ref="startTime" placeholder="Start Time" />
+            <input type="time" ref="endTime" placeholder="End Time" />
+            <input type="text" ref="host" placeholder="Host" />
+            <input type="tel" ref="contactNumber" placeholder="Contact Phone #"/>
+            <input type="url" ref="url" placeholder="URL for Event" />
+            <div className='center'>
+              <button className='btn center' type="submit">Create Event</button>
+            </div>
+          </form>
+        </div>
       </div>
     );
   }
