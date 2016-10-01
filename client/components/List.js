@@ -44,13 +44,13 @@ class List extends React.Component {
     });
 
     let styles = {
-      fontWeight: {fontWeight: '200'},
-      fontSize: {fontSize: '30px'}
+      title: {fontSize: '30px'},
+      listContainer: {display: this.props.view.listDisplay, fontWeight: '200'}
     };
 
     return (
-      <div style={{display: this.props.view.listDisplay}} style={styles.fontWeight}>
-        <p style={styles.fontSize}>Events</p>
+      <div style={styles.listContainer}>
+        <p style={styles.title}>Events</p>
         <ul className="collection">
           {events}
         </ul>
