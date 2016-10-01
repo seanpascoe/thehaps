@@ -1,6 +1,7 @@
 import React from 'react';
 import {GoogleMapLoader, GoogleMap, InfoWindow, Marker} from 'react-google-maps';
 import { connect } from 'react-redux';
+import { fetchEvents } from '../actions/event';
 import mapstyle from './mapstyle';
 import List from './List';
 import DetailView from './DetailView';
@@ -20,6 +21,13 @@ export class MapView extends React.Component {
     };
     this.eventDetails = this.eventDetails.bind(this);
     this.handleMarkerClose = this.handleMarkerClose.bind(this);
+  }
+
+  componentWillMount() {
+    let startDate = moment().startOf('day').format('x');
+    let endDate = moment().endOf('day').add(3, 'days').format('x');
+
+    this.props.dispatch(fetchEvents(startDate, endDate));
   }
 
   componentDidMount() {

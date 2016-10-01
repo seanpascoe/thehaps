@@ -26,14 +26,14 @@ class Filter extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    if(!prevProps.filter.endDate) {
-      let picker = window.jQuery('.dpStartDate').pickadate('picker');
-      picker.set('select', parseInt(this.props.filter.startDate));
-    }
-    if(!prevProps.filter.endDate) {
-      let picker = window.jQuery('.dpEndDate').pickadate('picker');
-      picker.set('select', parseInt(this.props.filter.endDate));
-    }
+    // if(!prevProps.filter.endDate) {
+    let picker1 = window.jQuery('.dpStartDate').pickadate('picker');
+    picker1.set('select', parseInt(this.props.filter.startDate));
+    // }
+    // if(!prevProps.filter.endDate) {
+    let picker2 = window.jQuery('.dpEndDate').pickadate('picker');
+    picker2.set('select', parseInt(this.props.filter.endDate));
+    // }
   }
 
   capitalizeCat(cat) {
