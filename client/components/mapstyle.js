@@ -197,7 +197,6 @@ const mapstyle = {
         ]
     }
   ]
-
-}
+};
 
 export default mapstyle;

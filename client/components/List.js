@@ -33,18 +33,24 @@ class List extends React.Component {
           <li>
             <img style={{borderRadius: '0'}} src="images/icons/soccer.png" alt="" className="circle" />
             <span className="title">{event.title}</span>
-            <p>Location Name <br/>
-               {event.primCategory}
+            <p>{event.locationName}
+              <br/>
+              {event.date}
             </p>
             <span className="secondary-content">{event.startTime}</span>
           </li>
         </a>
       );
     });
-    
+
+    let styles = {
+      fontWeight: {fontWeight: '200'},
+      fontSize: {fontSize: '30px'}
+    };
+
     return (
-      <div style={{display: this.props.view.listDisplay}}>
-        <h3>Events</h3>
+      <div style={{display: this.props.view.listDisplay}} style={styles.fontWeight}>
+        <p style={styles.fontSize}>Events</p>
         <ul className="collection">
           {events}
         </ul>
