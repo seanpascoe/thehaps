@@ -61,13 +61,14 @@ class NavBar extends React.Component {
   render() {
     let styles = {
       viewIcons: {paddingRight: '5px', cursor: 'pointer'},
-      fontWeight: {fontWeight: '200'}
+      fontWeight: {fontWeight: '200'},
+      navBar: {height: '50px', lineHeight: '50px'}
     };
 
     return (
       <nav>
         <div className="nav-wrapper">
-          <Link to="/" className="brand-logo center">The Haps</Link>
+          <Link to="/" className="brand-logo center"><img src="/images/logo/the-haps-white-small.png"/></Link>
           <a href="#" data-activates="mobile" className="button-collapse show-on-large">
             <FaBars size={'2rem'} />
           </a>
