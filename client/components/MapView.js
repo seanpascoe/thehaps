@@ -13,8 +13,8 @@ export class MapView extends React.Component {
     super(props);
     this.state = {
       center: {
-        lat: 40.6142948,
-        lng: -111.8962744
+        lat: 40.6822755,
+        lng: -111.9127072
       },
       eventDetail: {},
       activeIW: ''
@@ -119,7 +119,7 @@ export class MapView extends React.Component {
            data-activates="slide-out1"
            style={{ position: 'fixed', bottom: '10px', right: '10px' }}
            onClick={() => this.filterOption(this)}>
-          <FaSliders size={'1.8rem'} />
+          <FaSliders size={'1.8rem'} style={{marginBottom: '2px'}}/>
         </a>
         <Filter />
         <div id="g-map-wrapper" style={{display: this.props.view.mapDisplay}}>
