@@ -119,7 +119,7 @@ export class MapView extends React.Component {
            data-activates="slide-out1"
            style={{ position: 'fixed', bottom: '10px', right: '10px' }}
            onClick={() => this.filterOption(this)}>
-          <FaSliders size={'1.8rem'} style={{marginBottom: '2px'}}/>
+          <FaSliders size={'1.8rem'} style={{marginBottom: '1px'}}/>
         </a>
         <Filter />
         <div id="g-map-wrapper" style={{display: this.props.view.mapDisplay}}>
