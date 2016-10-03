@@ -103,10 +103,16 @@ export class MapView extends React.Component {
     });
 
     let events = filteredEvents.map((event) => {
+      let icon = {
+        url: "/images/icons/music.svg",
+        anchor: new google.maps.Point(15,60),
+        // scaledSize: new google.maps.Size(100,100)
+        // scale: 0.25
+      }
       return (
         <Marker
           key={event._id}
-          icon={`/images/icons/soccer.png`}
+          icon={icon}
           position={{lat: parseFloat(event.lat), lng: parseFloat(event.lng)}}
           onClick={this.handleMarkerClick.bind(this, event)} >
           {this.state.activeIW === event._id ? this.renderInfoWindow(event): null}
