@@ -103,9 +103,11 @@ export class MapView extends React.Component {
     });
 
     let events = filteredEvents.map((event) => {
+      let catIcon = event.primCategory.replace(/ /g, '-').replace('&', 'and');
+      console.log(catIcon);
       let icon = {
-        url: "/images/icons/music.svg",
-        anchor: new google.maps.Point(19.5,60),
+        url: `/images/icons/${catIcon}.svg`,
+        anchor: new google.maps.Point(16.25,50),
         // scaledSize: new google.maps.Size(100,100)
         // scale: 0.25
       }
