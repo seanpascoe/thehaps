@@ -62,7 +62,7 @@ class NavBar extends React.Component {
     let styles = {
       viewIcons: {paddingRight: '5px', cursor: 'pointer'},
       fontWeight: {fontWeight: '300'},
-      logo: {height: '50px'}
+      logo: {height: '40px'}
     };
 
     return (

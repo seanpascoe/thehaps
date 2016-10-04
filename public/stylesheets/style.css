@@ -14,18 +14,57 @@ body, html {
   height: 100%;
 }
 
-@media (max-width: 600px) {
+/*@media (max-width: 600px) {
   div[data-reactroot] {
-    height: calc(100% - 56px) !important;
+    height: calc(100% - 50px) !important;
   }
 }
 
 @media (min-width: 601px) {
   div[data-reactroot] {
-    height: calc(100% - 64px) !important;
+    height: calc(100% - 50px) !important;
   }
+}*/
+
+div[data-reactroot] {
+  height: calc(100% - 50px) !important;
 }
 
-.drag-target {
+
+/*.drag-target {
   z-index: -1 !important;
+}*/
+
+
+
+
+/*nav {
+    height: 45px;
+    line-height: 45px;
+}
+
+nav i, nav [class^="mdi-"], nav [class*="mdi-"], nav i.material-icons {
+    height: 45px;
+    line-height: 45px;
+}
+
+nav .button-collapse i {
+    height: 45px;
+    line-height: 45px;
+}
+
+nav .brand-logo {
+    font-size: 1.6rem;
+}*/
+
+/*@media only screen and (min-width: 601px){
+    nav, nav .nav-wrapper i, nav a.button-collapse, nav a.button-collapse i {
+        height: 50px;
+        line-height: 50px;
+    }
+}*/
+
+nav, nav .nav-wrapper i, nav a.button-collapse, nav a.button-collapse i {
+    height: 50px;
+    line-height: 50px;
 }
