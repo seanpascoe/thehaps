@@ -104,12 +104,9 @@ export class MapView extends React.Component {
 
     let events = filteredEvents.map((event) => {
       let catIcon = event.primCategory.replace(/ /g, '-').replace('&', 'and');
-      console.log(catIcon);
       let icon = {
         url: `/images/icons/${catIcon}.svg`,
         anchor: new google.maps.Point(16.25,50),
-        // scaledSize: new google.maps.Size(100,100)
-        // scale: 0.25
       }
       return (
         <Marker
@@ -125,8 +122,7 @@ export class MapView extends React.Component {
       <div id="map-list-wrapper">
         <a className="btn-floating btn-large waves-effect waves-light red filter-sideNav"
            data-activates="slide-out1"
-           style={{ position: 'fixed', bottom: '10px', right: '10px' }}
-           onClick={() => this.filterOption(this)}>
+           style={{ position: 'fixed', bottom: '10px', right: '10px' }}>
           <FaSliders size={'1.8rem'} style={{marginBottom: '1px'}}/>
         </a>
         <Filter />

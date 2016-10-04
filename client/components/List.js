@@ -23,6 +23,7 @@ class List extends React.Component {
 
   render() {
     let events = this.props.filteredEvents.map(event => {
+      let catIcon = event.primCategory.replace(/ /g, '-').replace('&', 'and');
       return (
         <a
           key={event._id}
@@ -30,7 +31,7 @@ class List extends React.Component {
           onClick={ (e) => {e.preventDefault();this.eventDetails(event._id);}}
           style={{ cursor: 'pointer' }}>
           <li>
-            <img style={{borderRadius: '0'}} src="images/icons/soccer.png" alt="" className="circle" />
+            <img style={{borderRadius: '0'}} src={`/images/icons/${catIcon}.svg`} alt="" className="circle" />
             <span className="title">{event.title}</span>
             <p>{event.locationName}
               <br/>
@@ -53,6 +54,14 @@ class List extends React.Component {
         <div style={styles.title}>Events</div>
         <ul className="collection" style={styles.ul}>
           {events}
+          <a
+            className="modal-trigger collection-item"
+            // onClick=
+            style={{ cursor: 'pointer', minHeight: "84px" }}>
+            <li>
+              <div className="center" style={{fontSize: '2rem', lineHeight: "2rem"}}>Adjust Filter For More Events (finish this)</div>
+            </li>
+          </a>
         </ul>
       </div>
     );
