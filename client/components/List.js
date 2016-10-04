@@ -59,7 +59,7 @@ class List extends React.Component {
             // onClick=
             style={{ cursor: 'pointer', minHeight: "84px" }}>
             <li>
-              <div className="center" style={{fontSize: '2rem', lineHeight: "2rem"}}>Adjust Filter For More Events (finish this)</div>
+              <div className="center" style={{fontSize: '2rem', lineHeight: '2rem'}}>Adjust Filter For More Events (finish this)</div>
             </li>
           </a>
         </ul>

@@ -13,8 +13,8 @@ export class MapView extends React.Component {
     super(props);
     this.state = {
       center: {
-        lat: 40.6822755,
-        lng: -111.9127072
+        lat: 40.760984,
+        lng: -111.8828773
       },
       eventDetail: {},
       activeIW: ''
@@ -36,18 +36,18 @@ export class MapView extends React.Component {
       closeOnClick: true // Closes side-nav on <a> clicks, useful for Angular/Meteor
     });
 
-    if (navigator && navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition((pos) => {
-        const coords = pos.coords;
-        this.setState({
-          center: {
-            lat: coords.latitude,
-            lng: coords.longitude
-          }
-        });
-        this.refs.map.panTo(this.state.center);
-      });
-    }
+    // if (navigator && navigator.geolocation) {
+    //   navigator.geolocation.getCurrentPosition((pos) => {
+    //     const coords = pos.coords;
+    //     this.setState({
+    //       center: {
+    //         lat: coords.latitude,
+    //         lng: coords.longitude
+    //       }
+    //     });
+    //     this.refs.map.panTo(this.state.center);
+    //   });
+    // }
   }
 
   handleMarkerClick(marker) {
