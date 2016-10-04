@@ -4,7 +4,7 @@ const mapstyle = {
         "featureType": "water",
         "stylers": [
             {
-                "color": "#19a0d8"
+                "color": "#0A9DEC"
             }
         ]
     },

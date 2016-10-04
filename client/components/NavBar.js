@@ -60,21 +60,21 @@ class NavBar extends React.Component {
 
   render() {
     let styles = {
-      viewIcons: {paddingRight: '5px', cursor: 'pointer'},
+      viewIcons: {cursor: 'pointer'},
       fontWeight: {fontWeight: '300'},
       logo: {height: '40px'}
     };
 
     return (
-      <nav>
+      <nav className="red lighten-1">
         <div className="nav-wrapper">
           <Link to="/" className="brand-logo center"><img src="/images/logo/thehapslogo-white.svg" style={styles.logo}/></Link>
           <a href="#" data-activates="mobile" className="button-collapse show-on-large">
             <FaBars size={'2rem'} />
           </a>
-          <span style={styles.viewIcons} className="right" onClick={this.viewChange}>
+          <div style={styles.viewIcons} className="right viewIcon" onClick={this.viewChange}>
             {this.props.view.icon === 'map' ? <FaMap size={'1.8rem'} /> : <FaList size={'1.8rem'} />}
-          </span>
+          </div>
           <ul className="side-nav" id="mobile">
             <li><Link to="/about" style={styles.fontWeight}>About</Link></li>
             <li className="divider"></li>

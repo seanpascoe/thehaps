@@ -120,7 +120,7 @@ export class MapView extends React.Component {
     });
     return (
       <div id="map-list-wrapper">
-        <a className="btn-floating btn-large waves-effect waves-light red filter-sideNav"
+        <a className="btn-floating btn-large waves-effect red waves-light filter-sideNav"
            data-activates="slide-out1"
            style={{ position: 'fixed', bottom: '10px', right: '10px' }}>
           <FaSliders size={'1.8rem'} style={{marginBottom: '1px'}}/>
