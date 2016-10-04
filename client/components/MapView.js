@@ -105,7 +105,7 @@ export class MapView extends React.Component {
     let events = filteredEvents.map((event) => {
       let icon = {
         url: "/images/icons/music.svg",
-        anchor: new google.maps.Point(15,60),
+        anchor: new google.maps.Point(19.5,60),
         // scaledSize: new google.maps.Size(100,100)
         // scale: 0.25
       }
