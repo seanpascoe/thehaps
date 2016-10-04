@@ -21,7 +21,7 @@ class NavBar extends React.Component {
 
   links() {
     let styles = {
-      fontWeight: {fontWeight: '200'}
+      fontWeight: {fontWeight: '300'}
     };
 
     if (this.props.auth.isAuthenticated) {
@@ -61,7 +61,7 @@ class NavBar extends React.Component {
   render() {
     let styles = {
       viewIcons: {paddingRight: '5px', cursor: 'pointer'},
-      fontWeight: {fontWeight: '200'},
+      fontWeight: {fontWeight: '300'},
       logo: {height: '50px'}
     };
 

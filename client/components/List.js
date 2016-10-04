@@ -44,7 +44,7 @@ class List extends React.Component {
 
     let styles = {
       title: {fontSize: '25px', paddingTop: '10px'},
-      listContainer: {display: this.props.view.listDisplay, fontWeight: '200'},
+      listContainer: {display: this.props.view.listDisplay, fontWeight: '300'},
       ul: {marginBottom: 0}
     };
 

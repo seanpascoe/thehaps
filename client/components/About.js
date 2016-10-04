@@ -2,7 +2,7 @@ import React from 'react';
 
 const About = () => {
 	let styles = {
-		fontWeight: {fontWeight: '200'},
+		fontWeight: {fontWeight: '300'},
 		fontSize: {fontSize: '30px'},
 		gitHub: {width: '200px', height: 'auto'},
 		devPoint: {width: '150px', height: 'auto'},

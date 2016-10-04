@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 const DetailView = (props) => {
   let styles = {
-    modalWrapper: {fontWeight: '200', maxHeight: "65%"},
+    modalWrapper: {fontWeight: '300', maxHeight: "65%"},
     noMargin: {margin: '0px'},
     divMargin: {marginTop: '10px'}
   };

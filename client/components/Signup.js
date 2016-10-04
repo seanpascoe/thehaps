@@ -19,7 +19,7 @@ class Signup extends React.Component {
 
   render() {
     let styles = {
-      fontWeight: {fontWeight: '200'},
+      fontWeight: {fontWeight: '300'},
       fontSize: {fontSize: '30px'},
       formBackground: {backgroundColor: 'rgba(128, 128, 128, 0.09)', borderRadius: '15px'}
     };
