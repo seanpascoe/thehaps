@@ -25,8 +25,8 @@ class App extends React.Component {
       <div>
         <NavBar />
         {this.props.children}
-     </div>
-     );
+      </div>
+    );
   }
 }
 

@@ -16,6 +16,8 @@ class NavBar extends React.Component {
     super(props);
     this.links = this.links.bind(this);
     this.viewChange = this.viewChange.bind(this);
+    this.navbarViewChangeMap = this.navbarViewChangeMap.bind(this);
+    this.navbarViewChangeList = this.navbarViewChangeList.bind(this);
   }
 
   componentDidMount() {
@@ -63,6 +65,20 @@ class NavBar extends React.Component {
     this.props.dispatch({type: 'VIEW_CHANGE', mapDisplay, listDisplay, icon});
   }
 
+  navbarViewChangeMap() {
+    let mapDisplay = 'block';
+    let listDisplay = 'none';
+    let icon = 'view_list';
+    this.props.dispatch({type: 'VIEW_CHANGE', mapDisplay, listDisplay, icon});
+  }
+
+  navbarViewChangeList() {
+    let mapDisplay = 'none';
+    let listDisplay = 'block';
+    let icon = 'map';
+    this.props.dispatch({type: 'VIEW_CHANGE', mapDisplay, listDisplay, icon});
+  }
+
   render() {
     let styles = {
       viewIcons: {cursor: 'pointer'},
@@ -71,7 +87,7 @@ class NavBar extends React.Component {
     };
 
     return (
-      <nav className="red lighten-1">
+      <nav className="red">
         <div className="nav-wrapper">
           <Link to="/" className="brand-logo center"><img src="/images/logo/thehapslogo-white.svg" style={styles.logo}/></Link>
           <a href="#" data-activates="mobile" className="button-collapse show-on-large">
@@ -83,8 +99,13 @@ class NavBar extends React.Component {
           <ul className="side-nav" id="mobile">
             <li><Link to="/about" style={styles.fontWeight}><FaInfo size={'1.8rem'} /><span className="menu-item">About</span></Link></li>
             <li className="divider"></li>
-            <li><Link to="/" style={styles.fontWeight}><FaMap size={'1.8rem'} /><span className="menu-item">Map View</span></Link></li>
-            <li><Link to="/" style={styles.fontWeight}><FaList size={'1.8rem'} /><span className="menu-item">List View</span></Link></li>
+            <li
+              onClick={() => {
+                this.navbarViewChangeMap();
+                //dispatch to redux that should retrigger map
+              }}>
+              <Link to="/" style={styles.fontWeight}><FaMap size={'1.8rem'} /><span className="menu-item">Map View</span></Link></li>
+            <li onClick={this.navbarViewChangeList}><Link to="/" style={styles.fontWeight}><FaList size={'1.8rem'} /><span className="menu-item">List View</span></Link></li>
             {this.links()}
           </ul>
         </div>
