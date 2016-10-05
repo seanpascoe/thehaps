@@ -41,13 +41,34 @@ nav, nav .nav-wrapper i, nav a.button-collapse, nav a.button-collapse i {
   }
 }
 
-
-/*nav .nav-wrapper {
-  z-index: 1000;
-}*/
-
 nav .brand-logo {
   padding-top: 4px;
+}
+
+.menu-item {
+  padding-left: 20px;
+}
+
+.picker__date-display {
+  background-color: #0A9DEC;
+}
+
+.picker__weekday-display {
+  background-color: #0388CF;
+}
+
+.picker__day--selected, .picker__day--selected:hover, .picker--focused .picker__day--selected {
+  background-color: #0A9DEC;
+}
+
+.picker__day.picker__day--today,
+.picker__close, .picker__today {
+  color: #0388CF;
+}
+
+.picker__nav--prev:hover,
+.picker__nav--next:hover {
+  background-color: rgba(89,185,236, 0.5);
 }
 
 /*nav {

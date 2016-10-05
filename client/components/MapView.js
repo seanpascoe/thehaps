@@ -132,7 +132,7 @@ export class MapView extends React.Component {
             googleMapElement={
               <GoogleMap
                 center={mapCenter || this.state.center}
-                defaultZoom={11}
+                defaultZoom={13}
                 ref='map'
                 onClick={this.handleMarkerClose}
                 defaultOptions={{

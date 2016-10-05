@@ -5,6 +5,11 @@ import { logout } from '../actions/userauth';
 import FaBars from 'react-icons/lib/fa/bars';
 import FaList from 'react-icons/lib/fa/th-list';
 import FaMap from 'react-icons/lib/fa/map-o';
+import FaPlus from 'react-icons/lib/fa/plus-circle';
+import FaSignIn from 'react-icons/lib/fa/sign-in';
+import FaSignOut from 'react-icons/lib/fa/sign-out';
+import FaSignUp from 'react-icons/lib/fa/user-plus';
+import FaInfo from 'react-icons/lib/fa/info-circle';
 
 class NavBar extends React.Component {
   constructor(props) {
@@ -27,16 +32,16 @@ class NavBar extends React.Component {
     if (this.props.auth.isAuthenticated) {
       return (
         <div>
-          <li><Link to="/add-event" style={styles.fontWeight}>Add Event</Link></li>
-          <li><a onClick={() => this.props.dispatch(logout())} style={styles.fontWeight}>Logout</a></li>
+          <li><Link to="/add-event" style={styles.fontWeight}><FaPlus size={'1.8rem'} /><span className="menu-item">Add Event</span></Link></li>
+          <li><a onClick={() => this.props.dispatch(logout())} style={styles.fontWeight}><FaSignOut size={'1.8rem'} /><span className="menu-item">Logout</span></a></li>
         </div>
       );
     } else {
       return (
         <div>
-          <li><Link to="/add-event" style={styles.fontWeight}>Add Event</Link></li>
-          <li><Link to="/login" style={styles.fontWeight}>Login</Link></li>
-          <li><Link to="/signup" style={styles.fontWeight}  >Sign Up</Link></li>
+          <li><Link to="/add-event" style={styles.fontWeight}><FaPlus size={'1.8rem'} /><span className="menu-item">Add Event</span></Link></li>
+          <li><Link to="/login" style={styles.fontWeight}><FaSignIn size={'1.8rem'} /><span className="menu-item">Login</span></Link></li>
+          <li><Link to="/signup" style={styles.fontWeight}><FaSignUp size={'1.8rem'} /><span className="menu-item">Sign Up</span></Link></li>
         </div>
       );
     }
@@ -76,9 +81,10 @@ class NavBar extends React.Component {
             {this.props.view.icon === 'map' ? <FaMap size={'1.8rem'} /> : <FaList size={'1.8rem'} />}
           </div>
           <ul className="side-nav" id="mobile">
-            <li><Link to="/about" style={styles.fontWeight}>About</Link></li>
+            <li><Link to="/about" style={styles.fontWeight}><FaInfo size={'1.8rem'} /><span className="menu-item">About</span></Link></li>
             <li className="divider"></li>
-            <li><Link to="/" style={styles.fontWeight}>Map</Link></li>
+            <li><Link to="/" style={styles.fontWeight}><FaMap size={'1.8rem'} /><span className="menu-item">Map View</span></Link></li>
+            <li><Link to="/" style={styles.fontWeight}><FaList size={'1.8rem'} /><span className="menu-item">List View</span></Link></li>
             {this.links()}
           </ul>
         </div>
