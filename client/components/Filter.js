@@ -15,6 +15,9 @@ class Filter extends React.Component {
       selectMonths: true,
       selectYears: 3,
       format: 'mmmm d, yyyy',
+      today: false,
+      clear: false,
+      close: false,
       onClose: this.dateSelect,
       // closes datepicker on date select
       onSet: function( arg ){

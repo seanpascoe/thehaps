@@ -18,7 +18,11 @@ div[data-reactroot] {
   height: calc(100% - 50px) !important;
 }
 
-nav, nav .nav-wrapper i, nav a.button-collapse, nav a.button-collapse i {
+nav,
+nav .nav-wrapper i,
+nav a.button-collapse,
+nav a.button-collapse i,
+.navbar-fixed {
     height: 50px;
     line-height: 50px;
 }
@@ -38,6 +42,9 @@ nav, nav .nav-wrapper i, nav a.button-collapse, nav a.button-collapse i {
   }
   .viewIcon {
     padding-right: 12px;
+  }
+  .navbar-fixed {
+    height: 50px;
   }
 }
 
