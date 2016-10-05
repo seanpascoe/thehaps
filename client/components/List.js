@@ -21,9 +21,17 @@ class List extends React.Component {
     window.jQuery('#event-detail').openModal();
   }
 
+  sortEvents(a, b) {
+    return a.timeValue - b.timeValue
+  }
+
   render() {
-    let events = this.props.filteredEvents.map(event => {
+    let sortedEvents = this.props.filteredEvents.sort(this.sortEvents);
+
+    let events = sortedEvents.map(event => {
       let catIcon = event.primCategory.replace(/ /g, '-').replace('&', 'and');
+      let startTime = moment(event.startTime, 'HH:mm', true).format('h:mm a');
+      let date = moment(event.date, 'MMMM D, YYYY', true).format('MMM Do');
       return (
         <a
           key={event._id}
@@ -33,11 +41,16 @@ class List extends React.Component {
           <li>
             <img style={{borderRadius: '0'}} src={`/images/icons/${catIcon}.svg`} alt="" className="circle" />
             <span className="title">{event.title}</span>
-            <p>{event.locationName}
+            <p>
+              {event.locationName}
               <br/>
-              {event.date}
+              {`${event.primCategory} : ${event.primSubCategory}`}
             </p>
-            <span className="secondary-content">{event.startTime}</span>
+            <p className="secondary-content">
+              {startTime === '12:00 am' ? 'see Details' : startTime}
+              <br/>
+              {date}
+            </p>
           </li>
         </a>
       );
