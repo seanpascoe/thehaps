@@ -61,6 +61,7 @@ class NavBar extends React.Component {
       mapDisplay = 'block';
       listDisplay = 'none';
       icon = 'view_list';
+      this.props.dispatch({type: 'TRIGGER_MAP', mapRefreshTrigger: true});
     }
     this.props.dispatch({type: 'VIEW_CHANGE', mapDisplay, listDisplay, icon});
   }
@@ -93,7 +94,7 @@ class NavBar extends React.Component {
           <a href="#" data-activates="mobile" className="button-collapse show-on-large">
             <FaBars size={'2rem'} />
           </a>
-          <div style={styles.viewIcons} className="right viewIcon" onClick={this.viewChange}>
+          <div style={{cursor: 'pointer', display: this.props.routing.locationBeforeTransitions.pathname === '/' ? 'block' : 'none'}} className="right viewIcon" onClick={this.viewChange}>
             {this.props.view.icon === 'map' ? <FaMap size={'1.8rem'} /> : <FaList size={'1.8rem'} />}
           </div>
           <ul className="side-nav" id="mobile">
@@ -102,7 +103,7 @@ class NavBar extends React.Component {
             <li
               onClick={() => {
                 this.navbarViewChangeMap();
-                //dispatch to redux that should retrigger map
+                this.props.dispatch({type: 'TRIGGER_MAP', mapRefreshTrigger: true});
               }}>
               <Link to="/" style={styles.fontWeight}><FaMap size={'1.8rem'} /><span className="menu-item">Map View</span></Link></li>
             <li onClick={this.navbarViewChangeList}><Link to="/" style={styles.fontWeight}><FaList size={'1.8rem'} /><span className="menu-item">List View</span></Link></li>
@@ -115,7 +116,7 @@ class NavBar extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  return { auth: state.auth, view: state.view };
+  return { auth: state.auth, view: state.view, routing: state.routing };
 };
 
 export default connect(mapStateToProps)(NavBar);

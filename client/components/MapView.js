@@ -1,5 +1,6 @@
 import React from 'react';
 import {GoogleMapLoader, GoogleMap, InfoWindow, Marker} from 'react-google-maps';
+import {triggerEvent} from "react-google-maps/lib/utils";
 import { connect } from 'react-redux';
 import { fetchEvents } from '../actions/event';
 import mapstyle from './mapstyle';
@@ -48,6 +49,14 @@ export class MapView extends React.Component {
     //     this.refs.map.panTo(this.state.center);
     //   });
     // }
+  }
+
+  componentDidUpdate() {
+    //this fixes the map refresh problem when moving from list to map view
+    if (this.props.view.mapRefreshTrigger === true) {
+      triggerEvent(this.refs.map, 'resize');
+      this.props.dispatch({type: 'TRIGGER_MAP', mapRefreshTrigger: false});
+    }
   }
 
   handleMarkerClick(marker) {
@@ -99,7 +108,6 @@ export class MapView extends React.Component {
           filtCat === event.secCategory ||
           filtCat === event.secSubCategory);
       }
-
     });
 
     let events = filteredEvents.map((event) => {
