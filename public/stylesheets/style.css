@@ -48,9 +48,10 @@ nav a.button-collapse i,
   }
 }
 
-a {
+div {
   -webkit-tap-highlight-color:  rgba(255, 255, 255, 0);
 }
+
 nav .brand-logo {
   padding-top: 4px;
 }
