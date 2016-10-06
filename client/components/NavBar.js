@@ -96,9 +96,9 @@ class NavBar extends React.Component {
           <a href="#" data-activates="mobile" className="button-collapse show-on-large">
             <FaBars size={'2rem'} />
           </a>
-          <div style={{cursor: 'pointer', display: this.props.routing.locationBeforeTransitions.pathname === '/' ? 'block' : 'none'}} className="right viewIcon" onClick={this.viewChange}>
+          <a style={{cursor: 'pointer', display: this.props.routing.locationBeforeTransitions.pathname === '/' ? 'block' : 'none'}} className="right viewIcon" onClick={this.viewChange}>
             {this.props.view.icon === 'map' ? <FaMap size={'1.8rem'} /> : <FaList size={'1.8rem'} />}
-          </div>
+          </a>
           <ul className="side-nav" id="mobile">
             <li><Link to="/about" style={styles.fontWeight}><FaInfo size={'1.8rem'} /><span className="menu-item">About</span></Link></li>
             <li className="divider"></li>
