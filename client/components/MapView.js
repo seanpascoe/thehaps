@@ -1,6 +1,7 @@
-  import React from 'react';
+import React from 'react';
 import {GoogleMapLoader, GoogleMap, InfoWindow, Marker} from 'react-google-maps';
-import {triggerEvent} from "react-google-maps/lib/utils";
+import {triggerEvent} from 'react-google-maps/lib/utils';
+import MarkerClusterer from 'react-google-maps/lib/addons/MarkerClusterer';
 import { connect } from 'react-redux';
 import { fetchEvents } from '../actions/event';
 import mapstyle from './mapstyle';
@@ -8,7 +9,6 @@ import List from './List';
 import DetailView from './DetailView';
 import Filter from './Filter';
 import FaSliders from 'react-icons/lib/fa/sliders';
-import FaInfo from 'react-icons/lib/md/info-outline';
 
 export class MapView extends React.Component {
   constructor(props) {
@@ -158,7 +158,13 @@ export class MapView extends React.Component {
                   }
                 }}
               >
-                {events}
+                <MarkerClusterer
+                  averageCenter
+                  enableRetinaIcons
+                  gridSize={3}
+                  ref='clusterer'>
+                  {events}
+                </MarkerClusterer>
               </GoogleMap>
             }
           />
