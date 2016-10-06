@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import categories from './categories';
 import { fetchEvents } from '../actions/event';
+import FaFilter from 'react-icons/lib/fa/filter';
 
 class Filter extends React.Component {
   constructor(props) {
@@ -58,10 +59,6 @@ class Filter extends React.Component {
   }
 
   render() {
-    let style = {
-      cursor: 'pointer'
-    };
-
     let categories = this.state.categories;
     let categorySelect = [];
     let rando = Math.floor(Math.random() * 1000000000);
@@ -73,25 +70,36 @@ class Filter extends React.Component {
       categories[parentCat].forEach( cat => {
         categorySelect.push(<option key={`${cat}-${rando}`} value={cat}>--{cat}</option>);
       });
-
     }
+
+    let styles = {
+      cursor: {cursor: 'pointer'},
+      filterHeader: {fontSize: '30px', fontWeight: '300'},
+      filterIcon: {marginBottom: '15px', marginRight: '15px'}
+    };
+
     return(
       <div id="slide-out1" className="side-nav">
-        <h3>Filter</h3>
-        <div className="col s12">
-          <label>Start Date</label>
-          <input style={style} ref="startDate" className="datepicker dpStartDate" />
-        </div>
-        <div className="col s12">
-          <label>End Date</label>
-          <input style={style} ref="endDate" className="datepicker dpEndDate" />
-        </div>
-        <div className="col s12">
-          <label>Filter By Category</label>
-          <select style={style} onChange={(e) => this.catSelect(e)} value={this.props.filter.selectedCategory} className="browser-default">
-            <option value="all">All Categories</option>
-            {categorySelect}
-          </select>
+        <div className='container'>
+          <div>
+            <FaFilter size={'2rem'} style={styles.filterIcon} />
+            <span style={styles.filterHeader}>Filter</span>
+          </div>
+          <div className="col s12">
+            <label>Start Date</label>
+            <input style={styles.cursor} ref="startDate" className="datepicker dpStartDate" />
+          </div>
+          <div className="col s12">
+            <label>End Date</label>
+            <input style={styles.cursor} ref="endDate" className="datepicker dpEndDate" />
+          </div>
+          <div className="col s12">
+            <label>Filter By Category</label>
+            <select style={styles.cursor} onChange={(e) => this.catSelect(e)} value={this.props.filter.selectedCategory} className="browser-default">
+              <option value="all">All Categories</option>
+              {categorySelect}
+            </select>
+          </div>
         </div>
       </div>
     );

@@ -84,12 +84,13 @@ class NavBar extends React.Component {
     let styles = {
       viewIcons: {cursor: 'pointer'},
       fontWeight: {fontWeight: '300'},
-      logo: {height: '40px'}
+      logo: {height: '40px'},
+      navBarColor: {backgroundColor: '#2C3E50'}
     };
 
     return (
       <div className="navbar-fixed">
-      <nav className="red">
+      <nav style={styles.navBarColor}>
         <div className="nav-wrapper">
           <Link to="/" className="brand-logo center"><img src="/images/logo/thehapslogo-white.svg" style={styles.logo}/></Link>
           <a href="#" data-activates="mobile" className="button-collapse show-on-large">

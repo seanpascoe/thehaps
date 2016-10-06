@@ -57,20 +57,20 @@ nav .brand-logo {
 }
 
 .picker__date-display {
-  background-color: #0A9DEC;
+  background-color: #3498DB;
 }
 
 .picker__weekday-display {
-  background-color: #0388CF;
+  background-color: #2980B9;
 }
 
 .picker__day--selected, .picker__day--selected:hover, .picker--focused .picker__day--selected {
-  background-color: #0A9DEC;
+  background-color: #3498DB;
 }
 
 .picker__day.picker__day--today,
 .picker__close, .picker__today {
-  color: #0388CF;
+  color: #2980B9;
 }
 
 .picker__nav--prev:hover,
