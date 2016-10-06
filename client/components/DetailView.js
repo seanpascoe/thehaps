@@ -1,9 +1,21 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import FaDirections from 'react-icons/lib/md/directions';
 
 const DetailView = (props) => {
+  let event = props.details.eventDetail;
+  let date = moment(event.date, 'MMMM D, YYYY', true).format('dddd MMMM D, YYYY');
+  let startTime = moment(event.startTime, 'HH:mm', true).format('h:mm a');
+  let endTime = event.endTime ? moment(event.endTime, 'HH:mm', true).format('h:mm a') : '';
+
+
   let styles = {
-    modalWrapper: {fontWeight: '300', maxHeight: "65%"},
+    modalWrapper: {fontWeight: '300', maxHeight: '65%'},
+    date: {fontSize: '1.5rem', fontweight: 'bold'},
+    time: {fontSize: '1.3rem'},
+    locationName: {fontSize: '1.1rem', fontWeight: 'bold', paddingTop: '10px'},
+    location: {fontSize: '1.1rem'},
+    directions: {paddingLeft: '10px'},
     noMargin: {margin: '0px'},
     divMargin: {marginTop: '10px'}
   };
@@ -13,22 +25,24 @@ const DetailView = (props) => {
       <div className="modal-content">
         <div className="row">
           <div className="col s12">
-            <h5 className="center" style={styles.fontWeight}>{props.details.eventDetail.title}</h5>
+            <h5 className="center" style={styles.fontWeight}>{event.title}</h5>
           </div>
           <div className="col s12 m4" style={styles.divMargin}>
-            <p style={styles.noMargin}>{props.details.eventDetail.date}</p>
-            <p style={styles.noMargin}>Time: {props.details.eventDetail.startTime} - {props.details.eventDetail.endTime}</p>
+            <div style={styles.date}>{date}</div>
+            <div style={styles.time}>{`Time: ${startTime}` }{endTime ? ` - ${endTime}` : ''}</div>
+            <div style={styles.locationName}>{event.locationName}</div>
+            <div className='left'>
+              <div style={styles.location}>{event.address}</div>
+              <div style={styles.location}>{event.city}, {event.state}</div>
+            </div>
+            <a className="left" style={styles.directions} href={`https://maps.google.com?q=${event.address}+${event.city}+${event.state}`} target="_blank"><FaDirections size={'3rem'} /></a>
           </div>
-          <div className="col s12 m4" style={styles.divMargin}>
-            <p style={styles.noMargin}>{props.details.eventDetail.locationName}</p>
-            <p style={styles.noMargin}>{props.details.eventDetail.address}</p>
-            <p style={styles.noMargin}>{props.details.eventDetail.city}, {props.details.eventDetail.state}</p>
-          </div>
-          <div className="col s12 m4" style={styles.divMargin}>
-            <p style={styles.noMargin}>Hosted By: {props.details.eventDetail.host}</p>
-            <p style={styles.noMargin}>Contact Info: <a href={`tel:${props.details.eventDetail.contactNumber}`}>{props.details.eventDetail.contactNumber}</a></p>
-            <p style={styles.noMargin}>Description: {props.details.eventDetail.description}</p>
-            <p style={styles.noMargin}>URL: <a href={props.details.eventDetail.url} target="_blank">{props.details.eventDetail.url}</a></p>
+
+          <div className="col s12 m8" style={styles.divMargin}>
+            <p style={styles.noMargin}>Hosted By: {event.host}</p>
+            <p style={styles.noMargin}>Contact Info: <a href={`tel:${event.contactNumber}`}>{event.contactNumber}</a></p>
+            <p style={styles.noMargin}>Description: {event.description}</p>
+            <p style={styles.noMargin}>URL: <a href={event.url} target="_blank">{event.url}</a></p>
           </div>
         </div>
       </div>

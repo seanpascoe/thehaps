@@ -1,4 +1,4 @@
-import React from 'react';
+  import React from 'react';
 import {GoogleMapLoader, GoogleMap, InfoWindow, Marker} from 'react-google-maps';
 import {triggerEvent} from "react-google-maps/lib/utils";
 import { connect } from 'react-redux';
@@ -60,6 +60,7 @@ export class MapView extends React.Component {
   }
 
   handleMarkerClick(marker) {
+    //if multiples show list view
     this.setState({activeIW: marker._id});
   }
 
@@ -78,11 +79,14 @@ export class MapView extends React.Component {
   }
 
   renderInfoWindow(event) {
+    let startTime = moment(event.startTime, 'HH:mm', true).format('h:mm a');
     return (
       <InfoWindow
         onCloseclick={this.handleMarkerClose} key={`iw-${event._id}`}>
         <div>
-          <div>{event.title}</div>
+          <div style={{fontWeight: 'bold'}}>{event.title}</div>
+          <div>{`${event.date} - ${startTime}`}</div>
+          <div>{`${event.primCategory} : ${event.primSubCategory ? event.primSubCategory : ''}`}</div>
           <a className="modal-trigger"
              onClick={() => this.eventDetails(event._id)}
              style={{ cursor: 'pointer' }}>event details</a>
