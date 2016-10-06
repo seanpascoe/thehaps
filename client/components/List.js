@@ -41,16 +41,16 @@ class List extends React.Component {
           <li>
             <img style={{borderRadius: '0'}} src={`/images/icons/${catIcon}.svg`} alt="" className="circle" />
             <span className="title">{event.title}</span>
-            <p>
+            <p style={{textOverflow: 'ellipsis'}}>
               {event.locationName}
               <br/>
               {`${event.primCategory} : ${event.primSubCategory}`}
             </p>
-            <p className="secondary-content">
+            <div className="secondary-content">
               {startTime === '12:00 am' ? 'see Details' : startTime}
               <br/>
               {date}
-            </p>
+            </div>
           </li>
         </a>
       );
