@@ -8,6 +8,7 @@ import List from './List';
 import DetailView from './DetailView';
 import Filter from './Filter';
 import FaSliders from 'react-icons/lib/fa/sliders';
+import FaInfo from 'react-icons/lib/md/info-outline';
 
 export class MapView extends React.Component {
   constructor(props) {
@@ -83,13 +84,14 @@ export class MapView extends React.Component {
     return (
       <InfoWindow
         onCloseclick={this.handleMarkerClose} key={`iw-${event._id}`}>
-        <div>
+        <div
+          className="modal-trigger"
+          onClick={() => this.eventDetails(event._id)}
+          style={{cursor: 'pointer'}}>
           <div style={{fontWeight: 'bold'}}>{event.title}</div>
           <div>{`${event.date} - ${startTime}`}</div>
           <div>{`${event.primCategory} : ${event.primSubCategory ? event.primSubCategory : ''}`}</div>
-          <a className="modal-trigger"
-             onClick={() => this.eventDetails(event._id)}
-             style={{ cursor: 'pointer' }}>event details</a>
+          <div style={{marginTop: '5px', color: '#3498db'}}>Event Details</div>
         </div>
       </InfoWindow>
     );

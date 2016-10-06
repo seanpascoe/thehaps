@@ -16,8 +16,9 @@ const DetailView = (props) => {
     locationName: {fontSize: '1.1rem', fontWeight: 'bold', paddingTop: '10px'},
     location: {fontSize: '1.1rem'},
     directions: {paddingLeft: '10px'},
-    noMargin: {margin: '0px'},
-    divMargin: {marginTop: '10px'}
+    infoLabels: {fontWeight: 'bold'},
+    divMargin: {marginTop: '10px'},
+    url: {clear: 'both', marginTop: '10px'}
   };
 
   return (
@@ -35,14 +36,14 @@ const DetailView = (props) => {
               <div style={styles.location}>{event.address}</div>
               <div style={styles.location}>{event.city}, {event.state}</div>
             </div>
-            <a className="left" style={styles.directions} href={`https://maps.google.com?q=${event.address}+${event.city}+${event.state}`} target="_blank"><FaDirections size={'3rem'} /></a>
+            <a style={styles.directions} href={`https://maps.google.com?q=${event.address}+${event.city}+${event.state}`} target="_blank"><FaDirections size={'3rem'} /></a>
+            <div style={styles.url}><a href={event.url} target="_blank">{event.url}</a></div>
           </div>
 
           <div className="col s12 m8" style={styles.divMargin}>
-            <p style={styles.noMargin}>Hosted By: {event.host}</p>
-            <p style={styles.noMargin}>Contact Info: <a href={`tel:${event.contactNumber}`}>{event.contactNumber}</a></p>
-            <p style={styles.noMargin}>Description: {event.description}</p>
-            <p style={styles.noMargin}>URL: <a href={event.url} target="_blank">{event.url}</a></p>
+            <div><span style={styles.infoLabels}>{event.host ? 'Hosted By: ' : ''}</span>{event.host}</div>
+            <div><span style={styles.infoLabels}>{event.contactNumber ? 'Contact #: ' : ''}</span><a href={`tel:${event.contactNumber}`}>{event.contactNumber}</a></div>
+            <div><span style={styles.infoLabels}>Description:</span> {event.description ? event.description : 'no description'}</div>
           </div>
         </div>
       </div>
