@@ -73,6 +73,7 @@ class Filter extends React.Component {
     }
 
     let styles = {
+      container: {width: '90%', margin: '10px auto'},
       cursor: {cursor: 'pointer'},
       filterHeader: {fontSize: '30px', fontWeight: '300'},
       filterIcon: {marginBottom: '15px', marginRight: '15px'}
@@ -80,9 +81,9 @@ class Filter extends React.Component {
 
     return(
       <div id="slide-out1" className="side-nav">
-        <div className='container'>
+        <div style={styles.container}>
           <div>
-            <FaFilter size={'2rem'} style={styles.filterIcon} />
+            <FaFilter size={'32px'} style={styles.filterIcon} />
             <span style={styles.filterHeader}>Filter</span>
           </div>
           <div className="col s12">

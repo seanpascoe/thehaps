@@ -11,10 +11,11 @@ const DetailView = (props) => {
 
   let styles = {
     modalWrapper: {fontWeight: '300', maxHeight: '65%'},
-    date: {fontSize: '1.5rem', fontweight: 'bold'},
-    time: {fontSize: '1.3rem'},
-    locationName: {fontSize: '1.1rem', fontWeight: 'bold', paddingTop: '10px'},
-    location: {fontSize: '1.1rem'},
+    categories: {fontSize: '18px'},
+    date: {fontSize: '24px', fontweight: 'bold'},
+    time: {fontSize: '21px'},
+    locationName: {fontSize: '18px', fontWeight: 'bold', paddingTop: '10px'},
+    location: {fontSize: '18px'},
     directions: {paddingLeft: '10px'},
     infoLabels: {fontWeight: 'bold'},
     divMargin: {marginTop: '10px'},
@@ -27,6 +28,8 @@ const DetailView = (props) => {
         <div className="row">
           <div className="col s12">
             <h5 className="center" style={styles.fontWeight}>{event.title}</h5>
+            <div className="center" style={styles.categories}>{event.primCategory}{event.primSubCategory ? ` : ${event.primSubCategory}` : ''}</div>
+            <div className="center" style={styles.categories}>{event.secCategory ? ` ${event.secCategory}` : ''}{event.secSubCategory ? ` : ${event.secSubCategory}` : ''}</div>
           </div>
           <div className="col s12 m4" style={styles.divMargin}>
             <div style={styles.date}>{date}</div>
@@ -36,8 +39,8 @@ const DetailView = (props) => {
               <div style={styles.location}>{event.address}</div>
               <div style={styles.location}>{event.city}, {event.state}</div>
             </div>
-            <a style={styles.directions} href={`https://maps.google.com?q=${event.address}+${event.city}+${event.state}`} target="_blank"><FaDirections size={'3rem'} /></a>
-            <div style={styles.url}><a href={event.url} target="_blank">{event.url}</a></div>
+            <a style={styles.directions} href={`https://maps.google.com?q=${event.address}+${event.city}+${event.state}`} target="_blank"><FaDirections size={'48px'} /></a>
+            <div style={styles.url}><a href={event.url} target="_blank">Event Link</a></div>
           </div>
 
           <div className="col s12 m8" style={styles.divMargin}>

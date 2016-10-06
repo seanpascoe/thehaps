@@ -44,7 +44,7 @@ class List extends React.Component {
             <p style={{textOverflow: 'ellipsis'}}>
               {event.locationName}
               <br/>
-              {`${event.primCategory} : ${event.primSubCategory}`}
+              {event.primCategory}{event.primSubCategory ? ` : ${event.primSubCategory}` : ''}
             </p>
             <div className="secondary-content">
               {startTime === '12:00 am' ? 'see Details' : startTime}
@@ -68,11 +68,11 @@ class List extends React.Component {
         <ul className="collection" style={styles.ul}>
           {events}
           <a
-            className="modal-trigger collection-item"
-            // onClick=
-            style={{ cursor: 'pointer', minHeight: "84px" }}>
+            className="collection-item filter-sideNav"
+            data-activates="slide-out1"
+            style={{ cursor: 'pointer', minHeight: '84px' }}>
             <li>
-              <div className="center" style={{fontSize: '2rem', lineHeight: '2rem'}}>Adjust Filter For More Events (finish this)</div>
+              <div className="center " style={{fontSize: '25px', lineHeight: '64px'}}>Adjust Filter For More Events</div>
             </li>
           </a>
         </ul>

@@ -90,7 +90,7 @@ export class MapView extends React.Component {
           style={{cursor: 'pointer'}}>
           <div style={{fontWeight: 'bold'}}>{event.title}</div>
           <div>{`${event.date} - ${startTime}`}</div>
-          <div>{`${event.primCategory} : ${event.primSubCategory ? event.primSubCategory : ''}`}</div>
+          <div>{event.primCategory}{event.primSubCategory ? ` : ${event.primSubCategory}` : ''}</div>
           <div style={{marginTop: '5px', color: '#3498db'}}>Event Details</div>
         </div>
       </InfoWindow>
@@ -137,7 +137,7 @@ export class MapView extends React.Component {
         <a className="btn-floating btn-large waves-effect waves-light filter-sideNav"
            data-activates="slide-out1"
            style={{ position: 'fixed', bottom: '10px', right: '10px', backgroundColor: '#2C3E50' }}>
-          <FaSliders size={'1.8rem'} style={{marginBottom: '1px'}}/>
+          <FaSliders size={'30px'} style={{marginBottom: '1px'}}/>
         </a>
         <Filter />
         <div id="g-map-wrapper" style={{display: this.props.view.mapDisplay}}>
