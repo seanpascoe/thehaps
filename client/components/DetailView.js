@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import FaDirections from 'react-icons/lib/md/directions';
+import FaLink from 'react-icons/lib/fa/external-link';
 
 const DetailView = (props) => {
   let event = props.details.eventDetail;
@@ -40,7 +41,7 @@ const DetailView = (props) => {
               <div style={styles.location}>{event.city}, {event.state}</div>
             </div>
             <a style={styles.directions} href={`https://maps.google.com?q=${event.address}+${event.city}+${event.state}`} target="_blank"><FaDirections size={'48px'} /></a>
-            <div style={styles.url}><a href={event.url} target="_blank">Event Link</a></div>
+            <div style={styles.url}><a href={event.url} style={{fontSize: '17px'}} target="_blank">Event Link <FaLink size={'15px'} /></a></div>
           </div>
 
           <div className="col s12 m8" style={styles.divMargin}>

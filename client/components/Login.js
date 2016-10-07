@@ -20,21 +20,26 @@ class Login extends React.Component {
   render() {
     let styles = {
       fontWeight: {fontWeight: '300'},
-      fontSize: {fontSize: '30px'},
-      formBackground: {backgroundColor: 'rgba(128, 128, 128, 0.09)', borderRadius: '15px'}
-    }
+      title: {fontSize: '30px', margin: '20px 0 20px'},
+      formBackground: {backgroundColor: 'rgba(128, 128, 128, 0.09)', borderRadius: '15px', padding: '20px'},
+      submitButton: {margin: '10px 0px 15px 0px', backgroundColor: '#2C3E50'}
+    };
     return (
       <div className="container" style={styles.fontWeight}>
-        <p style={styles.fontSize}>Login</p>
-        <div style={styles.formBackground}>
-          <form onSubmit={this.signIn} style={{padding: '20px'}}>
-            <label><input type="email" ref="email" placeholder="email"/></label>
-            <label><input type="password" ref="password" placeholder="password" /></label><br />
-            <div className="center">
-              <button className="btn" type="submit">Login</button>
-            </div>
-          </form>
-        </div>
+        <div style={styles.title}>Login</div>
+        <form className='row' onSubmit={this.signIn} style={styles.formBackground}>
+          <div className='input-field col s12'>
+            <input type="email" ref="email" className='validate' required />
+            <label>Email</label>
+          </div>
+          <div className='input-field col s12'>
+            <input type="password" ref="password" className='validate' required />
+            <label>Password</label>
+          </div>
+          <div className="center">
+            <button className="btn" style={styles.submitButton} type="submit">Login</button>
+          </div>
+        </form>
       </div>
     );
   }

@@ -184,10 +184,10 @@ class AddEvent extends React.Component {
             <input type="url" ref="url" className='validate'/>
             <label><FaGlobe style={styles.iconMargin} />URL for Event</label>
           </div>
+          <div className='center'>
+            <button className='btn center' style={styles.submitButton} type="submit">Create Event</button>
+          </div>
         </form>
-        <div className='center'>
-          <button className='btn center' style={styles.submitButton} type="submit">Create Event</button>
-        </div>
       </div>
     );
   }

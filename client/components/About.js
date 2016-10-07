@@ -1,57 +1,60 @@
 import React from 'react';
+import FaGithub	from 'react-icons/lib/fa/github-square';
+import FaLinkedin from 'react-icons/lib/fa/linkedin-square';
+import GoGithub from 'react-icons/lib/go/mark-github';
 
 const About = () => {
-	let styles = {
-		fontWeight: {fontWeight: '300'},
-		fontSize: {fontSize: '30px'},
-		gitHub: {width: '200px', height: 'auto'},
-		devPoint: {width: '150px', height: 'auto'},
-		linkedin: {width: '55px', height: 'auto', marginLeft: '10px'},
-		octocat: {width: '50px', height: 'auto'},
-		portrait: {height: '250px', borderRadius: '50%', boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)'},
-		bottomMargin: {marginBottom: '20px'}
-	};
+  let styles = {
+    fontWeight: {fontWeight: '300'},
+    title: {fontSize: '30px', padding: '20px 0 10px'},
+    devPoint: {width: '150px', height: 'auto'},
+    portrait: {height: '250px', borderRadius: '50%', boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)'},
+    bottomMargin: {marginBottom: '20px'},
+    background: {backgroundColor: '#2C3E50', color: '#ECF0F1', padding: '20px 0 20px', fontWeight: '300'},
+    linkIcon: {color: 'white', margin: '10px'},
+    developerBackground: {backgroundColor: '#2980B9', color: '#ECF0F1', padding: '20px 0 20px'}
+  };
 
-	return(
-		<div style={styles.fontWeight}>
+  return(
+		<div style={styles.background}>
 			<div className="container">
-				<div className="center">
-					<p style={styles.fontSize}>What can you do here?</p>
-				</div>
-				<div className="container">
-					<p className="container">
-						The Haps is an app where you can discover amazing
-						events that is happening right now near you.
-						Go out with family and friends and find
-						new places to go!
-					</p>
-				</div>
-				<p className="center" style={styles.fontSize}>About the Developers</p>
+				<div style={{padding: '0 0 25px 0'}}>
+					<div className="center">
+						<div style={styles.title}>What Can You Do Here?</div>
+					</div>
 					<div className="container">
-					<p className="container">
-						We saw an opportunity to connect our users with the
-						city around them. Our passion for web development
-						has given us an opportunity to bring our ideas
-						to life. We are thankful for all the help we have
-						received to our journey of becoming web developers.
-					</p>
+						<div className="container">
+							The Haps is an app where you can discover amazing
+							events that is happening right now near you.
+							Go out with family and friends and find
+							new places to go!
+						</div>
+					</div>
+					<div className="center" style={styles.title}>About The Developers</div>
+					<div className="container">
+						<div className="container">
+							We saw an opportunity to connect our users with the
+							city around them. Our passion for web development
+							has given us an opportunity to bring our ideas
+							to life. We are thankful for all the help we have
+							received on our journey of becoming web developers.
+						</div>
+					</div>
 				</div>
 			</div>
-			<p className="center" style={styles.fontSize}>Meet the Developers</p>
-			<div className="row">
+			<div className="row" style={styles.developerBackground}>
+				<div className="center" style={styles.title}>Meet The Developers</div>
 				<div className="col s12 m6 center" style={styles.bottomMargin}>
 					<img src="/images/taylor.jpg"
 						style={styles.portrait}/>
-					<p style={styles.fontSize}>Taylor Wu</p>
-					<a href="https://github.com/TaylorWu21">
-						<img src="/images/octocat1.png"
-							style={styles.octocat} />
+					<div style={styles.title}>Taylor Wu</div>
+					<a href="https://github.com/TaylorWu21" target='_blank'>
+						<FaGithub size={'60px'} style={styles.linkIcon} />
 					</a>
-					<a href="https://www.linkedin.com/in/taylorswu">
-						<img src="/images/linkedin1.png"
-							style={styles.linkedin} />
+					<a href="https://www.linkedin.com/in/taylorswu" target='_blank'>
+						<FaLinkedin size={'60px'} style={styles.linkIcon} />
 					</a>
-					<p className="container">
+					<div className="container">
 						I am currently a senior at the University of Utah.
 						I will graduate in spring of 2017 with a BS degree
 						in Information Systems. The summer of 2016 is where
@@ -62,21 +65,19 @@ const About = () => {
 						part of my professional life and hopefully I will be
 						able to create a career out of it. During my free time
 						I love to play video games and snowboard!
-					</p>
+					</div>
 				</div>
 				<div className="col s12 m6 center" style={styles.bottomMargin}>
 					<img src="/images/person.png"
-					 	style={styles.portrait}/>
-					<p style={styles.fontSize}>Sean Pascoe</p>
-					<a href="https://github.com/spflow">
-						<img src="/images/octocat1.png"
-							style={styles.octocat} />
+            style={styles.portrait}/>
+					<div style={styles.title}>Sean Pascoe</div>
+					<a href="https://github.com/spflow" target='_blank'>
+						<FaGithub size={'60px'} style={styles.linkIcon} />
 					</a>
-					<a href="">
-						<img src='/images/linkedin1.png'
-							style={styles.linkedin} />
+					<a href="" target='_blank'>
+						<FaLinkedin size={'60px'} style={styles.linkIcon} />
 					</a>
-					<p className="container">
+					<div className="container">
 						Lorem ipsum dolor sit amet, consectetur adipiscing
 						elit, sed do eiusmod tempor incididunt ut labore et
 						olore magna aliqua. Ut enim ad minim veniam, quis
@@ -86,24 +87,23 @@ const About = () => {
 						eu fugiat nulla pariatur. Excepteur sint occaecat
 						cupidatat non proident, sunt in culpa qui officia
 						deserunt mollit anim id est laborum."
-					</p>
+					</div>
 				</div>
 			</div>
 			<div className="center">
-				<p style={styles.fontSize}>Github Repository</p>
-				<a href="https://github.com/spflow/thehaps">
-					<img src="/images/octocat1.png"
-						style={styles.gitHub} />
+				<div style={styles.title}>Github Repository</div>
+				<a href="https://github.com/spflow/thehaps" target='_blank'>
+					<GoGithub size={'250px'} style={{color: 'white'}}/>
 				</a>
 			</div>
 			<div className="center container">
-				<p style={styles.fontSize}>Where we came from</p>
-				<a href="http://www.devpointlabs.com/">
-					<img src="/images/dpl1.jpeg"
+				<div style={styles.title}>Where we came from</div>
+				<a href="http://www.devpointlabs.com/" target='_blank'>
+					<img src="/images/dpl.png"
 						style={styles.devPoint} />
 				</a>
 				<div className="container" style={styles.marginBottom}>
-					<p className="container">
+					<div className="container" style={{marginBottom: '30px'}}>
 						Devpoint Labs is a coding bootcamp that teaches
 						full stack JavaScript. Over the course of 14
 						weeks we have learned many web development
@@ -112,7 +112,7 @@ const About = () => {
 						Testing, JQuery, and Ajax. DPL has equipped
 						us with new knowledge of current web-development
 						technology being used in the real world.
-					</p>
+					</div>
 				</div>
 			</div>
 		</div>
