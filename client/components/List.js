@@ -22,10 +22,19 @@ class List extends React.Component {
   }
 
   sortEvents(a, b) {
-    return a.timeValue - b.timeValue
+    return a.timeValue - b.timeValue;
   }
 
   render() {
+    let styles = {
+      title: {fontSize: '25px', paddingTop: '10px'},
+      listContainer: {display: this.props.view.listDisplay, fontWeight: '300'},
+      row: {marginBottom: 0},
+      ul: {marginBottom: 0},
+      time: {fontWeight: '500'},
+      date: {fontWeight: '400'}
+    };
+
     let sortedEvents = this.props.filteredEvents.sort(this.sortEvents);
 
     let events = sortedEvents.map(event => {
@@ -33,48 +42,45 @@ class List extends React.Component {
       let startTime = moment(event.startTime, 'HH:mm', true).format('h:mm a');
       let date = moment(event.date, 'MMMM D, YYYY', true).format('MMM Do');
       return (
-        <a
+        <li
           key={event._id}
           className="modal-trigger collection-item avatar"
           onClick={ (e) => {e.preventDefault();this.eventDetails(event._id);}}
           style={{ cursor: 'pointer' }}>
-          <li>
-            <img style={{borderRadius: '0'}} src={`/images/icons/${catIcon}.svg`} alt="" className="circle" />
-            <span className="title">{event.title}</span>
-            <p style={{textOverflow: 'ellipsis'}}>
-              {event.locationName}
-              <br/>
-              {event.primCategory}{event.primSubCategory ? ` : ${event.primSubCategory}` : ''}
-            </p>
-            <div className="secondary-content">
-              {startTime === '12:00 am' ? 'see Details' : startTime}
-              <br/>
-              {date}
+          <div className="row event-row" style={styles.row}>
+            <div className="col s1">
+              <img src={`/images/icons/${catIcon}.svg`} alt=""/>
             </div>
-          </li>
-        </a>
+            <div className="col s8">
+              <span className="title">{event.title}</span>
+              <p style={{textOverflow: 'ellipsis'}}>
+                {event.locationName}
+                <br/>
+                {event.primCategory}{event.primSubCategory ? ` : ${event.primSubCategory}` : ''}
+              </p>
+            </div>
+            <div className="col s3">
+              <div className="right" style={styles.dateTime}>
+                <div style={styles.time}>{startTime === '12:00 am' ? 'see det.' : startTime}</div>
+                <div style={styles.date}>{date}</div>
+              </div>
+            </div>
+          </div>
+        </li>
       );
     });
-
-    let styles = {
-      title: {fontSize: '25px', paddingTop: '10px'},
-      listContainer: {display: this.props.view.listDisplay, fontWeight: '300'},
-      ul: {marginBottom: 0}
-    };
 
     return (
       <div style={styles.listContainer}>
         <div style={styles.title}>Events</div>
         <ul className="collection" style={styles.ul}>
           {events}
-          <a
+          <li
             className="collection-item filter-sideNav"
             data-activates="slide-out1"
             style={{ cursor: 'pointer', minHeight: '84px' }}>
-            <li>
-              <div className="center " style={{fontSize: '25px', lineHeight: '64px'}}>Adjust Filter For More Events</div>
-            </li>
-          </a>
+            <div className="center " style={{fontSize: '25px', lineHeight: '64px'}}>Adjust Filter For More Events</div>
+          </li>
         </ul>
       </div>
     );

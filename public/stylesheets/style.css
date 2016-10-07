@@ -34,6 +34,23 @@ nav a.button-collapse i,
   .viewIcon {
     padding-right: 5px;
   }
+  .collection .collection-item {
+    padding: 10px 5px;
+  }
+  .collection .collection-item.avatar {
+    padding-left: 5px;
+  }
+  .event-row .col {
+    padding: 0;
+  }
+  .event-row .col.s8 {
+    padding-left: 10px;
+    width: 74%;
+  }
+
+  .event-row .col.s3 {
+    width: 17.66666667%;
+  }
 }
 
 @media (min-width: 601px) {
@@ -46,6 +63,13 @@ nav a.button-collapse i,
   .navbar-fixed {
     height: 50px;
   }
+  .collection .collection-item.avatar {
+    padding-left: 20px;
+  }
+}
+
+.collection .collection-item:hover {
+  background-color: rgba(0,0,0, 0.02);
 }
 
 div {
