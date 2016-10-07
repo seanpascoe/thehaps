@@ -137,7 +137,7 @@ export class MapView extends React.Component {
         <a className="btn-floating btn-large waves-effect waves-light filter-sideNav"
            data-activates="slide-out1"
            style={{ position: 'fixed', bottom: '10px', right: '10px', backgroundColor: '#2C3E50' }}>
-          <FaSliders size={'30px'} style={{marginBottom: '1px'}}/>
+          <FaSliders size={'28px'} style={{marginBottom: '1px'}}/>
         </a>
         <Filter />
         <div id="g-map-wrapper" style={{display: this.props.view.mapDisplay}}>
