@@ -32,7 +32,8 @@ class List extends React.Component {
       row: {marginBottom: 0},
       ul: {marginBottom: 0},
       time: {fontWeight: '500'},
-      date: {fontWeight: '400'}
+      date: {fontWeight: '400'},
+      moreEvents: {fontSize: '20px', lineHeight: '64px', fontWeight: "300", paddingLeft: '25px', color: 'gray'}
     };
 
     let sortedEvents = this.props.filteredEvents.sort(this.sortEvents);
@@ -79,7 +80,7 @@ class List extends React.Component {
             className="collection-item filter-sideNav"
             data-activates="slide-out1"
             style={{ cursor: 'pointer', minHeight: '84px' }}>
-            <div className="center " style={{fontSize: '25px', lineHeight: '64px'}}>Adjust Filter For More Events</div>
+            <div className="moreEvents" style={styles.moreEvents}><span style={{borderBottom: "1px solid gray"}}>adjust filter for more events</span></div>
           </li>
         </ul>
       </div>

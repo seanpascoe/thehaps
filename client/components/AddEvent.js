@@ -113,7 +113,7 @@ class AddEvent extends React.Component {
       fontWeight: {fontWeight: '300'},
       title: {fontSize: '30px', margin: '20px 0 20px'},
       formBackground: {backgroundColor: 'rgba(128, 128, 128, 0.09)', borderRadius: '15px', padding: '20px'},
-      submitButton: {margin: '10px 0px 30px 0px', backgroundColor: '#2C3E50'},
+      submitButton: {margin: '10px 0px 20px 0px', backgroundColor: '#2C3E50'},
       iconMargin: {marginRight: '5px'},
       clockLabel: {color: '#2980B9'}
     };
@@ -157,7 +157,7 @@ class AddEvent extends React.Component {
             <label>State (Required)</label>
           </div>
           <div className="input-field col s12">
-            <textarea type='text' ref="description" className="materialize-textarea" maxLength="2000"></textarea>
+            <textarea type='text' ref="description" id="description" className="materialize-textarea" maxLength="2000"></textarea>
             <label htmlFor="description">Description</label>
           </div>
           <div className='input-field col s12'>
@@ -165,12 +165,12 @@ class AddEvent extends React.Component {
             <label htmlFor="date"><FaCalendar style={styles.iconMargin}/>Date</label>
           </div>
           <div className='col s12'>
-            <label style={styles.clockLabel}><FaClock style={styles.iconMargin}/>Start Time</label>
-            <input type="time" ref="startTime" className='validate'/>
+            <label style={styles.clockLabel} htmlFor="startTime"><FaClock style={styles.iconMargin}/>Start Time</label>
+            <input type="time" ref="startTime" id="startTime" />
           </div>
           <div className='col s12'>
-            <label style={styles.clockLabel}><FaClock style={styles.iconMargin}/>End Time</label>
-            <input type="time" ref="endTime" className='validate' />
+            <label style={styles.clockLabel} htmlFor="endTime"><FaClock style={styles.iconMargin}/>End Time</label>
+            <input type="time" ref="endTime" id="endTime" />
           </div>
           <div className='input-field col s12'>
             <input type="text" ref="host" className='validate' />
@@ -185,7 +185,7 @@ class AddEvent extends React.Component {
             <label><FaGlobe style={styles.iconMargin} />URL for Event</label>
           </div>
           <div className='center'>
-            <button className='btn center' style={styles.submitButton} type="submit">Create Event</button>
+            <button className='btn center waves-effect waves-light' style={styles.submitButton} type="submit">Create Event</button>
           </div>
         </form>
       </div>
