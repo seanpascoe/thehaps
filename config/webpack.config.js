@@ -4,7 +4,8 @@ var path = require('path');
 var webpack = require('webpack');
 
 module.exports = {
-  devtool: 'eval-source-map',
+  // devtool: 'eval-source-map',
+  devtool: 'cheap-module-source-map',
   entry: [
     path.join(__dirname, '../client/index.js')
   ],
@@ -19,6 +20,11 @@ module.exports = {
     new webpack.NoErrorsPlugin(),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify('development')
+    }),
+    new webpack.DefinePlugin({
+      'process.env': {
+        'NODE_ENV': JSON.stringify('production')
+      }
     })
   ],
   module: {
