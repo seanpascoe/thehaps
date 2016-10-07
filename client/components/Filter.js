@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import categories from './categories';
 import { fetchEvents } from '../actions/event';
 import FaFilter from 'react-icons/lib/fa/filter';
+import FaCalendar from 'react-icons/lib/fa/calendar';
+import FaSlider from 'react-icons/lib/fa/sliders';
 
 class Filter extends React.Component {
   constructor(props) {
@@ -76,7 +78,8 @@ class Filter extends React.Component {
       container: {width: '90%', margin: '10px auto'},
       cursor: {cursor: 'pointer'},
       filterHeader: {fontSize: '30px', fontWeight: '300'},
-      filterIcon: {marginBottom: '15px', marginRight: '15px'}
+      filterIcon: {marginBottom: '15px', marginRight: '15px'},
+      calendarIcon: {marginRight: '10px'}
     };
 
     return(
@@ -87,15 +90,15 @@ class Filter extends React.Component {
             <span style={styles.filterHeader}>Filter</span>
           </div>
           <div className="col s12">
-            <label>Start Date</label>
+            <FaCalendar style={styles.calendarIcon} /><label>Start Date</label>
             <input style={styles.cursor} ref="startDate" className="datepicker dpStartDate" />
           </div>
           <div className="col s12">
-            <label>End Date</label>
+            <FaCalendar style={styles.calendarIcon} /><label>End Date</label>
             <input style={styles.cursor} ref="endDate" className="datepicker dpEndDate" />
           </div>
           <div className="col s12">
-            <label>Filter By Category</label>
+            <FaSlider style={styles.calendarIcon}/><label>Filter By Category</label>
             <select style={styles.cursor} onChange={(e) => this.catSelect(e)} value={this.props.filter.selectedCategory} className="browser-default">
               <option value="all">All Categories</option>
               {categorySelect}

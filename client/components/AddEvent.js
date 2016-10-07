@@ -3,6 +3,11 @@ import { connect } from 'react-redux';
 import { addEvent } from '../actions/event';
 import categories from './categories';
 import $ from 'jquery';
+import FaCalendar from 'react-icons/lib/fa/calendar-plus-o';
+import FaClock from 'react-icons/lib/fa/clock-o';
+import FaPhone from 'react-icons/lib/fa/phone';
+import FaUser from 'react-icons/lib/fa/user';
+import FaGlobe from 'react-icons/lib/fa/globe';
 
 class AddEvent extends React.Component {
   constructor(props) {
@@ -61,7 +66,7 @@ class AddEvent extends React.Component {
       type: 'GET',
       dataType: 'JSON'
     }).done( data => {
-      let status = data.status
+      let status = data.status;
       if (status === 'ZERO_RESULTS') {
         Materialize.toast('No results from address. Please submit a valid address', 4000);
       } else if (status === 'OVER_QUERY_LIMIT') {
@@ -106,48 +111,82 @@ class AddEvent extends React.Component {
 
     let styles = {
       fontWeight: {fontWeight: '300'},
-      fontSize: {fontSize: '30px'},
-      formBackground: {backgroundColor: 'rgba(128, 128, 128, 0.09)', borderRadius: '15px',}
+      title: {fontSize: '30px', margin: '20px 0 20px'},
+      formBackground: {backgroundColor: 'rgba(128, 128, 128, 0.09)', borderRadius: '15px', padding: '20px'},
+      submitButton: {margin: '10px 0px 30px 0px', backgroundColor: '#2C3E50'},
+      iconMargin: {marginRight: '5px'},
+      clockLabel: {color: '#2980B9'}
     };
 
     return(
       <div className="container" style={styles.fontWeight}>
-        <p style={styles.fontSize}>Add Event</p>
-        <div style={styles.formBackground}>
-          <form ref='form' onSubmit={this.addEvent} style={{padding: '20px'}}>
-            <input style={{color: 'black'}} type="text" ref="title" placeholder="Title (Required)" />
-            <div className="input-field col s12">
-              <select ref="primaryCategory">
-                <option defaultValue="" disabled selected>Choose your option</option>
-                {categorySelect}
-              </select>
-              <label>Primary Category</label>
-            </div>
-            <div className="input-field col s12">
-              <select ref="secondaryCategory">
-                <option defaultValue="" disabled selected="selected">Choose your option</option>
-                {categorySelect}
-              </select>
-              <label>Secondary Category</label>
-            </div>
-            <input type="text" ref="locationName" placeholder="Location Name (Required)" />
-            <input type="text" ref="address" placeholder="Address (Required)" />
-            <input type="text" ref="city" placeholder="City (Required)" />
-            <input type="text" ref="state" placeholder="State (Required)" />
-            <div className="input-field col s12">
-              <textarea ref="description" id="description" className="materialize-textarea" maxLength="2000"></textarea>
-              <label htmlFor="description">Description</label>
-            </div>
-            <input type="date" ref="date" className="datepicker" placeholder="Date" />
-            <input type="time" ref="startTime" placeholder="Start Time" />
-            <input type="time" ref="endTime" placeholder="End Time" />
-            <input type="text" ref="host" placeholder="Host" />
-            <input type="tel" ref="contactNumber" placeholder="Contact Phone #"/>
-            <input type="url" ref="url" placeholder="URL for Event" />
-            <div className='center'>
-              <button className='btn center' type="submit">Create Event</button>
-            </div>
-          </form>
+        <div style={styles.title}>Add Event</div>
+        <form className='row' ref='form' onSubmit={this.addEvent} style={styles.formBackground}>
+          <div className='input-field col s12'>
+            <input className='validate' type="text" ref="title" required />
+            <label style={{position: '12px 0px 32px 0px'}}>Title (Required)</label>
+          </div>
+          <div className="input-field col s12">
+            <select ref="primaryCategory">
+              <option defaultValue="" disabled selected>Choose your option</option>
+              {categorySelect}
+            </select>
+            <label>Primary Category</label>
+          </div>
+          <div className="input-field col s12">
+            <select ref="secondaryCategory">
+              <option defaultValue="" disabled selected="selected">Choose your option</option>
+              {categorySelect}
+            </select>
+            <label>Secondary Category</label>
+          </div>
+          <div className='input-field col s12'>
+            <input type="text" ref="locationName" className='validate' required />
+            <label>Location Name (Required)</label>
+          </div>
+          <div className='input-field col s12'>
+            <input type="text" ref="address" className='validate' required />
+            <label>Address (Required)</label>
+          </div>
+          <div className='input-field col s12'>
+            <input type="text" ref="city" className='validate' required />
+            <label>City (Required)</label>
+          </div>
+          <div className='input-field col s12'>
+            <input type="text" ref="state" className='validate' required />
+            <label>State (Required)</label>
+          </div>
+          <div className="input-field col s12">
+            <textarea type='text' ref="description" className="materialize-textarea" maxLength="2000"></textarea>
+            <label htmlFor="description">Description</label>
+          </div>
+          <div className='input-field col s12'>
+            <input type="date" ref="date" className="datepicker validate"  />
+            <label><FaCalendar style={styles.iconMargin} />Date</label>
+          </div>
+          <div className='col s12'>
+            <label style={styles.clockLabel}><FaClock style={styles.iconMargin}/>Start Time</label>
+            <input type="time" ref="startTime" className='validate'/>
+          </div>
+          <div className='col s12'>
+            <label style={styles.clockLabel}><FaClock style={styles.iconMargin}/>End Time</label>
+            <input type="time" ref="endTime" className='validate' />
+          </div>
+          <div className='input-field col s12'>
+            <input type="text" ref="host" className='validate' />
+            <label><FaUser style={styles.iconMargin}/>Host</label>
+          </div>
+          <div className='input-field col s12'>
+            <input type="tel" ref="contactNumber" className='validate' />
+            <label><FaPhone style={styles.iconMargin} />Contact Phone</label>
+          </div>
+          <div className='input-field col s12'>
+            <input type="url" ref="url" className='validate'/>
+            <label><FaGlobe style={styles.iconMargin} />URL for Event</label>
+          </div>
+        </form>
+        <div className='center'>
+          <button className='btn center' style={styles.submitButton} type="submit">Create Event</button>
         </div>
       </div>
     );
