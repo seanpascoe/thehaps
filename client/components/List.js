@@ -27,7 +27,7 @@ class List extends React.Component {
 
   render() {
     let styles = {
-      title: {fontSize: '25px', paddingTop: '10px'},
+      title: {fontSize: '25px', paddingTop: '10px', fontWeight: '400'},
       listContainer: {display: this.props.view.listDisplay, fontWeight: '300'},
       row: {marginBottom: 0},
       ul: {marginBottom: 0},
@@ -53,7 +53,7 @@ class List extends React.Component {
               <img src={`/images/icons/${catIcon}.svg`} alt=""/>
             </div>
             <div className="col s8">
-              <span className="title">{event.title}</span>
+              <span className="title" style={{fontWeight: '400'}}>{event.title}</span>
               <p style={{textOverflow: 'ellipsis'}}>
                 {event.locationName}
                 <br/>

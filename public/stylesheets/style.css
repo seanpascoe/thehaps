@@ -50,6 +50,9 @@ nav a.button-collapse i,
   .event-row .col.s3 {
     width: 17.66666667%;
   }
+  .modal .detailView {
+    padding: 10px 5px;
+  }
 }
 
 @media (min-width: 601px) {

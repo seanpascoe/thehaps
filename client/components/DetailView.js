@@ -11,7 +11,8 @@ const DetailView = (props) => {
 
 
   let styles = {
-    modalWrapper: {fontWeight: '300', maxHeight: '65%'},
+    modalWrapper: {fontWeight: '300', maxHeight: '80%'},
+    title: {fontWeight: '500'},
     categories: {fontSize: '18px'},
     date: {fontSize: '24px', fontweight: 'bold'},
     time: {fontSize: '21px'},
@@ -25,10 +26,10 @@ const DetailView = (props) => {
 
   return (
     <div id="event-detail" className="modal bottom-sheet" style={styles.modalWrapper}>
-      <div className="modal-content">
+      <div className="modal-content detailView">
         <div className="row">
           <div className="col s12">
-            <h5 className="center" style={styles.fontWeight}>{event.title}</h5>
+            <h5 className="center" style={styles.title}>{event.title}</h5>
             <div className="center" style={styles.categories}>{event.primCategory}{event.primSubCategory ? ` : ${event.primSubCategory}` : ''}</div>
             <div className="center" style={styles.categories}>{event.secCategory ? ` ${event.secCategory}` : ''}{event.secSubCategory ? ` : ${event.secSubCategory}` : ''}</div>
           </div>

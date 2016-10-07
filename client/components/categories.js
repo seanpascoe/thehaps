@@ -111,6 +111,7 @@ const categories =
        'fundraisers',
        'kids',
        'parks & gardens',
+       'patriotic',
        'politics & government',
        'seniors',
        'singles',
