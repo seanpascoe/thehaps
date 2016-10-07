@@ -161,8 +161,8 @@ class AddEvent extends React.Component {
             <label htmlFor="description">Description</label>
           </div>
           <div className='input-field col s12'>
-            <input type="date" ref="date" className="datepicker validate"  />
-            <label><FaCalendar style={styles.iconMargin} />Date</label>
+            <input type="date" ref="date" id="date" className="datepicker validate"  />
+            <label htmlFor="date"><FaCalendar style={styles.iconMargin}/>Date</label>
           </div>
           <div className='col s12'>
             <label style={styles.clockLabel}><FaClock style={styles.iconMargin}/>Start Time</label>
