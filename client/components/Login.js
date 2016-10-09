@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { login } from '../actions/userauth';
+import { Link } from 'react-router';
 
 class Login extends React.Component {
   constructor(props) {
@@ -38,6 +39,9 @@ class Login extends React.Component {
           </div>
           <div className="center">
             <button className="btn" style={styles.submitButton} type="submit">Login</button>
+          </div>
+          <div className="right">
+            <Link to="/signup" style={styles.fontWeight}>Don't have an account?</Link>
           </div>
         </form>
       </div>

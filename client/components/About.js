@@ -68,7 +68,7 @@ const About = () => {
 					</div>
 				</div>
 				<div className="col s12 m6 center" style={styles.bottomMargin}>
-					<img src="/images/person.png"
+					<img src="/images/sean.jpg"
             style={styles.portrait}/>
 					<div style={styles.title}>Sean Pascoe</div>
 					<a href="https://github.com/spflow" target='_blank'>

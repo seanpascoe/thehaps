@@ -89,6 +89,10 @@ nav .brand-logo {
   padding-left: 20px;
 }
 
+.catFilter {
+  margin-top: 10px;
+}
+
 .picker__date-display {
   background-color: #3498DB;
 }

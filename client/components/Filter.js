@@ -5,6 +5,7 @@ import { fetchEvents } from '../actions/event';
 import FaFilter from 'react-icons/lib/fa/filter';
 import FaCalendar from 'react-icons/lib/fa/calendar';
 import FaSlider from 'react-icons/lib/fa/sliders';
+import MdClose from 'react-icons/lib/md/close';
 
 class Filter extends React.Component {
   constructor(props) {
@@ -48,6 +49,7 @@ class Filter extends React.Component {
 
   catSelect(e) {
     this.props.dispatch({type: 'SET_SELECTED_CATEGORY', selectedCategory: e.target.value});
+    window.jQuery('.slide-out1').sideNav('hide');
   }
 
   dateSelect() {
@@ -57,20 +59,22 @@ class Filter extends React.Component {
     let endTimeValue = moment(endDate, 'MMMM D, YYYY', true).endOf('day').format('x');
 
     this.props.dispatch(fetchEvents(startTimeValue, endTimeValue));
+  }
 
+  closeFilter() {
+    window.jQuery('.slide-out1').sideNav('hide');
   }
 
   render() {
     let categories = this.state.categories;
     let categorySelect = [];
-    let rando = Math.floor(Math.random() * 1000000000);
 
     for(let parentCat in categories) {
       categorySelect.push(
-        <option key={`${parentCat}-${rando}`} className="parCatFilter" value={parentCat}>{this.capitalizeCat(parentCat)}</option>
+        <option key={`${parentCat}`} className="parCatFilter" value={parentCat}>{this.capitalizeCat(parentCat)}</option>
       );
       categories[parentCat].forEach( cat => {
-        categorySelect.push(<option key={`${cat}-${rando}`} value={cat}>--{cat}</option>);
+        categorySelect.push(<option key={`${cat}`} value={cat}>--{cat}</option>);
       });
     }
 
@@ -79,27 +83,32 @@ class Filter extends React.Component {
       cursor: {cursor: 'pointer'},
       filterHeader: {fontSize: '30px', fontWeight: '300'},
       filterIcon: {marginBottom: '15px', marginRight: '15px'},
-      calendarIcon: {marginRight: '10px'}
+      calendarIcon: {marginRight: '10px'},
+      close: {position: 'absolute', top: '10px', right: '10px', cursor: 'pointer'}
     };
 
     return(
       <div id="slide-out1" className="side-nav">
+        <MdClose size={'24px'} style={styles.close} onClick={this.closeFilter} />
         <div style={styles.container}>
           <div>
             <FaFilter size={'32px'} style={styles.filterIcon} />
             <span style={styles.filterHeader}>Filter</span>
           </div>
           <div className="col s12">
-            <FaCalendar style={styles.calendarIcon} /><label>Start Date</label>
+            <FaCalendar style={styles.calendarIcon} />
+            <label>Start Date</label>
             <input style={styles.cursor} ref="startDate" className="datepicker dpStartDate" />
           </div>
           <div className="col s12">
-            <FaCalendar style={styles.calendarIcon} /><label>End Date</label>
+            <FaCalendar style={styles.calendarIcon} />
+            <label>End Date</label>
             <input style={styles.cursor} ref="endDate" className="datepicker dpEndDate" />
           </div>
           <div className="col s12">
-            <FaSlider style={styles.calendarIcon}/><label>Filter By Category</label>
-            <select style={styles.cursor} onChange={(e) => this.catSelect(e)} value={this.props.filter.selectedCategory} className="browser-default">
+            <FaSlider style={styles.calendarIcon}/>
+            <label>Filter By Category</label>
+            <select style={styles.cursor} onChange={(e) => this.catSelect(e)} value={this.props.filter.selectedCategory} className="browser-default catFilter">
               <option value="all">All Categories</option>
               {categorySelect}
             </select>
