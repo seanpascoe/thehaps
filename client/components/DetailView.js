@@ -2,13 +2,13 @@ import React from 'react';
 import { connect } from 'react-redux';
 import FaDirections from 'react-icons/lib/md/directions';
 import FaLink from 'react-icons/lib/fa/external-link';
+import MdClose from 'react-icons/lib/md/close';
 
 const DetailView = (props) => {
   let event = props.details.eventDetail;
   let date = moment(event.date, 'MMMM D, YYYY', true).format('dddd MMMM D, YYYY');
   let startTime = moment(event.startTime, 'HH:mm', true).format('h:mm a');
   let endTime = event.endTime ? moment(event.endTime, 'HH:mm', true).format('h:mm a') : '';
-
 
   let styles = {
     modalWrapper: {fontWeight: '300', maxHeight: '80%'},
@@ -21,11 +21,17 @@ const DetailView = (props) => {
     directions: {paddingLeft: '10px'},
     infoLabels: {fontWeight: 'bold'},
     divMargin: {marginTop: '10px'},
-    url: {clear: 'both', marginTop: '10px'}
+    url: {clear: 'both', marginTop: '10px'},
+    close: {position: 'absolute', top: '10px', right: '10px', cursor: 'pointer'}
   };
+
+  function closeFilter() {
+    window.jQuery('#event-detail').closeModal();
+  }
 
   return (
     <div id="event-detail" className="modal bottom-sheet" style={styles.modalWrapper}>
+      <MdClose size={'24px'} style={styles.close} onClick={() => closeFilter()} />
       <div className="modal-content detailView">
         <div className="row">
           <div className="col s12">

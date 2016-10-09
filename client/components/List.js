@@ -26,14 +26,16 @@ class List extends React.Component {
   }
 
   render() {
+    let startDate = moment(this.props.filter.startDate, 'x', true).format('MMM Do');
+    let endDate = moment(this.props.filter.endDate, 'x', true).format('MMM Do');
     let styles = {
-      title: {fontSize: '25px', paddingTop: '10px', fontWeight: '400'},
+      head: {fontSize: '18px', paddingTop: '5px', paddingBottom: '5px', marginBottom: '0', fontWeight: '300', cursor: 'pointer'},
       listContainer: {display: this.props.view.listDisplay, fontWeight: '300'},
       row: {marginBottom: 0},
-      ul: {marginBottom: 0},
+      ul: {margin: '0'},
       time: {fontWeight: '500'},
       date: {fontWeight: '400'},
-      moreEvents: {fontSize: '20px', lineHeight: '64px', fontWeight: "300", paddingLeft: '25px', color: 'gray'}
+      moreEvents: {fontSize: '20px', lineHeight: '64px', fontWeight: '300', paddingLeft: '25px', color: 'gray'}
     };
 
     let sortedEvents = this.props.filteredEvents.sort(this.sortEvents);
@@ -73,14 +75,17 @@ class List extends React.Component {
 
     return (
       <div style={styles.listContainer}>
-        <div style={styles.title}>Events</div>
+        <div data-activates="slide-out1" className="row filter-sideNav" style={styles.head}>
+          <div className="col m6"><span className="right"><span style={{fontWeight: '200'}}>Category: </span>{`"${this.props.filter.selectedCategory}"`}</span></div>
+          <div className="col m6"><span style={{fontWeight: '200'}}>Range:</span>{` ${startDate} -- ${endDate}`}</div>
+        </div>
         <ul className="collection" style={styles.ul}>
           {events}
           <li
             className="collection-item filter-sideNav"
             data-activates="slide-out1"
             style={{ cursor: 'pointer', minHeight: '84px' }}>
-            <div className="moreEvents" style={styles.moreEvents}><span style={{borderBottom: "1px solid gray"}}>adjust filter for more events</span></div>
+            <div className="moreEvents" style={styles.moreEvents}><span style={{borderBottom: '1px solid gray'}}>adjust filter for more events</span></div>
           </li>
         </ul>
       </div>
@@ -89,7 +94,7 @@ class List extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  return { events: state.events, view: state.view, details: state.details };
+  return { events: state.events, view: state.view, filter: state.filter };
 };
 
 export default connect(mapStateToProps)(List);

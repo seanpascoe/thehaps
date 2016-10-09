@@ -4,8 +4,8 @@ var path = require('path');
 var webpack = require('webpack');
 
 module.exports = {
-  devtool: 'eval-source-map',
-  // devtool: 'cheap-module-source-map',
+  // devtool: 'eval-source-map',
+  devtool: 'cheap-module-source-map',
   entry: [
     path.join(__dirname, '../client/index.js')
   ],
@@ -18,23 +18,23 @@ module.exports = {
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin(),
-    new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify('development')
-    }),
     // new webpack.DefinePlugin({
-    //   'process.env': {
-    //     'NODE_ENV': JSON.stringify('production')
-    //   }
-    // })
-    // ,
-    // new webpack.optimize.UglifyJsPlugin({
-    //   compress: {
-    //     warnings: false,
-    //     screw_ie8: true
-    //   },
-    //   comments: false,
-    //   sourceMap: false
-    // })
+    //   'process.env.NODE_ENV': JSON.stringify('development')
+    // }),
+    new webpack.DefinePlugin({
+      'process.env': {
+        'NODE_ENV': JSON.stringify('production')
+      }
+    })
+    ,
+    new webpack.optimize.UglifyJsPlugin({
+      compress: {
+        warnings: false,
+        screw_ie8: true
+      },
+      comments: false,
+      sourceMap: false
+    })
   ],
   module: {
     loaders: [
