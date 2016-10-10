@@ -78,6 +78,7 @@ export class MapView extends React.Component {
     this.props.dispatch({type: 'SET_EVENT', eventDetail: event});
 
     window.jQuery('#event-detail').openModal();
+    window.jQuery('#event-detail').scrollTop(0);
   }
 
   renderInfoWindow(event) {
@@ -154,6 +155,7 @@ export class MapView extends React.Component {
                   mapTypeControl: false,
                   streetViewControl: false,
                   styles: mapstyle.styles,
+                  clickableIcons: false,
                   zoomControlOptions: {
                     position: google.maps.ControlPosition.LEFT_TOP
                   }

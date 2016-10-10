@@ -22,7 +22,7 @@ const DetailView = (props) => {
     infoLabels: {fontWeight: 'bold'},
     divMargin: {marginTop: '10px'},
     url: {clear: 'both', marginTop: '10px'},
-    close: {position: 'absolute', top: '10px', right: '10px', cursor: 'pointer'}
+    close: {position: 'absolute', top: '7px', right: '7px', cursor: 'pointer'}
   };
 
   function closeFilter() {
