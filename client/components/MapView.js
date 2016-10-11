@@ -117,7 +117,6 @@ export class MapView extends React.Component {
           filtCat === event.secSubCategory);
       }
     });
-
     let events = filteredEvents.map((event) => {
       let catIcon = event.primCategory.replace(/ /g, '-').replace('&', 'and');
       let icon = {
@@ -161,13 +160,7 @@ export class MapView extends React.Component {
                   }
                 }}
               >
-                <MarkerClusterer
-                  averageCenter
-                  enableRetinaIcons
-                  gridSize={3}
-                  ref='clusterer'>
-                  {events}
-                </MarkerClusterer>
+                {events}
               </GoogleMap>
             }
           />
