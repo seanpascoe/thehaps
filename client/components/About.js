@@ -20,24 +20,18 @@ const About = () => {
 			<div className="container">
 				<div style={{padding: '0 0 25px 0'}}>
 					<div className="center">
-						<div style={styles.title}>What Can You Do Here?</div>
+						<div style={styles.title}>What's the haps?!</div>
 					</div>
 					<div className="container">
 						<div className="container">
-							The Haps is an app where you can discover amazing
-							events that is happening right now near you.
-							Go out with family and friends and find
-							new places to go!
+							The Haps is a local event discovery app that delivers a clean, minimalistic user interface. Users can browse events in a full-screen google map or scroll through an intuitive list view. Users are able to filter events by category and date to quickly get the events that they are interested in. Registered users can post their events as well!
 						</div>
 					</div>
-					<div className="center" style={styles.title}>About The Developers</div>
+					<div className="center" style={styles.title}>Why The Haps?</div>
 					<div className="container">
 						<div className="container">
-							We saw an opportunity to connect our users with the
-							city around them. Our passion for web development
-							has given us an opportunity to bring our ideas
-							to life. We are thankful for all the help we have
-							received on our journey of becoming web developers.
+              Current event discovery options are fragmented, incomplete, and riddled with advertisements. With our recently-gained knowledge in the latest web technologies, we saw an opportunity to fix this problem. By providing a free, user-friendly web app we connect our users with the
+							community around them.
 						</div>
 					</div>
 				</div>
