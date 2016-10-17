@@ -23,6 +23,7 @@ const events = (state = [], action) => {
           timeValue: action.timeValue,
           url: action.url,
           host: action.host,
+          contactEmail: action.contactEmail,
           contactNumber: action.contactNumber,
           lat: action.lat,
           lng: action.lng

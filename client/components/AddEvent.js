@@ -8,6 +8,7 @@ import FaClock from 'react-icons/lib/fa/clock-o';
 import FaPhone from 'react-icons/lib/fa/phone';
 import FaUser from 'react-icons/lib/fa/user';
 import FaGlobe from 'react-icons/lib/fa/globe';
+import FaEnvelope from 'react-icons/lib/fa/envelope';
 
 class AddEvent extends React.Component {
   constructor(props) {
@@ -51,18 +52,19 @@ class AddEvent extends React.Component {
     let endTime = this.refs.endTime.value;
     let url = this.refs.url.value;
     let host = this.refs.host.value;
+    let contactEmail = this.refs.contactEmail.value;
     let contactNumber = this.refs.contactNumber.value;
 
-    // this returns a Unix Time Value of type string... so should be parseInt before storage
-    let timeValue = moment(`${date}, ${startTime}`, 'MMMM D, YYYY, HH:mm', true).format('x');
-    timeValue = parseInt(timeValue);
+    // create unix timestamp from date and starteTime
+    let timeValue = parseInt(moment(`${date}, ${startTime}`, 'MMMM D, YYYY, HH:mm', true).format('x'));
 
-    // getting lat and long from address
-    let mapAddress = address.split('+');
-    let mapCity = city.split('+');
+    //format inputted address to geocode-ready format
+    let mapAddress = address.split(' ').join('+').replace(/\./g, '');
+    let mapCity = city.split(' ').join('+').replace(/\./g, '');
+    let mapState = state.split(' ').join('+').replace(/\./g, '');
 
     $.ajax({
-      url: `https://maps.googleapis.com/maps/api/geocode/json?address=${mapAddress},+${mapCity},+${state}&key=AIzaSyBDnrHjFasPDwXmFQ1XUAyt1Q1uAPju8TI`,
+      url: `https://maps.googleapis.com/maps/api/geocode/json?address=${mapAddress},+${mapCity},+${mapState}&key=AIzaSyBDnrHjFasPDwXmFQ1XUAyt1Q1uAPju8TI`,
       type: 'GET',
       dataType: 'JSON'
     }).done( data => {
@@ -84,11 +86,12 @@ class AddEvent extends React.Component {
           secCategory, secSubCategory, locationName,
           address, city, state, description,
           date, startTime, endTime, timeValue,
-          url, host, contactNumber, lat, lng));
+          url, host, contactEmail, contactNumber, lat, lng));
         this.refs.form.reset();
       }
     }).fail(data => {
       Materialize.toast('Uh, oh! There was a problem.', 4000);
+      console.log('google geocode problem', data);
     });
   }
 
@@ -175,6 +178,10 @@ class AddEvent extends React.Component {
           <div className='input-field col s12'>
             <input type="text" ref="host" className='validate' />
             <label><FaUser style={styles.iconMargin}/>Host</label>
+          </div>
+          <div className='input-field col s12'>
+            <input type="email" ref="contactEmail" className='validate' />
+            <label><FaEnvelope style={styles.iconMargin} />Contact Email</label>
           </div>
           <div className='input-field col s12'>
             <input type="tel" ref="contactNumber" className='validate' />

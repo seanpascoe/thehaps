@@ -20,9 +20,11 @@ let Event = new Schema({
   timeValue: Number,
   url: String,
   host: String,
+  contactEmail: String,
   contactNumber: String,
   lat: String,
-  lng: String
+  lng: String,
+  active: Boolean
 });
 
 

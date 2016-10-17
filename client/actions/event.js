@@ -20,6 +20,7 @@ const event = (type, data) => {
     timeValue: data.timeValue,
     url: data.url,
     host: data.host,
+    contactEmail: data.contactEmail,
     contactNumber: data.contactNumber,
     lat: data.lat,
     lng: data.lng
@@ -30,7 +31,7 @@ export const addEvent = (title, primCategory, primSubCategory,
                            secCategory, secSubCategory, locationName,
                            address, city, state, description,
                            date, startTime, endTime, timeValue,
-                           url, host, contactNumber, lat, lng) => {
+                           url, host, contactEmail, contactNumber, lat, lng) => {
   return(dispatch) => {
     $.ajax({
       url: '/events',
@@ -39,12 +40,14 @@ export const addEvent = (title, primCategory, primSubCategory,
                secCategory, secSubCategory, locationName,
                address, city, state, description,
                date, startTime, endTime, timeValue,
-               url, host, contactNumber, lat, lng}
+               url, host, contactEmail, contactNumber, lat, lng}
     }).done( data => {
       Materialize.toast('Your event has been successfully submitted for review!', 4000);
       dispatch(event('ADD_EVENT', data));
-    }).fail( data => {
-      console.log(data);
+    }).fail( (data,text,err) => {
+      console.log('post problem', data);
+      console.log('text', text);
+      console.log('error', err);
       Materialize.toast('Uh, oh! There was a problem.', 4000);
     });
   };

@@ -1,5 +1,4 @@
 'use strict';
-
 var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
@@ -9,7 +8,7 @@ var Event = require('../models/event');
 router.get('/', (req, res) => {
   let startDate = parseInt(req.query.startDate);
   let endDate = parseInt(req.query.endDate);
-  Event.find({timeValue: {$gte:startDate, $lte:endDate} },(err, events) => {
+  Event.find({timeValue: {$gte:startDate, $lte:endDate}, active: true},(err, events) => {
     res.json(events);
   });
 });
@@ -33,10 +32,16 @@ router.post('/', (req, res) => {
     timeValue: req.body.timeValue,
     url: req.body.url,
     host: req.body.host,
+    contactEmail: req.body.contactEmail,
     contactNumber: req.body.contactNumber,
     lat: req.body.lat,
-    lng: req.body.lng
+    lng: req.body.lng,
+    active: false
   }).save((err, event) => {
+    if (err) {
+      console.log('this err', err);
+      res.json(err);
+    }
     res.json(event);
   });
 });

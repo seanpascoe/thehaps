@@ -1,7 +1,6 @@
 import React from 'react';
 import {GoogleMapLoader, GoogleMap, InfoWindow, Marker} from 'react-google-maps';
 import {triggerEvent} from 'react-google-maps/lib/utils';
-import MarkerClusterer from 'react-google-maps/lib/addons/MarkerClusterer';
 import { connect } from 'react-redux';
 import { fetchEvents } from '../actions/event';
 import mapstyle from './mapstyle';
@@ -177,5 +176,3 @@ const mapStateToProps = (state) => {
 };
 
 export default connect(mapStateToProps)(MapView);
-
-// export default MapView;

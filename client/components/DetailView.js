@@ -48,13 +48,17 @@ const DetailView = (props) => {
               <div style={styles.location}>{event.city}, {event.state}</div>
             </div>
             <a style={styles.directions} href={`https://maps.google.com?q=${event.address}+${event.city}+${event.state}`} target="_blank"><FaDirections size={'48px'} /></a>
-            <div style={styles.url}><a href={event.url} style={{fontSize: '17px'}} target="_blank">Event Link <FaLink size={'15px'} /></a></div>
+            {event.url ? <div style={styles.url}><a href={event.url} style={{fontSize: '17px'}} target="_blank">Event Link <FaLink size={'15px'} /></a></div> : ''}
           </div>
 
           <div className="col s12 m8" style={styles.divMargin}>
             <div><span style={styles.infoLabels}>{event.host ? 'Hosted By: ' : ''}</span>{event.host}</div>
-            <div><span style={styles.infoLabels}>{event.contactNumber ? 'Contact #: ' : ''}</span><a href={`tel:${event.contactNumber}`}>{event.contactNumber}</a></div>
-            <div><span style={styles.infoLabels}>Description:</span> {event.description ? event.description : 'no description'}</div>
+
+            <div><span style={styles.infoLabels}>{event.contactNumber ? 'Contact Phone: ' : ''}</span><a href={`tel:${event.contactNumber}`}>{event.contactNumber}</a></div>
+
+            <div><span style={styles.infoLabels}>{event.contactEmail ? 'Contact Email: ' : ''}</span><a href={`mailto:${event.contactEmail}`}>{event.contactEmail}</a></div>
+
+            <div><span style={styles.infoLabels}>Description: </span>{event.description ? event.description : 'no description'}</div>
           </div>
         </div>
       </div>
