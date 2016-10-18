@@ -24,6 +24,8 @@ let Event = new Schema({
   contactNumber: String,
   lat: String,
   lng: String,
+  creatorId: String,
+  creatorEmail: String,
   active: Boolean
 });
 

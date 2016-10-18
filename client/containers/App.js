@@ -10,11 +10,13 @@ class App extends React.Component {
 
   componentWillMount() {
     if (!this.props.auth.isAuthenticated) {
-      if (sessionStorage.userId && sessionStorage.token) {
+      if (localStorage.userId && localStorage.token) {
         this.props.dispatch({
           type: 'LOGIN',
-          id: sessionStorage.userId,
-          token: sessionStorage.token
+          id: localStorage.userId,
+          token: localStorage.token,
+          email: localStorage.email,
+          username: localStorage.username
         });
       }
     }

@@ -4,7 +4,9 @@ const auth = (state = { isAuthenticated: false }, action ) => {
       return {
         isAuthenticated: true,
         id: action.id,
-        token: action.token
+        token: action.token,
+        email: action.email,
+        username: action.username
       };
     case 'LOGOUT':
       return {};

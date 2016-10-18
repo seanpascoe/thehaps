@@ -31,7 +31,8 @@ export const addEvent = (title, primCategory, primSubCategory,
                            secCategory, secSubCategory, locationName,
                            address, city, state, description,
                            date, startTime, endTime, timeValue,
-                           url, host, contactEmail, contactNumber, lat, lng) => {
+                           url, host, contactEmail, contactNumber, lat, lng,
+                           creatorId, creatorEmail) => {
   return(dispatch) => {
     $.ajax({
       url: '/events',
@@ -40,7 +41,8 @@ export const addEvent = (title, primCategory, primSubCategory,
                secCategory, secSubCategory, locationName,
                address, city, state, description,
                date, startTime, endTime, timeValue,
-               url, host, contactEmail, contactNumber, lat, lng}
+               url, host, contactEmail, contactNumber, lat, lng,
+               creatorId, creatorEmail }
     }).done( data => {
       Materialize.toast('Your event has been successfully submitted for review!', 4000);
       dispatch(event('ADD_EVENT', data));

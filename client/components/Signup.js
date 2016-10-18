@@ -15,7 +15,8 @@ class Signup extends React.Component {
     e.preventDefault();
     let email = this.refs.newEmail.value;
     let password = this.refs.newPassword.value;
-    this.props.dispatch(signup(email, password, this.props.history, this.state.redirect));
+    let username = this.refs.newUserName.value;
+    this.props.dispatch(signup(email, password, username, this.props.history, this.state.redirect));
   }
 
   render() {
@@ -35,11 +36,15 @@ class Signup extends React.Component {
             <label>Email</label>
           </div>
           <div className='input-field col s12'>
+            <input className='validate' type="text" ref="newUserName" required/>
+            <label>UserName</label>
+          </div>
+          <div className='input-field col s12'>
             <input className='validate' type="password" ref="newPassword" required />
             <label>Password</label>
           </div>
           <div className="center">
-            <button className="btn" type="submit" style={styles.submitButton}>Sign Up</button>
+            <button className="btn waves-effect waves-light" type="submit" style={styles.submitButton}>Sign Up</button>
           </div>
           <div className="right">
             <Link to="/login" style={styles.fontWeight}>Already have an account?</Link>

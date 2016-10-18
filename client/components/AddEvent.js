@@ -32,10 +32,14 @@ class AddEvent extends React.Component {
 
   addEvent(e) {
     e.preventDefault();
+    //split inpt values from category selection
     let primaryCategory = this.refs.primaryCategory.value;
     let splitPrimCat = primaryCategory.split(',');
     let secondaryCategory = this.refs.secondaryCategory.value;
     let splitSecCat = secondaryCategory.split(',');
+
+    let creatorId = this.props.authData.id;
+    let creatorEmail = this.props.authData.email;
 
     let title = this.refs.title.value;
     let primCategory = splitPrimCat[0];
@@ -72,7 +76,7 @@ class AddEvent extends React.Component {
       if (status === 'ZERO_RESULTS') {
         Materialize.toast('No results from address. Please submit a valid address', 4000);
       } else if (status === 'OVER_QUERY_LIMIT') {
-        Materialize.toast('Cannot make anymore google API calls', 4000);
+        Materialize.toast('Cannot make any more google API calls', 4000);
       } else if (status === 'REQUEST_DENIED') {
         Materialize.toast('Request Denied', 4000);
       } else if (status === 'INVALID_REQUEST') {
@@ -86,7 +90,7 @@ class AddEvent extends React.Component {
           secCategory, secSubCategory, locationName,
           address, city, state, description,
           date, startTime, endTime, timeValue,
-          url, host, contactEmail, contactNumber, lat, lng));
+          url, host, contactEmail, contactNumber, lat, lng, creatorId, creatorEmail));
         this.refs.form.reset();
       }
     }).fail(data => {
@@ -98,15 +102,14 @@ class AddEvent extends React.Component {
   render() {
     let categories = this.state.categories;
     let categorySelect = [];
-    let rando = Math.floor(Math.random() * 1000000000);
 
     for(let parentCat in categories) {
       let subCat = categories[parentCat].map( cat => {
-        return(<option key={`${cat}-${rando}`} value={`${parentCat},${cat}`}>{cat}</option>);
+        return(<option key={`${cat}`} value={`${parentCat},${cat}`}>{cat}</option>);
       });
 
       categorySelect.push(
-        <optgroup key={`${parentCat}-${rando}`} label={parentCat}>
+        <optgroup key={`${parentCat}`} label={parentCat}>
           {subCat}
         </optgroup>
       );
@@ -138,7 +141,7 @@ class AddEvent extends React.Component {
           </div>
           <div className="input-field col s12">
             <select ref="secondaryCategory">
-              <option defaultValue="" disabled selected="selected">Choose your option</option>
+              <option defaultValue="" disabled selected>Choose your option</option>
               {categorySelect}
             </select>
             <label>Secondary Category</label>
@@ -164,7 +167,7 @@ class AddEvent extends React.Component {
             <label htmlFor="description">Description</label>
           </div>
           <div className='input-field col s12'>
-            <input type="date" ref="date" id="date" className="datepicker validate"  />
+            <input type="date" ref="date" id="date" className="datepicker"  />
             <label htmlFor="date"><FaCalendar style={styles.iconMargin}/>Date</label>
           </div>
           <div className='col s12'>

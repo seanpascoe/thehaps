@@ -36,6 +36,8 @@ router.post('/', (req, res) => {
     contactNumber: req.body.contactNumber,
     lat: req.body.lat,
     lng: req.body.lng,
+    creatorId: req.body.creatorId,
+    creatorEmail: req.body.creatorEmail,
     active: false
   }).save((err, event) => {
     if (err) {
