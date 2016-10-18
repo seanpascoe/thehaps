@@ -30,17 +30,22 @@ class Filter extends React.Component {
         }
       }
     });
+    this.syncDateSettings();
   }
 
   componentDidUpdate(prevProps) {
-    // if(!prevProps.filter.endDate) {
+    //only run date sync when date filter settings change, not category or other settings
+    if(prevProps.filter.startDate !== this.props.filter.startDate ||
+      prevProps.filter.endDate !== this.props.filter.endDate)
+      this.syncDateSettings();
+  }
+
+  syncDateSettings() {
     let picker1 = window.jQuery('.dpStartDate').pickadate('picker');
     picker1.set('select', parseInt(this.props.filter.startDate));
-    // }
-    // if(!prevProps.filter.endDate) {
+
     let picker2 = window.jQuery('.dpEndDate').pickadate('picker');
     picker2.set('select', parseInt(this.props.filter.endDate));
-    // }
   }
 
   capitalizeCat(cat) {

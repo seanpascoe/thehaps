@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import NavBar from '../components/NavBar';
+import { fetchEvents } from '../actions/event';
 
 class App extends React.Component {
   constructor(props) {
@@ -20,6 +21,11 @@ class App extends React.Component {
         });
       }
     }
+
+    //fetches initial events for current day
+    let startDate = moment().startOf('day').format('x');
+    let endDate = moment().endOf('day').format('x');
+    this.props.dispatch(fetchEvents(startDate, endDate));
 
   }
 
