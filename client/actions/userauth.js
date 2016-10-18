@@ -47,9 +47,11 @@ export const signup = (email, password, username, history, redirect) => {
       Materialize.toast('Successfully signed up!', 4000);
     }).fail( (data) => {
       if(data.responseJSON.code === 11000) {
-        Materialize.toast("Username or Email already exists", 4000);
+        Materialize.toast('Email already exists', 4000);
+      } else if(data.responseJSON.message) {
+        Materialize.toast(data.responseJSON.message, 4000);
       } else {
-        Materialize.toast("There was a problem, please contact admin", 4000);
+        Materialize.toast('There was a problem, please contact admin', 4000);
       }
     });
   };

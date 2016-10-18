@@ -2,13 +2,13 @@ import React from 'react';
 import { connect } from 'react-redux';
 import NavBar from '../components/NavBar';
 
-
 class App extends React.Component {
   constructor(props) {
     super(props);
   }
 
   componentWillMount() {
+
     if (!this.props.auth.isAuthenticated) {
       if (localStorage.userId && localStorage.token) {
         this.props.dispatch({
@@ -20,6 +20,7 @@ class App extends React.Component {
         });
       }
     }
+
   }
 
   render() {

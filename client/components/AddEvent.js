@@ -118,7 +118,7 @@ class AddEvent extends React.Component {
     let styles = {
       fontWeight: {fontWeight: '300'},
       title: {fontSize: '30px', margin: '20px 0 20px'},
-      formBackground: {backgroundColor: 'rgba(128, 128, 128, 0.09)', borderRadius: '15px', padding: '20px'},
+      formBackground: {backgroundColor: 'rgba(128, 128, 128, 0.09)', borderRadius: '5px', padding: '20px'},
       submitButton: {margin: '10px 0px 20px 0px', backgroundColor: '#2C3E50'},
       iconMargin: {marginRight: '5px'},
       clockLabel: {color: '#2980B9'}

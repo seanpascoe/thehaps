@@ -7,7 +7,7 @@ import NotFound from './components/NotFound';
 import AddEvent from './components/AddEvent';
 import Login from './components/Login';
 import Signup from './components/Signup';
-import About from './components/About';
+import Contact from './components/Contact';
 
 const UserIsAuthenticated = UserAuthWrapper({
   authSelector: state => state.auth,
@@ -24,7 +24,7 @@ export default (
       <Route path="/add-event" component={UserIsAuthenticated(AddEvent)} />
       <Route path="/login" component={Login} />
       <Route path="/signup" component={Signup} />
-      <Route path="/about" component={About} />
+      <Route path="/contact" component={Contact} />
       <Route path="*" component={NotFound} />
     </Route>
   </Route>

@@ -100,8 +100,8 @@ class NavBar extends React.Component {
             {this.props.view.icon === 'map' ? <FaMap size={'26px'} /> : <FaList size={'26px'} />}
           </div>
           <ul className="side-nav" id="mobile">
-            <li><Link to="/about" style={styles.fontWeight}><FaInfo size={'26px'} /><span className="menu-item">About</span></Link></li>
-            <li className="divider"></li>
+            <li><Link to="/contact" style={styles.fontWeight}><FaInfo size={'26px'} /><span className="menu-item">Contact</span></Link></li>
+            <li className="divider" style={{margin: 0}}></li>
             <li
               onClick={() => {
                 this.navbarViewChangeMap();

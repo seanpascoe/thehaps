@@ -25,10 +25,9 @@ export class MapView extends React.Component {
   }
 
   componentWillMount() {
+    //fetches events for current day
     let startDate = moment().startOf('day').format('x');
     let endDate = moment().endOf('day').format('x');
-    // let endDate = moment().endOf('day').add(3, 'days').format('x');
-
     this.props.dispatch(fetchEvents(startDate, endDate));
   }
 
