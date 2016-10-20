@@ -84,7 +84,7 @@ class NavBar extends React.Component {
     let styles = {
       viewIcons: {cursor: 'pointer'},
       fontWeight: {fontWeight: '300'},
-      logo: {height: '40px'},
+      logo: {height: '38px'},
       navBarColor: {backgroundColor: '#2C3E50'}
     };
 

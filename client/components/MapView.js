@@ -2,12 +2,12 @@ import React from 'react';
 import {GoogleMapLoader, GoogleMap, InfoWindow, Marker} from 'react-google-maps';
 import {triggerEvent} from 'react-google-maps/lib/utils';
 import { connect } from 'react-redux';
-import { fetchEvents } from '../actions/event';
 import mapstyle from './mapstyle';
 import List from './List';
 import DetailView from './DetailView';
 import Filter from './Filter';
-import FaSliders from 'react-icons/lib/fa/sliders';
+import FilterButton from './FilterButton';
+import SettingsLabel from './SettingsLabel';
 
 export class MapView extends React.Component {
   constructor(props) {
@@ -17,18 +17,10 @@ export class MapView extends React.Component {
         lat: 40.760984,
         lng: -111.8828773
       },
-      eventDetail: {},
       activeIW: ''
     };
     this.eventDetails = this.eventDetails.bind(this);
     this.handleMarkerClose = this.handleMarkerClose.bind(this);
-  }
-
-  componentWillMount() {
-    //fetches events for filter settings or current day
-    // let startDate = this.props.filter.startDate || moment().startOf('day').format('x');
-    // let endDate = this.props.filter.endDate || moment().endOf('day').format('x');
-    // this.props.dispatch(fetchEvents(startDate, endDate));
   }
 
   componentDidMount() {
@@ -51,16 +43,20 @@ export class MapView extends React.Component {
     // }
   }
 
+  // componentWillUpdate() {
+  //   console.log('start');
+  // }
+
   componentDidUpdate() {
     //this fixes the map refresh problem when moving from list to map view
     if (this.props.view.mapRefreshTrigger === true) {
       triggerEvent(this.refs.map, 'resize');
       this.props.dispatch({type: 'TRIGGER_MAP', mapRefreshTrigger: false});
     }
+
   }
 
   handleMarkerClick(marker) {
-    //if multiples show list view
     this.setState({activeIW: marker._id});
   }
 
@@ -98,11 +94,6 @@ export class MapView extends React.Component {
   }
 
   render() {
-    let mapCenter;
-    if(this.refs.map) {
-      mapCenter = this.refs.map.getCenter();
-    }
-
     let filtCat = this.props.filter.selectedCategory;
     let filteredEvents = this.props.events.filter(event => {
       if (filtCat === 'all') {
@@ -115,12 +106,20 @@ export class MapView extends React.Component {
           filtCat === event.secSubCategory);
       }
     });
-    let events = filteredEvents.map((event) => {
+
+    let eventsNumCheck;
+    if (filteredEvents.length > 100) {
+      eventsNumCheck = filteredEvents.slice(0, 100);
+    } else {
+      eventsNumCheck = filteredEvents;
+    }
+
+    let events = eventsNumCheck.map((event) => {
       let catIcon = event.primCategory.replace(/ /g, '-').replace('&', 'and');
       let icon = {
         url: `/images/icons/${catIcon}.svg`,
         anchor: new google.maps.Point(16.25,50),
-      }
+      };
       return (
         <Marker
           key={event._id}
@@ -129,40 +128,36 @@ export class MapView extends React.Component {
           onClick={this.handleMarkerClick.bind(this, event)} >
           {this.state.activeIW === event._id ? this.renderInfoWindow(event): null}
         </Marker> );
-
     });
+
     return (
       <div id="map-list-wrapper">
-        <a className="btn-floating btn-large waves-effect waves-light filter-sideNav"
-           data-activates="slide-out1"
-           style={{ position: 'fixed', bottom: '10px', right: '10px', backgroundColor: '#2C3E50' }}>
-          <FaSliders size={'28px'} style={{marginBottom: '1px'}}/>
-        </a>
+        <FilterButton />
         <Filter />
-        <div id="g-map-wrapper" style={{display: this.props.view.mapDisplay}}>
-          <GoogleMapLoader
-            containerElement={<div id="g-map"></div>}
-            googleMapElement={
-              <GoogleMap
-                center={mapCenter || this.state.center}
-                defaultZoom={13}
-                ref='map'
-                onClick={this.handleMarkerClose}
-                defaultOptions={{
-                  mapTypeControl: false,
-                  streetViewControl: false,
-                  styles: mapstyle.styles,
-                  clickableIcons: false,
-                  zoomControlOptions: {
-                    position: google.maps.ControlPosition.LEFT_TOP
-                  }
-                }}
-              >
-                {events}
-              </GoogleMap>
-            }
-          />
-        </div>
+        <SettingsLabel iw={this.state.activeIW} numMapEvents={eventsNumCheck.length} numFilteredEvents={filteredEvents.length}/>
+        <GoogleMapLoader
+          containerElement={<div id="g-map" style={{display: this.props.view.mapDisplay}}></div>}
+          googleMapElement={
+            <GoogleMap
+              // center={mapCenter || this.state.center}
+              defaultCenter={this.state.center}
+              defaultZoom={13}
+              ref='map'
+              onClick={this.handleMarkerClose}
+              defaultOptions={{
+                mapTypeControl: false,
+                streetViewControl: false,
+                styles: mapstyle.styles,
+                clickableIcons: false,
+                zoomControlOptions: {
+                  position: google.maps.ControlPosition.LEFT_TOP
+                }
+              }}
+            >
+              {events}
+            </GoogleMap>
+          }
+        />
         <List filteredEvents={filteredEvents} />
         <DetailView />
       </div>

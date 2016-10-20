@@ -65,8 +65,8 @@ const getEvents = (events, startDate, endDate) => {
 export const fetchEvents = (startDate, endDate) => {
   return(dispatch) => {
     $.ajax({
-      url: '/events',
       type: 'GET',
+      url: '/events',
       data: {startDate, endDate}
     }).done( events => {
       dispatch(getEvents(events, startDate, endDate));
