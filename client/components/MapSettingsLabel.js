@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-const SettingsLabel = (props) => {
+const MapSettingsLabel = (props) => {
   let startDate = moment(props.filter.startDate, 'x', true).format('MMM Do');
   let endDate = moment(props.filter.endDate, 'x', true).format('MMM Do');
 
@@ -9,12 +9,12 @@ const SettingsLabel = (props) => {
   let eventLabelColor = props.numMapEvents < props.numFilteredEvents ? 'red' : 'white';
 
   return (
-    <div style={{display: 'flex', justifyContent: 'center'}}>
+    <div className="filter-sideNav" style={{display: 'flex', justifyContent: 'center', cursor: 'pointer'}} data-activates="slide-out1">
       <div id="settingslabel" style={{
         display,
         position: 'absolute',
         backgroundColor: 'rgba(0,0,0, 0.6)',
-        zIndex: '2001',
+        zIndex: '997',
         color: 'white',
         padding: '0px 10px',
         fontWeight: '300',
@@ -35,4 +35,4 @@ const mapStateToProps = (state) => {
   return { filter: state.filter, view: state.view }
 };
 
-export default connect(mapStateToProps)(SettingsLabel);
+export default connect(mapStateToProps)(MapSettingsLabel);

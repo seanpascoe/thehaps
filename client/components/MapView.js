@@ -7,7 +7,7 @@ import List from './List';
 import DetailView from './DetailView';
 import Filter from './Filter';
 import FilterButton from './FilterButton';
-import SettingsLabel from './SettingsLabel';
+import MapSettingsLabel from './MapSettingsLabel';
 
 export class MapView extends React.Component {
   constructor(props) {
@@ -134,7 +134,7 @@ export class MapView extends React.Component {
       <div id="map-list-wrapper">
         <FilterButton />
         <Filter />
-        <SettingsLabel iw={this.state.activeIW} numMapEvents={eventsNumCheck.length} numFilteredEvents={filteredEvents.length}/>
+        <MapSettingsLabel iw={this.state.activeIW} numMapEvents={eventsNumCheck.length} numFilteredEvents={filteredEvents.length}/>
         <GoogleMapLoader
           containerElement={<div id="g-map" style={{display: this.props.view.mapDisplay}}></div>}
           googleMapElement={
@@ -150,7 +150,7 @@ export class MapView extends React.Component {
                 styles: mapstyle.styles,
                 clickableIcons: false,
                 zoomControlOptions: {
-                  position: google.maps.ControlPosition.LEFT_TOP
+                  position: google.maps.ControlPosition.LEFT_BOTTOM
                 }
               }}
             >
