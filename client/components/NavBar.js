@@ -92,7 +92,7 @@ class NavBar extends React.Component {
       <div className="navbar-fixed">
       <nav style={styles.navBarColor}>
         <div className="nav-wrapper">
-          <Link to="/" className="brand-logo center"><img src="/images/logo/thehapslogo-white.svg" style={styles.logo}/></Link>
+          <Link to="/" className="brand-logo center" style={styles.logo}><img src="/images/logo/thehapslogo-white.svg" style={styles.logo}/></Link>
           <a href="#" data-activates="mobile" className="button-collapse show-on-large">
             <FaBars size={'29px'} />
           </a>

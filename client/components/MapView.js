@@ -65,7 +65,7 @@ export class MapView extends React.Component {
   }
 
   eventDetails(id) {
-    let event = this.props.events.filter(e => {
+    let event = this.props.filteredEvents.filter(e => {
       return e._id === id;
     });
     event = event[0];
@@ -94,27 +94,27 @@ export class MapView extends React.Component {
   }
 
   render() {
-    let filtCat = this.props.filter.selectedCategory;
-    let filteredEvents = this.props.events.filter(event => {
-      if (filtCat === 'all') {
-        return true;
-      } else {
-        return (
-          filtCat === event.primCategory ||
-          filtCat === event.primSubCategory ||
-          filtCat === event.secCategory ||
-          filtCat === event.secSubCategory);
-      }
-    });
+    // let filtCat = this.props.filter.selectedCategory;
+    // let filteredEvents = this.props.events.filter(event => {
+    //   if (filtCat === 'all') {
+    //     return true;
+    //   } else {
+    //     return (
+    //       filtCat === event.primCategory ||
+    //       filtCat === event.primSubCategory ||
+    //       filtCat === event.secCategory ||
+    //       filtCat === event.secSubCategory);
+    //   }
+    // });
 
-    let eventsNumCheck;
-    if (filteredEvents.length > 100) {
-      eventsNumCheck = filteredEvents.slice(0, 100);
-    } else {
-      eventsNumCheck = filteredEvents;
-    }
+    // let eventsNumCheck;
+    // if (this.props.filteredEvents.length > 100) {
+    //   eventsNumCheck = this.props.filteredEvents.slice(0, 100);
+    // } else {
+    //   eventsNumCheck = this.props.filteredEvents;
+    // }
 
-    let events = eventsNumCheck.map((event) => {
+    let eventMarkers = this.props.eventsNumCheck.map((event) => {
       let catIcon = event.primCategory.replace(/ /g, '-').replace('&', 'and');
       let icon = {
         url: `/images/icons/${catIcon}.svg`,
@@ -134,7 +134,7 @@ export class MapView extends React.Component {
       <div id="map-list-wrapper">
         <FilterButton />
         <Filter />
-        <MapSettingsLabel iw={this.state.activeIW} numMapEvents={eventsNumCheck.length} numFilteredEvents={filteredEvents.length}/>
+        <MapSettingsLabel iw={this.state.activeIW} numMapEvents={this.props.eventsNumCheck.length} numFilteredEvents={this.props.filteredEvents.length}/>
         <GoogleMapLoader
           containerElement={<div id="g-map" style={{display: this.props.view.mapDisplay}}></div>}
           googleMapElement={
@@ -154,11 +154,11 @@ export class MapView extends React.Component {
                 }
               }}
             >
-              {events}
+              {eventMarkers}
             </GoogleMap>
           }
         />
-        <List filteredEvents={filteredEvents} />
+        <List filteredEvents={this.props.filteredEvents} />
         <DetailView />
       </div>
     );
@@ -166,7 +166,27 @@ export class MapView extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  return { events: state.events, view: state.view, details: state.details, filter: state.filter };
+  const filtCat = state.filter.selectedCategory;
+  const filteredEvents = state.events.filter(event => {
+    if (filtCat === 'all') {
+      return true;
+    } else {
+      return (
+        filtCat === event.primCategory ||
+        filtCat === event.primSubCategory ||
+        filtCat === event.secCategory ||
+        filtCat === event.secSubCategory);
+    }
+  });
+
+  let eventsNumCheck;
+  if (filteredEvents.length > 100) {
+    eventsNumCheck = filteredEvents.slice(0, 100);
+  } else {
+    eventsNumCheck = filteredEvents;
+  }
+
+  return { events: state.events, filteredEvents, eventsNumCheck, view: state.view, details: state.details, filter: state.filter };
 };
 
 export default connect(mapStateToProps)(MapView);

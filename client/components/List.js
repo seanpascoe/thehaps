@@ -31,7 +31,6 @@ class List extends React.Component {
     let startDate = moment(this.props.filter.startDate, 'x', true).format('MMM Do');
     let endDate = moment(this.props.filter.endDate, 'x', true).format('MMM Do');
     let styles = {
-      // head: {fontSize: '18px', paddingTop: '5px', paddingBottom: '5px', marginBottom: '0', fontWeight: '300', cursor: 'pointer'},
       listContainer: {display: this.props.view.listDisplay, fontWeight: '300'},
       row: {marginBottom: 0},
       ul: {margin: '0', border: 'none', borderTop: '1px solid #e0e0e0'},
@@ -78,10 +77,6 @@ class List extends React.Component {
     return (
       <div style={styles.listContainer}>
         <ListSettingsLabel startDate={startDate} endDate={endDate} selectedCategory={this.props.filter.selectedCategory} numFilteredEvents={this.props.filteredEvents.length}/>
-        {/* <div data-activates="slide-out1" className="row filter-sideNav" style={styles.head}>
-          <div className="col m6"><span className="right"><span style={{fontWeight: '200'}}>Category: </span>{`"${this.props.filter.selectedCategory}"`}</span></div>
-          <div className="col m6"><span style={{fontWeight: '200'}}>Range:</span>{` ${startDate} -- ${endDate}`}</div>
-        </div> */}
         <ul className="collection" style={styles.ul}>
           {events}
           <li
