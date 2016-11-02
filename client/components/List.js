@@ -14,10 +14,8 @@ class List extends React.Component {
   }
 
   eventDetails(id) {
-    let event = this.props.sortedEvents.filter(e => {
-      return e._id === id;
-    });
-    event = event[0];
+    //replaced filter method with find method for performance gains
+    const event = this.props.sortedEvents.find(e => e._id === id);
     this.props.dispatch({ type: 'SET_EVENT', eventDetail: event});
 
     window.jQuery('#event-detail').modal('open');
@@ -44,7 +42,7 @@ class List extends React.Component {
         <li
           key={event._id}
           className="modal-trigger collection-item avatar"
-          onClick={ (e) => {e.preventDefault();this.eventDetails(event._id);}}
+          onClick={() => this.eventDetails(event._id)}
           style={{ cursor: 'pointer' }}>
           <div className="row event-row" style={styles.row}>
             <div className="col s1">

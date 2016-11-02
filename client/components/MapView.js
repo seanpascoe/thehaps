@@ -63,10 +63,8 @@ export class MapView extends React.Component {
   }
 
   eventDetails(id) {
-    let event = this.props.filteredEvents.filter(e => {
-      return e._id === id;
-    });
-    event = event[0];
+    //replaced filter method with find method for performance gains
+    const event = this.props.filteredEvents.find(e => e._id === id);
     this.props.dispatch({type: 'SET_EVENT', eventDetail: event});
     window.jQuery('#event-detail').modal('open');
     window.jQuery('#event-detail').scrollTop(0);
