@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { getSortedEvents } from '../selectors/selectors';
 import ListSettingsLabel from './ListSettingsLabel';
 
 class List extends React.Component {
@@ -13,7 +14,7 @@ class List extends React.Component {
   }
 
   eventDetails(id) {
-    let event = this.props.filteredEvents.filter(e => {
+    let event = this.props.sortedEvents.filter(e => {
       return e._id === id;
     });
     event = event[0];
@@ -21,10 +22,6 @@ class List extends React.Component {
 
     window.jQuery('#event-detail').openModal();
     window.jQuery('#event-detail').scrollTop(0);
-  }
-
-  sortEvents(a, b) {
-    return a.timeValue - b.timeValue;
   }
 
   render() {
@@ -39,9 +36,7 @@ class List extends React.Component {
       moreEvents: {fontSize: '20px', lineHeight: '64px', fontWeight: '300', paddingLeft: '25px', color: 'gray'}
     };
 
-    let sortedEvents = this.props.filteredEvents.sort(this.sortEvents);
-
-    let events = sortedEvents.map(event => {
+    let events = this.props.sortedEvents.map(event => {
       let catIcon = event.primCategory.replace(/ /g, '-').replace('&', 'and');
       let startTime = moment(event.startTime, 'HH:mm', true).format('h:mm a');
       let date = moment(event.date, 'MMMM D, YYYY', true).format('MMM Do');
@@ -76,7 +71,7 @@ class List extends React.Component {
 
     return (
       <div style={styles.listContainer}>
-        <ListSettingsLabel startDate={startDate} endDate={endDate} selectedCategory={this.props.filter.selectedCategory} numFilteredEvents={this.props.filteredEvents.length}/>
+        <ListSettingsLabel startDate={startDate} endDate={endDate} selectedCategory={this.props.filter.selectedCategory} numFilteredEvents={this.props.sortedEvents.length}/>
         <ul className="collection" style={styles.ul}>
           {events}
           <li
@@ -92,7 +87,10 @@ class List extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  return { view: state.view, filter: state.filter };
+  return {
+    sortedEvents: getSortedEvents(state),
+    view: state.view,
+    filter: state.filter };
 };
 
 export default connect(mapStateToProps)(List);

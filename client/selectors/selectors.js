@@ -31,3 +31,10 @@ export const getEventsNumCheck = createSelector(
     }
   }
 );
+
+export const getSortedEvents = createSelector(
+  [ getFilteredEvents ],
+  (filteredEvents) => {
+    return filteredEvents.sort((a, b) => a.timeValue - b.timeValue);
+  }
+);

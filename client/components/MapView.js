@@ -139,7 +139,7 @@ export class MapView extends React.Component {
             </GoogleMap>
           }
         />
-        <List filteredEvents={this.props.filteredEvents} />
+        <List />
         <DetailView />
       </div>
     );

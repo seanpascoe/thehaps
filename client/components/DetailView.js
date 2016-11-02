@@ -9,7 +9,7 @@ class DetailView extends React.Component {
     super(props);
   }
 
-  closeFilter() {
+  closeDetails() {
     window.jQuery('#event-detail').closeModal();
   }
 
@@ -36,7 +36,7 @@ class DetailView extends React.Component {
 
     return (
       <div id="event-detail" className="modal bottom-sheet" style={styles.modalWrapper}>
-        <MdClose size={'24px'} style={styles.close} onClick={this.closeFilter} />
+        <MdClose size={'24px'} style={styles.close} onClick={this.closeDetails} />
         <div className="modal-content detailView">
           <div className="row">
             <div className="col s12">
