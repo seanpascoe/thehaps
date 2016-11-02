@@ -20,7 +20,7 @@ class List extends React.Component {
     event = event[0];
     this.props.dispatch({ type: 'SET_EVENT', eventDetail: event});
 
-    window.jQuery('#event-detail').openModal();
+    window.jQuery('#event-detail').modal('open');
     window.jQuery('#event-detail').scrollTop(0);
   }
 

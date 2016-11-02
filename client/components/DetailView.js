@@ -10,7 +10,7 @@ class DetailView extends React.Component {
   }
 
   closeDetails() {
-    window.jQuery('#event-detail').closeModal();
+    window.jQuery('#event-detail').modal('close');
   }
 
   render() {

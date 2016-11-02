@@ -15,7 +15,7 @@ const ListSettingsLabel = (props) => {
         <div style={styles.value}>{`"${props.selectedCategory}"`}</div>
       </div>
       <div style={styles.unit}>
-        <div style={styles.label}>Range:</div>
+        <div style={styles.label}>Dates:</div>
         <div style={styles.value}>{` ${props.startDate} -- ${props.endDate}`}</div>
       </div>
       <div style={styles.unit}>

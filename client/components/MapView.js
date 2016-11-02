@@ -25,10 +25,12 @@ export class MapView extends React.Component {
   }
 
   componentDidMount() {
+    //initialialize modals
     window.jQuery('.filter-sideNav').sideNav({
       edge: 'right',
       closeOnClick: true
     });
+    window.jQuery('#event-detail').modal();
 
     // if (navigator && navigator.geolocation) {
     //   navigator.geolocation.getCurrentPosition((pos) => {
@@ -44,17 +46,12 @@ export class MapView extends React.Component {
     // }
   }
 
-  // componentWillUpdate() {
-  //   console.log('start');
-  // }
-
   componentDidUpdate() {
     //this fixes the map refresh problem when moving from list to map view
     if (this.props.view.mapRefreshTrigger === true) {
       triggerEvent(this.refs.map, 'resize');
       this.props.dispatch({type: 'TRIGGER_MAP', mapRefreshTrigger: false});
     }
-
   }
 
   handleMarkerClick(marker) {
@@ -71,8 +68,7 @@ export class MapView extends React.Component {
     });
     event = event[0];
     this.props.dispatch({type: 'SET_EVENT', eventDetail: event});
-
-    window.jQuery('#event-detail').openModal();
+    window.jQuery('#event-detail').modal('open');
     window.jQuery('#event-detail').scrollTop(0);
   }
 
@@ -115,7 +111,8 @@ export class MapView extends React.Component {
       <div id="map-list-wrapper">
         <FilterButton />
         <Filter />
-        <MapSettingsLabel iw={this.state.activeIW} numMapEvents={this.props.eventsNumCheck.length} numFilteredEvents={this.props.filteredEvents.length}/>
+        <MapSettingsLabel
+          iw={this.state.activeIW} numMapEvents={this.props.eventsNumCheck.length} numFilteredEvents={this.props.filteredEvents.length}/>
         <GoogleMapLoader
           containerElement={<div id="g-map" style={{display: this.props.view.mapDisplay}}></div>}
           googleMapElement={
