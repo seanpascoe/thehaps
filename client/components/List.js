@@ -92,7 +92,7 @@ class List extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  return { events: state.events, view: state.view, filter: state.filter };
+  return { view: state.view, filter: state.filter };
 };
 
 export default connect(mapStateToProps)(List);

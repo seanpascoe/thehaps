@@ -2,6 +2,7 @@ import React from 'react';
 import {GoogleMapLoader, GoogleMap, InfoWindow, Marker} from 'react-google-maps';
 import {triggerEvent} from 'react-google-maps/lib/utils';
 import { connect } from 'react-redux';
+import { getFilteredEvents, getEventsNumCheck } from '../selectors/selectors';
 import mapstyle from './mapstyle';
 import List from './List';
 import DetailView from './DetailView';
@@ -94,26 +95,6 @@ export class MapView extends React.Component {
   }
 
   render() {
-    // let filtCat = this.props.filter.selectedCategory;
-    // let filteredEvents = this.props.events.filter(event => {
-    //   if (filtCat === 'all') {
-    //     return true;
-    //   } else {
-    //     return (
-    //       filtCat === event.primCategory ||
-    //       filtCat === event.primSubCategory ||
-    //       filtCat === event.secCategory ||
-    //       filtCat === event.secSubCategory);
-    //   }
-    // });
-
-    // let eventsNumCheck;
-    // if (this.props.filteredEvents.length > 100) {
-    //   eventsNumCheck = this.props.filteredEvents.slice(0, 100);
-    // } else {
-    //   eventsNumCheck = this.props.filteredEvents;
-    // }
-
     let eventMarkers = this.props.eventsNumCheck.map((event) => {
       let catIcon = event.primCategory.replace(/ /g, '-').replace('&', 'and');
       let icon = {
@@ -166,27 +147,10 @@ export class MapView extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  const filtCat = state.filter.selectedCategory;
-  const filteredEvents = state.events.filter(event => {
-    if (filtCat === 'all') {
-      return true;
-    } else {
-      return (
-        filtCat === event.primCategory ||
-        filtCat === event.primSubCategory ||
-        filtCat === event.secCategory ||
-        filtCat === event.secSubCategory);
-    }
-  });
-
-  let eventsNumCheck;
-  if (filteredEvents.length > 100) {
-    eventsNumCheck = filteredEvents.slice(0, 100);
-  } else {
-    eventsNumCheck = filteredEvents;
-  }
-
-  return { events: state.events, filteredEvents, eventsNumCheck, view: state.view, details: state.details, filter: state.filter };
+  return {
+    filteredEvents: getFilteredEvents(state),
+    eventsNumCheck: getEventsNumCheck(state),
+    view: state.view };
 };
 
 export default connect(mapStateToProps)(MapView);

@@ -4,14 +4,20 @@ var router = express.Router();
 var mongoose = require('mongoose');
 var Event = require('../models/event');
 
+// mongoose.set('debug', true);
+
 // GET events within start and end date
 router.get('/', (req, res) => {
   let startDate = parseInt(req.query.startDate);
   let endDate = parseInt(req.query.endDate);
-  // {timeValue: {$gte:startDate, $lte:endDate}, active: true}
-  Event.find({timeValue: {$gte:startDate, $lte:endDate}},(err, events) => {
-    res.json(events);
-  });
+  Event.find(
+    {timeValue: {$gte:startDate, $lte:endDate}, active: true},
+    /* testing limiting result fields */
+    // 'title primCategory primSubCategory secCategory secSubCategory locationName date startTime timeValue lat lng',
+    (err, events) => {
+      res.json(events);
+    }
+  );
 });
 
 // POST creates a event
