@@ -1,5 +1,15 @@
 const map = (state = {}, action) => {
   switch (action.type) {
+    case 'GET_EVENTS':
+      return {
+        ...state,
+        mapBounds: {
+          maxLat: action.maxLat, 
+          minLat: action.minLat, 
+          maxLng: action.maxLng, 
+          minLng: action.minLng
+        }
+      }
     case 'SET_MAPCENTER':
       return {
         ...state,

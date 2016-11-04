@@ -10,8 +10,20 @@ var Event = require('../models/event');
 router.get('/', (req, res) => {
   let startDate = parseInt(req.query.startDate);
   let endDate = parseInt(req.query.endDate);
+  let minLat = parseFloat(req.query.minLat);
+  let maxLat = parseFloat(req.query.maxLat);
+  let minLng = parseFloat(req.query.minLng);
+  let maxLng = parseFloat(req.query.maxLng);
+
   Event.find(
-    {timeValue: {$gte:startDate, $lte:endDate}, active: true},
+    {
+      timeValue: {$gte:startDate, $lte:endDate},
+      lat: {$gte:minLat, $lte:maxLat},
+      lng: {$gte:minLng, $lte:maxLng},
+      active: true
+    },
+
+
     /* testing limiting result fields */
     // 'title primCategory primSubCategory secCategory secSubCategory locationName date startTime timeValue lat lng',
     (err, events) => {

@@ -22,8 +22,8 @@ let Event = new Schema({
   host: String,
   contactEmail: String,
   contactNumber: String,
-  lat: String,
-  lng: String,
+  lat: Number,
+  lng: Number,
   creatorId: String,
   creatorEmail: String,
   active: Boolean

@@ -63,7 +63,7 @@ class Filter extends React.Component {
     let startTimeValue = moment(startDate, 'MMMM D, YYYY', true).format('x');
     let endTimeValue = moment(endDate, 'MMMM D, YYYY', true).endOf('day').format('x');
 
-    this.props.dispatch(fetchEvents(startTimeValue, endTimeValue));
+    this.props.dispatch(fetchEvents(startTimeValue, endTimeValue, this.props.mapBounds.maxLat, this.props.mapBounds.minLat, this.props.mapBounds.maxLng, this.props.mapBounds.minLng));
   }
 
   closeFilter() {
@@ -125,7 +125,7 @@ class Filter extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  return {events: state.events, filter: state.filter};
+  return {events: state.events, filter: state.filter, mapBounds: state.map.mapBounds};
 };
 
 export default connect(mapStateToProps)(Filter);

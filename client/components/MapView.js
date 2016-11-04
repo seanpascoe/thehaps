@@ -2,6 +2,7 @@ import React from 'react';
 import {GoogleMapLoader, GoogleMap, InfoWindow, Marker} from 'react-google-maps';
 import {triggerEvent} from 'react-google-maps/lib/utils';
 import { connect } from 'react-redux';
+import { fetchEvents } from '../actions/event';
 import { getFilteredEvents, getEventsNumCheck } from '../selectors/selectors';
 import mapstyle from './mapstyle';
 import List from './List';
@@ -24,6 +25,18 @@ export class MapView extends React.Component {
     this.eventDetails = this.eventDetails.bind(this);
     this.handleMarkerClose = this.handleMarkerClose.bind(this);
     this.boundsChanged = this.boundsChanged.bind(this);
+  }
+
+  componentWillMount() {
+    //fetches initial events for current day, and efault location
+    let startDate = moment().startOf('day').format('x');
+    let endDate = moment().endOf('day').format('x');
+    let maxLat = 40.785293884504796;
+    let minLat = 40.703228647350485;
+    let maxLng = -111.78194041035158;
+    let minLng = -111.98381418964846;
+
+    this.props.dispatch(fetchEvents(startDate, endDate, maxLat, minLat, maxLng, minLng));
   }
 
   componentDidMount() {
@@ -67,10 +80,19 @@ export class MapView extends React.Component {
     //     console.log('hello!');
     //   }, 1000)
     // });
-    console.log("Top Latitude:" + this.refs.map.getBounds().getNorthEast().lat())
-    console.log("Right Longitude:" + this.refs.map.getBounds().getNorthEast().lng())
-    console.log("Bottom Latitude:" + this.refs.map.getBounds().getSouthWest().lat())
-    console.log("Left Longitude" + this.refs.map.getBounds().getSouthWest().lng())
+    // console.log("Top Latitude:" + this.refs.map.getBounds().getNorthEast().lat())
+    // console.log("Right Longitude:" + this.refs.map.getBounds().getNorthEast().lng())
+    // console.log("Bottom Latitude:" + this.refs.map.getBounds().getSouthWest().lat())
+    // console.log("Left Longitude" + this.refs.map.getBounds().getSouthWest().lng())
+
+    const maxLat = this.refs.map.getBounds().getNorthEast().lat();
+    const minLat = this.refs.map.getBounds().getSouthWest().lat();
+    const maxLng = this.refs.map.getBounds().getNorthEast().lng();
+    const minLng = this.refs.map.getBounds().getSouthWest().lng();
+
+    this.props.dispatch(fetchEvents(
+      this.props.filter.startDate, this.props.filter.endDate,
+      maxLat, minLat, maxLng, minLng));
   }
 
   handleMarkerClick(marker) {
@@ -118,7 +140,7 @@ export class MapView extends React.Component {
         <Marker
           key={event._id}
           icon={icon}
-          position={{lat: parseFloat(event.lat), lng: parseFloat(event.lng)}}
+          position={{lat: event.lat, lng: event.lng}}
           onClick={this.handleMarkerClick.bind(this, event)} >
           {this.state.activeIW === event._id ? this.renderInfoWindow(event): null}
         </Marker> );
@@ -166,6 +188,7 @@ const mapStateToProps = (state) => {
   return {
     filteredEvents: getFilteredEvents(state),
     eventsNumCheck: getEventsNumCheck(state),
+    filter: state.filter,
     view: state.view };
 };
 

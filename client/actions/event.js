@@ -55,10 +55,10 @@ export const addEvent = (title, primCategory, primSubCategory,
   };
 };
 
-const getEvents = (events, startDate, endDate) => {
+const getEvents = (events, startDate, endDate, maxLat, minLat, maxLng, minLng) => {
   return {
     type: 'GET_EVENTS',
-    events, startDate, endDate
+    events, startDate, endDate, maxLat, minLat, maxLng, minLng
   };
 };
 
@@ -69,7 +69,7 @@ export const fetchEvents = (startDate, endDate, maxLat, minLat, maxLng, minLng) 
       url: '/events',
       data: {startDate, endDate, maxLat, minLat, maxLng, minLng}
     }).done( events => {
-      dispatch(getEvents(events, startDate, endDate));
+      dispatch(getEvents(events, startDate, endDate, maxLat, minLat, maxLng, minLng));
     });
   };
 };
