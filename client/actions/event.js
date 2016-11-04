@@ -62,12 +62,12 @@ const getEvents = (events, startDate, endDate) => {
   };
 };
 
-export const fetchEvents = (startDate, endDate) => {
+export const fetchEvents = (startDate, endDate, maxLat, minLat, maxLng, minLng) => {
   return(dispatch) => {
     $.ajax({
       type: 'GET',
       url: '/events',
-      data: {startDate, endDate}
+      data: {startDate, endDate, maxLat, minLat, maxLng, minLng}
     }).done( events => {
       dispatch(getEvents(events, startDate, endDate));
     });

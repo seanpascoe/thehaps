@@ -18,10 +18,12 @@ export class MapView extends React.Component {
         lat: 40.760984,
         lng: -111.8828773
       },
-      activeIW: ''
+      activeIW: '',
+      boundsChangedTimeout: 0
     };
     this.eventDetails = this.eventDetails.bind(this);
     this.handleMarkerClose = this.handleMarkerClose.bind(this);
+    this.boundsChanged = this.boundsChanged.bind(this);
   }
 
   componentDidMount() {
@@ -52,6 +54,23 @@ export class MapView extends React.Component {
       triggerEvent(this.refs.map, 'resize');
       this.props.dispatch({type: 'TRIGGER_MAP', mapRefreshTrigger: false});
     }
+  }
+
+
+  boundsChanged() {
+    // if (this.state.boundsChangedTimeout) {
+    //   clearTimeout(this.state.boundsChangedTimeout);
+    //   this.setState({boundsChangedTimeout: 0})
+    // }
+    // this.setState({
+    //   boundsChangedTimeout: setTimeout(() => {
+    //     console.log('hello!');
+    //   }, 1000)
+    // });
+    console.log("Top Latitude:" + this.refs.map.getBounds().getNorthEast().lat())
+    console.log("Right Longitude:" + this.refs.map.getBounds().getNorthEast().lng())
+    console.log("Bottom Latitude:" + this.refs.map.getBounds().getSouthWest().lat())
+    console.log("Left Longitude" + this.refs.map.getBounds().getSouthWest().lng())
   }
 
   handleMarkerClick(marker) {
@@ -120,6 +139,8 @@ export class MapView extends React.Component {
               defaultZoom={13}
               ref='map'
               onClick={this.handleMarkerClose}
+              onDragend={this.boundsChanged}
+              onZoomChanged={this.boundsChanged}
               defaultOptions={{
                 mapTypeControl: false,
                 streetViewControl: false,

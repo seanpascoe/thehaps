@@ -25,7 +25,11 @@ class App extends React.Component {
     //fetches initial events for current day
     let startDate = moment().startOf('day').format('x');
     let endDate = moment().endOf('day').format('x');
-    this.props.dispatch(fetchEvents(startDate, endDate));
+    let maxLat = 40.785293884504796;
+    let minLat = 40.703228647350485;
+    let maxLng = -111.78194041035158;
+    let minLng = -111.98381418964846;
+    this.props.dispatch(fetchEvents(startDate, endDate, maxLat, minLat, maxLng, minLng));
 
   }
 
