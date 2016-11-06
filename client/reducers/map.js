@@ -1,12 +1,12 @@
-const map = (state = {}, action) => {
+const map = (state = {mapBounds: ''}, action) => {
   switch (action.type) {
     case 'GET_EVENTS':
       return {
         ...state,
         mapBounds: {
-          maxLat: action.maxLat, 
-          minLat: action.minLat, 
-          maxLng: action.maxLng, 
+          maxLat: action.maxLat,
+          minLat: action.minLat,
+          maxLng: action.maxLng,
           minLng: action.minLng
         }
       }

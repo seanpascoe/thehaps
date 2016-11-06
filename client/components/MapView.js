@@ -28,13 +28,14 @@ export class MapView extends React.Component {
   }
 
   componentWillMount() {
-    //fetches initial events for current day, and efault location
-    let startDate = moment().startOf('day').format('x');
-    let endDate = moment().endOf('day').format('x');
-    let maxLat = 40.785293884504796;
-    let minLat = 40.703228647350485;
-    let maxLng = -111.78194041035158;
-    let minLng = -111.98381418964846;
+    //fetches initial events for current day, and default location
+
+    let startDate = this.props.filter.startDate || moment().startOf('day').format('x');
+    let endDate = this.props.filter.endDate || moment().endOf('day').format('x');
+    let maxLat = this.props.mapBounds.maxLat || 40.785293884504796;
+    let minLat = this.props.mapBounds.minLat || 40.703228647350485;
+    let maxLng = this.props.mapBounds.maxLng || -111.78194041035158;
+    let minLng = this.props.mapBounds.minLng || -111.98381418964846;
 
     this.props.dispatch(fetchEvents(startDate, endDate, maxLat, minLat, maxLng, minLng));
   }
@@ -57,6 +58,7 @@ export class MapView extends React.Component {
     //       }
     //     });
     //     this.refs.map.panTo(this.state.center);
+    //     this.boundsChanged();
     //   });
     // }
   }
@@ -188,6 +190,7 @@ const mapStateToProps = (state) => {
   return {
     filteredEvents: getFilteredEvents(state),
     eventsNumCheck: getEventsNumCheck(state),
+    mapBounds: state.map.mapBounds,
     filter: state.filter,
     view: state.view };
 };
