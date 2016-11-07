@@ -19,6 +19,12 @@ class DetailView extends React.Component {
     let startTime = moment(event.startTime, 'HH:mm', true).format('h:mm a');
     let endTime = event.endTime ? moment(event.endTime, 'HH:mm', true).format('h:mm a') : '';
 
+    let calendarDateTime = moment(`${event.date} ${event.startTime}`, 'MMMM D, YYYY HH:mm').utc()
+      .format('YYYYMMDDTHHmmss');
+    calendarDateTime += 'Z'
+
+    let calendarLink = `http://www.google.com/calendar/event?action=TEMPLATE&text=${encodeURIComponent(event.title)}&dates=${calendarDateTime}/${calendarDateTime}&details=${encodeURIComponent(event.description)}&location=${event.locationName}+${event.address}+${event.city}+${event.state}&trp=false`;
+
     let styles = {
       modalWrapper: {fontWeight: '300', maxHeight: '80%'},
       title: {fontWeight: '500'},
@@ -47,6 +53,9 @@ class DetailView extends React.Component {
             <div className="col s12 m4" style={styles.divMargin}>
               <div style={styles.date}>{date}</div>
               <div style={styles.time}>{`Time: ${startTime}` }{endTime ? ` - ${endTime}` : ''}</div>
+
+              <a href={calendarLink} target="_blank" rel="nofollow">Add to Google Calendar</a>
+
               <div style={styles.locationName}>{event.locationName}</div>
               <div className='left'>
                 <div style={styles.location}>{event.address}</div>

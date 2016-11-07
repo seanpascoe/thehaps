@@ -109,6 +109,9 @@ export class MapView extends React.Component {
     //replaced filter method with find method for performance gains
     const event = this.props.filteredEvents.find(e => e._id === id);
     this.props.dispatch({type: 'SET_EVENT', eventDetail: event});
+
+    //place comment fetch action/reducer here using event id
+
     window.jQuery('#event-detail').modal('open');
     window.jQuery('#event-detail').scrollTop(0);
   }

@@ -20,9 +20,9 @@ const MapSettingsLabel = (props) => {
         fontWeight: '300',
         borderBottomLeftRadius: '2px',
         borderBottomRightRadius: '2px'}}>
-        <span>{`Category: ' ${props.filter.selectedCategory} '`}</span>
-        <span style={{marginLeft: '10px'}}>{`Dates: ${startDate} - ${endDate}`}</span>
-        <span style={{marginLeft: '10px', color: eventLabelColor}}>{`Events: ${props.numMapEvents}/${props.numFilteredEvents}`}</span>
+        <span>{`Cat: ' ${props.filter.selectedCategory} '`}</span>
+        <span style={{marginLeft: '10px'}}>{`Rng: ${startDate} - ${endDate}`}</span>
+        <span style={{marginLeft: '10px', color: eventLabelColor}}>{`Evts: ${props.numMapEvents}/${props.numFilteredEvents}`}</span>
         {/* <div style={{color: 'red', fontWeight: 300, display: `${props.numMapEvents === 100 ? 'block' : 'none'}`}}>
           Map events limit exceeded! Filter, Zoom, or switch to List View
         </div> */}
