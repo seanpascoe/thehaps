@@ -6,7 +6,8 @@ import map from './map';
 import view from './view';
 import details from './details';
 import filter from './filter';
+import mobile from './mobile';
 
-const rootReducer = combineReducers({ auth, events, map, view, details, filter, routing: routerReducer });
+const rootReducer = combineReducers({ auth, events, map, view, details, filter, mobile, routing: routerReducer });
 
 export default rootReducer;
