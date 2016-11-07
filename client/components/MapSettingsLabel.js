@@ -9,7 +9,7 @@ const MapSettingsLabel = (props) => {
   let eventLabelColor = props.numMapEvents < props.numFilteredEvents ? 'red' : 'white';
 
   return (
-    <div className="filter-sideNav" style={{display: 'flex', justifyContent: 'center', cursor: 'pointer'}} data-activates="slide-out1">
+    <div className="filter-sideNav" style={{display: 'flex', justifyContent: 'center', cursor: 'pointer', fontWeight: '300'}} data-activates="slide-out1">
       <div id="settingslabel" style={{
         display,
         position: 'absolute',
@@ -17,7 +17,6 @@ const MapSettingsLabel = (props) => {
         zIndex: '997',
         color: 'white',
         padding: '0px 10px',
-        fontWeight: '300',
         borderBottomLeftRadius: '2px',
         borderBottomRightRadius: '2px'}}>
         <span>{`Cat: ' ${props.filter.selectedCategory} '`}</span>

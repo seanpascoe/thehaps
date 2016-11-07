@@ -22,6 +22,16 @@ nav a.button-collapse i,
   z-index: 998;
 }
 
+@media screen and (min-color-index:0) and(-webkit-min-device-pixel-ratio:0)
+{ @media {
+  #settingslabel {
+    transform: translateX(-50%);
+    font-weight: 400;
+    min-width: 315px;
+  }
+}}
+
+
 @media (max-width: 600px) {
   nav .button-collapse {
     padding-left: 10px;
