@@ -22,7 +22,7 @@ router.get('/', (req, res) => {
       lng: {$gte:minLng, $lte:maxLng},
       active: true
     },
-
+    // { description: false },
 
     /* testing limiting result fields */
     // 'title primCategory primSubCategory secCategory secSubCategory locationName date startTime timeValue lat lng',
