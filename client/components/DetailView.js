@@ -25,7 +25,8 @@ class DetailView extends React.Component {
     calendarDateTime += 'Z'
 
     let calendarLink = (function(event) {
-      const urlParams = `?action=TEMPLATE&text=${encodeURIComponent(event.title)}&dates=${calendarDateTime}/${calendarDateTime}&details=${encodeURIComponent(event.description)}&location=${event.locationName}+${event.address}+${event.city}+${event.state}&trp=false`;
+      let desc = event.description ? event.description.substring(0, 500) : '';
+      const urlParams = `?action=TEMPLATE&text=${encodeURIComponent(event.title)}&dates=${calendarDateTime}/${calendarDateTime}&details=${encodeURIComponent(desc)}&location=${event.locationName}+${event.address}+${event.city}+${event.state}&trp=false`;
 
       if(this.props.mobile) {
         return `http://calendar.google.com/calendar/gp#~calendar:view=e&bm=1${urlParams}`;
