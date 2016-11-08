@@ -72,7 +72,7 @@ class List extends React.PureComponent {
     });
 
     return (
-      <div style={styles.listContainer}>
+      <div id="listcontainer" style={styles.listContainer}>
         <ListSettingsLabel startDate={startDate} endDate={endDate} selectedCategory={this.props.filter.selectedCategory} numFilteredEvents={this.props.sortedEvents.length}/>
         <ul className="collection" style={styles.ul}>
           {events}

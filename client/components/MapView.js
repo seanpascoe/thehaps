@@ -149,7 +149,7 @@ export class MapView extends React.PureComponent {
             // style={{display: this.props.view.mapDisplay}}
                             >
 
-            </div>}
+          </div>}
           googleMapElement={
             <GoogleMap
               // center={mapCenter || this.state.center}
@@ -186,7 +186,7 @@ const mapStateToProps = (state) => {
     eventsNumCheck: getEventsNumCheck(state),
     mapBounds: state.map.mapBounds,
     filter: state.filter,
-    // view: state.view 
+    // view: state.view
   };
 };
 

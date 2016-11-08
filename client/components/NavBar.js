@@ -54,10 +54,14 @@ class NavBar extends React.Component {
     let listDisplay;
     let icon;
     if(mapDisplay === 'block') {
+      window.jQuery('#listcontainer').show();
+      window.jQuery('#g-map').hide();    
       mapDisplay = 'none';
       listDisplay = 'block';
       icon = 'map';
     } else {
+      window.jQuery('#g-map').show();
+      window.jQuery('#listcontainer').hide();
       mapDisplay = 'block';
       listDisplay = 'none';
       icon = 'view_list';
@@ -67,6 +71,8 @@ class NavBar extends React.Component {
   }
 
   navbarViewChangeMap() {
+    window.jQuery('#g-map').show();
+    window.jQuery('#listcontainer').hide();
     let mapDisplay = 'block';
     let listDisplay = 'none';
     let icon = 'view_list';
@@ -74,6 +80,8 @@ class NavBar extends React.Component {
   }
 
   navbarViewChangeList() {
+    window.jQuery('#listcontainer').show();
+    window.jQuery('#g-map').hide();
     let mapDisplay = 'none';
     let listDisplay = 'block';
     let icon = 'map';
