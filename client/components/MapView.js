@@ -11,7 +11,7 @@ import Filter from './Filter';
 import FilterButton from './FilterButton';
 import MapSettingsLabel from './MapSettingsLabel';
 
-export class MapView extends React.Component {
+export class MapView extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state = {
@@ -73,20 +73,6 @@ export class MapView extends React.Component {
 
 
   boundsChanged() {
-    // if (this.state.boundsChangedTimeout) {
-    //   clearTimeout(this.state.boundsChangedTimeout);
-    //   this.setState({boundsChangedTimeout: 0})
-    // }
-    // this.setState({
-    //   boundsChangedTimeout: setTimeout(() => {
-    //     console.log('hello!');
-    //   }, 1000)
-    // });
-    // console.log("Top Latitude:" + this.refs.map.getBounds().getNorthEast().lat())
-    // console.log("Right Longitude:" + this.refs.map.getBounds().getNorthEast().lng())
-    // console.log("Bottom Latitude:" + this.refs.map.getBounds().getSouthWest().lat())
-    // console.log("Left Longitude" + this.refs.map.getBounds().getSouthWest().lng())
-
     const maxLat = this.refs.map.getBounds().getNorthEast().lat();
     const minLat = this.refs.map.getBounds().getSouthWest().lat();
     const maxLng = this.refs.map.getBounds().getNorthEast().lng();
@@ -109,13 +95,12 @@ export class MapView extends React.Component {
     window.jQuery('#event-detail').modal('open');
     window.jQuery('#event-detail').scrollTop(0);
 
-    //replaced filter method with find method for performance gains
+    //gets event details from redux store (missing description)
     const event = this.props.filteredEvents.find(e => e._id === id);
     this.props.dispatch({type: 'SET_EVENT', eventDetail: event});
 
-    //place comment fetch action/reducer here using event id
+    //gets full event details from db
     this.props.dispatch(fetchEventDetails(id));
-
   }
 
   renderInfoWindow(event) {
@@ -160,7 +145,11 @@ export class MapView extends React.Component {
         <MapSettingsLabel
           iw={this.state.activeIW} numMapEvents={this.props.eventsNumCheck.length} numFilteredEvents={this.props.filteredEvents.length}/>
         <GoogleMapLoader
-          containerElement={<div id="g-map" style={{display: this.props.view.mapDisplay}}></div>}
+          containerElement={<div id="g-map"
+            // style={{display: this.props.view.mapDisplay}}
+                            >
+
+            </div>}
           googleMapElement={
             <GoogleMap
               // center={mapCenter || this.state.center}
@@ -197,7 +186,8 @@ const mapStateToProps = (state) => {
     eventsNumCheck: getEventsNumCheck(state),
     mapBounds: state.map.mapBounds,
     filter: state.filter,
-    view: state.view };
+    // view: state.view 
+  };
 };
 
 export default connect(mapStateToProps)(MapView);

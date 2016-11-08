@@ -1,9 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { getSortedEvents } from '../selectors/selectors';
+import { fetchEventDetails } from '../actions/event';
 import ListSettingsLabel from './ListSettingsLabel';
 
-class List extends React.Component {
+class List extends React.PureComponent {
   constructor(props) {
     super(props);
   }
@@ -14,19 +15,22 @@ class List extends React.Component {
   }
 
   eventDetails(id) {
-    //replaced filter method with find method for performance gains
-    const event = this.props.sortedEvents.find(e => e._id === id);
-    this.props.dispatch({ type: 'SET_EVENT', eventDetail: event});
-
     window.jQuery('#event-detail').modal('open');
     window.jQuery('#event-detail').scrollTop(0);
+
+    //gets event details from redux store (missing description)
+    const event = this.props.sortedEvents.find(e => e._id === id);
+    this.props.dispatch({type: 'SET_EVENT', eventDetail: event});
+
+    //gets full event details from db
+    this.props.dispatch(fetchEventDetails(id));
   }
 
   render() {
     let startDate = moment(this.props.filter.startDate, 'x', true).format('MMM Do');
     let endDate = moment(this.props.filter.endDate, 'x', true).format('MMM Do');
     let styles = {
-      listContainer: {display: this.props.view.listDisplay, fontWeight: '300'},
+      // listContainer: {display: this.props.view.listDisplay, fontWeight: '300'},
       row: {marginBottom: 0},
       ul: {margin: '0', border: 'none', borderTop: '1px solid #e0e0e0'},
       time: {fontWeight: '500'},
@@ -87,7 +91,7 @@ class List extends React.Component {
 const mapStateToProps = (state) => {
   return {
     sortedEvents: getSortedEvents(state),
-    view: state.view,
+    // view: state.view,
     filter: state.filter };
 };
 
