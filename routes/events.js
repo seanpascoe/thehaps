@@ -22,7 +22,7 @@ router.get('/', (req, res) => {
       lng: {$gte:minLng, $lte:maxLng},
       active: true
     },
-    // { description: false },
+    { description: false },
 
     /* testing limiting result fields */
     // 'title primCategory primSubCategory secCategory secSubCategory locationName date startTime timeValue lat lng',
@@ -30,6 +30,12 @@ router.get('/', (req, res) => {
       res.json(events);
     }
   );
+});
+
+router.get('/details', (req, res) => {
+  Event.findOne({_id: req.query.id}, (err, event) => {
+    res.json(event);
+  });
 });
 
 // POST creates a event

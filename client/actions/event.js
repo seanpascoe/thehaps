@@ -55,13 +55,6 @@ export const addEvent = (title, primCategory, primSubCategory,
   };
 };
 
-const getEvents = (events, startDate, endDate, maxLat, minLat, maxLng, minLng) => {
-  return {
-    type: 'GET_EVENTS',
-    events, startDate, endDate, maxLat, minLat, maxLng, minLng
-  };
-};
-
 export const fetchEvents = (startDate, endDate, maxLat, minLat, maxLng, minLng) => {
   return(dispatch) => {
     $.ajax({
@@ -71,5 +64,32 @@ export const fetchEvents = (startDate, endDate, maxLat, minLat, maxLng, minLng) 
     }).done( events => {
       dispatch(getEvents(events, startDate, endDate, maxLat, minLat, maxLng, minLng));
     });
+  };
+};
+
+
+const getEvents = (events, startDate, endDate, maxLat, minLat, maxLng, minLng) => {
+  return {
+    type: 'GET_EVENTS',
+    events, startDate, endDate, maxLat, minLat, maxLng, minLng
+  };
+};
+
+export const fetchEventDetails = (id) => {
+  return(dispatch) => {
+    $.ajax({
+      type: 'GET',
+      url: '/events/details',
+      data: {id}
+    }).done( event => {
+      dispatch(setEventDetail(event));
+    });
+  };
+};
+
+const setEventDetail = (event) => {
+  return {
+    type: 'SET_EVENT',
+    eventDetail: event
   };
 };
