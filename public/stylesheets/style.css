@@ -26,6 +26,12 @@ nav a.button-collapse i,
   display: none;
 }
 
+.clearfix:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
 @media screen and (min-color-index:0) and(-webkit-min-device-pixel-ratio:0)
 { @media {
   #settingslabel {

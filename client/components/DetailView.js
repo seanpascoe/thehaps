@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import Comments from './Comments';
 import FaDirections from 'react-icons/lib/md/directions';
 import FaLink from 'react-icons/lib/fa/external-link';
 import FaCalendar from 'react-icons/lib/fa/calendar-plus-o';
@@ -84,6 +85,7 @@ class DetailView extends React.Component {
               <div><span style={styles.infoLabels}>Description: </span>{event.description ? event.description : 'no description'}</div>
             </div>
           </div>
+          <Comments />
         </div>
       </div>
     );
