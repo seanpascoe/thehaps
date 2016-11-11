@@ -24,8 +24,6 @@ router.get('/', (req, res) => {
     },
     { description: false },
 
-    /* testing limiting result fields */
-    // 'title primCategory primSubCategory secCategory secSubCategory locationName date startTime timeValue lat lng',
     (err, events) => {
       res.json(events);
     }

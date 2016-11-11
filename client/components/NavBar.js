@@ -16,7 +16,6 @@ class NavBar extends React.Component {
     super(props);
     this.links = this.links.bind(this);
     this.viewChange = this.viewChange.bind(this);
-    this.navbarViewChangeMap = this.navbarViewChangeMap.bind(this);
   }
 
   componentDidMount() {
@@ -50,35 +49,17 @@ class NavBar extends React.Component {
   }
 
   viewChange() {
-    // let mapDisplay = this.props.view.mapDisplay;
-    // let listDisplay;
     let icon = this.props.view.icon;
     if(icon === 'view_list') {
       window.jQuery('#listcontainer').show();
       window.jQuery('#g-map').hide();
-      // mapDisplay = 'none';
-      // listDisplay = 'block';
       icon = 'map';
     } else {
       window.jQuery('#g-map').show();
       window.jQuery('#listcontainer').hide();
-      // mapDisplay = 'block';
-      // listDisplay = 'none';
       icon = 'view_list';
-      // this.props.dispatch({type: 'TRIGGER_MAP', mapRefreshTrigger: true});
     }
     this.props.dispatch({type: 'VIEW_CHANGE', icon});
-  }
-
-  navbarViewChangeMap() {
-    if(this.props.view.icon === 'map') {
-      return;
-    } else {
-      // let mapDisplay = 'block';
-      // let listDisplay = 'none';
-      // let icon = 'view_list';
-      this.props.dispatch({type: 'VIEW_CHANGE', icon: 'view_list'});
-    }
   }
 
   render() {
@@ -101,9 +82,13 @@ class NavBar extends React.Component {
               {this.props.view.icon === 'map' ? <FaMap size={'26px'} /> : <FaList size={'26px'} />}
             </div>
             <ul className="side-nav" id="mobile">
-              <li><Link to="/contact" style={styles.fontWeight}><FaInfo size={'26px'} /><span className="menu-item">Contact</span></Link></li>
+              <li>
+                <Link to="/contact" style={styles.fontWeight}><FaInfo size={'26px'} /><span className="menu-item">Contact</span></Link>
+              </li>
               <li className="divider" style={{margin: 0}}></li>
-              <li onClick={this.navbarViewChangeMap}><Link to="/" style={styles.fontWeight}><FaMap size={'26px'} /><span className="menu-item">Map/List View</span></Link></li>
+              <li>
+                <Link to="/" style={styles.fontWeight}><FaMap size={'26px'} /><span className="menu-item">Map/List View</span></Link>
+              </li>
               {this.links()}
             </ul>
           </div>

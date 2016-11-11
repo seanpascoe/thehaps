@@ -1,16 +1,9 @@
-const view = (state={icon: 'view_list', mapDisplay: 'block', listDisplay: 'none', mapRefreshTrigger: false}, action) => {
+const view = (state={icon: 'view_list'}, action) => {
   switch (action.type) {
     case 'VIEW_CHANGE':
       return {
         ...state,
-        icon: action.icon,
-        // mapDisplay: action.mapDisplay,
-        // listDisplay: action.listDisplay
-      };
-    case 'TRIGGER_MAP':
-      return {
-        ...state,
-        mapRefreshTrigger: action.mapRefreshTrigger
+        icon: action.icon
       };
     default:
       return state;

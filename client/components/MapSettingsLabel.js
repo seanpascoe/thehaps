@@ -24,11 +24,11 @@ const MapSettingsLabel = (props) => {
         <span style={{marginLeft: '10px', color: eventLabelColor}}>{`Evts: ${props.numMapEvents}/${props.numFilteredEvents}`}</span>
       </div>
     </div>
-  )
+  );
 };
 
 const mapStateToProps = (state) => {
-  return { filter: state.filter, view: state.view }
+  return { filter: state.filter, view: state.view };
 };
 
 export default connect(mapStateToProps)(MapSettingsLabel);

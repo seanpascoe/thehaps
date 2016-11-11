@@ -1,6 +1,6 @@
 import React from 'react';
 import {GoogleMapLoader, GoogleMap, InfoWindow, Marker} from 'react-google-maps';
-import {triggerEvent} from 'react-google-maps/lib/utils';
+// import {triggerEvent} from 'react-google-maps/lib/utils';
 import { connect } from 'react-redux';
 import { fetchEvents, fetchEventDetails } from '../actions/event';
 import { getFilteredEvents, getEventsNumCheck } from '../selectors/selectors';
@@ -48,10 +48,7 @@ export class MapView extends React.PureComponent {
     });
     window.jQuery('#event-detail').modal();
 
-    let mapDisplay = 'block';
-    let listDisplay = 'none';
-    let icon = 'view_list';
-    this.props.dispatch({type: 'VIEW_CHANGE', mapDisplay, listDisplay, icon});
+    this.props.dispatch({type: 'VIEW_CHANGE', icon: 'view_list'});
 
     // if (navigator && navigator.geolocation) {
     //   navigator.geolocation.getCurrentPosition((pos) => {
@@ -67,15 +64,6 @@ export class MapView extends React.PureComponent {
     //   });
     // }
   }
-
-  componentDidUpdate() {
-    //this fixes the map refresh problem when moving from list to map view
-    // if (this.props.view.mapRefreshTrigger === true) {
-    //   triggerEvent(this.refs.map, 'resize');
-    //   this.props.dispatch({type: 'TRIGGER_MAP', mapRefreshTrigger: false});
-    // }
-  }
-
 
   boundsChanged() {
     const maxLat = this.refs.map.getBounds().getNorthEast().lat();
@@ -186,8 +174,7 @@ const mapStateToProps = (state) => {
     filteredEvents: getFilteredEvents(state),
     eventsNumCheck: getEventsNumCheck(state),
     mapBounds: state.map.mapBounds,
-    filter: state.filter,
-    // view: state.view
+    filter: state.filter
   };
 };
 

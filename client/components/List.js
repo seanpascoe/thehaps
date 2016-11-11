@@ -91,7 +91,6 @@ class List extends React.PureComponent {
 const mapStateToProps = (state) => {
   return {
     sortedEvents: getSortedEvents(state),
-    // view: state.view,
     filter: state.filter };
 };
 
