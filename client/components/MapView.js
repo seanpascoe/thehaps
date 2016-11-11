@@ -1,6 +1,6 @@
 import React from 'react';
 import {GoogleMapLoader, GoogleMap, InfoWindow, Marker} from 'react-google-maps';
-// import {triggerEvent} from 'react-google-maps/lib/utils';
+import {triggerEvent} from 'react-google-maps/lib/utils';
 import { connect } from 'react-redux';
 import { fetchEvents, fetchEventDetails } from '../actions/event';
 import { getFilteredEvents, getEventsNumCheck } from '../selectors/selectors';
@@ -10,6 +10,8 @@ import DetailView from './DetailView';
 import Filter from './Filter';
 import FilterButton from './FilterButton';
 import MapSettingsLabel from './MapSettingsLabel';
+
+
 
 export class MapView extends React.PureComponent {
   constructor(props) {
@@ -50,6 +52,7 @@ export class MapView extends React.PureComponent {
 
     this.props.dispatch({type: 'VIEW_CHANGE', icon: 'view_list'});
 
+
     // if (navigator && navigator.geolocation) {
     //   navigator.geolocation.getCurrentPosition((pos) => {
     //     const coords = pos.coords;
@@ -64,6 +67,14 @@ export class MapView extends React.PureComponent {
     //   });
     // }
   }
+
+  componentDidUpdate(prevProps) {
+    //this fixes the map refresh problem when moving from list to map view
+    if(prevProps.view.icon === 'map' && this.props.view.icon === 'view_list') {
+      triggerEvent(this.refs.map, 'resize');
+    }
+  }
+
 
   boundsChanged() {
     const maxLat = this.refs.map.getBounds().getNorthEast().lat();
@@ -132,7 +143,7 @@ export class MapView extends React.PureComponent {
     });
 
     return (
-      <div id="map-list-wrapper">
+      <div ref="mapListWrapper" id="map-list-wrapper">
         <FilterButton />
         <Filter />
         <MapSettingsLabel
@@ -174,7 +185,8 @@ const mapStateToProps = (state) => {
     filteredEvents: getFilteredEvents(state),
     eventsNumCheck: getEventsNumCheck(state),
     mapBounds: state.map.mapBounds,
-    filter: state.filter
+    filter: state.filter,
+    view: state.view
   };
 };
 
