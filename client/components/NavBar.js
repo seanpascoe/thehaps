@@ -17,12 +17,12 @@ class NavBar extends React.Component {
     this.links = this.links.bind(this);
     this.viewChange = this.viewChange.bind(this);
     this.navbarViewChangeMap = this.navbarViewChangeMap.bind(this);
-    this.navbarViewChangeList = this.navbarViewChangeList.bind(this);
   }
 
   componentDidMount() {
     window.jQuery('.button-collapse').sideNav({
-      closeOnClick: true
+      closeOnClick: true,
+      draggable: false
     });
   }
 
@@ -50,42 +50,35 @@ class NavBar extends React.Component {
   }
 
   viewChange() {
-    let mapDisplay = this.props.view.mapDisplay;
-    let listDisplay;
-    let icon;
-    if(mapDisplay === 'block') {
+    // let mapDisplay = this.props.view.mapDisplay;
+    // let listDisplay;
+    let icon = this.props.view.icon;
+    if(icon === 'view_list') {
       window.jQuery('#listcontainer').show();
-      window.jQuery('#g-map').hide();    
-      mapDisplay = 'none';
-      listDisplay = 'block';
+      window.jQuery('#g-map').hide();
+      // mapDisplay = 'none';
+      // listDisplay = 'block';
       icon = 'map';
     } else {
       window.jQuery('#g-map').show();
       window.jQuery('#listcontainer').hide();
-      mapDisplay = 'block';
-      listDisplay = 'none';
+      // mapDisplay = 'block';
+      // listDisplay = 'none';
       icon = 'view_list';
-      this.props.dispatch({type: 'TRIGGER_MAP', mapRefreshTrigger: true});
+      // this.props.dispatch({type: 'TRIGGER_MAP', mapRefreshTrigger: true});
     }
-    this.props.dispatch({type: 'VIEW_CHANGE', mapDisplay, listDisplay, icon});
+    this.props.dispatch({type: 'VIEW_CHANGE', icon});
   }
 
   navbarViewChangeMap() {
-    window.jQuery('#g-map').show();
-    window.jQuery('#listcontainer').hide();
-    let mapDisplay = 'block';
-    let listDisplay = 'none';
-    let icon = 'view_list';
-    this.props.dispatch({type: 'VIEW_CHANGE', mapDisplay, listDisplay, icon});
-  }
-
-  navbarViewChangeList() {
-    window.jQuery('#listcontainer').show();
-    window.jQuery('#g-map').hide();
-    let mapDisplay = 'none';
-    let listDisplay = 'block';
-    let icon = 'map';
-    this.props.dispatch({type: 'VIEW_CHANGE', mapDisplay, listDisplay, icon});
+    if(this.props.view.icon === 'map') {
+      return;
+    } else {
+      // let mapDisplay = 'block';
+      // let listDisplay = 'none';
+      // let icon = 'view_list';
+      this.props.dispatch({type: 'VIEW_CHANGE', icon: 'view_list'});
+    }
   }
 
   render() {
@@ -98,29 +91,23 @@ class NavBar extends React.Component {
 
     return (
       <div className="navbar-fixed">
-      <nav style={styles.navBarColor}>
-        <div className="nav-wrapper">
-          <Link to="/" className="brand-logo center" style={styles.logo}><img src="/images/logo/thehapslogo-white.svg" style={styles.logo}/></Link>
-          <a href="#" data-activates="mobile" className="button-collapse show-on-large">
-            <FaBars size={'29px'} />
-          </a>
-          <div style={{cursor: 'pointer', display: this.props.routing.locationBeforeTransitions.pathname === '/' ? 'block' : 'none'}} className="right viewIcon" onClick={this.viewChange}>
-            {this.props.view.icon === 'map' ? <FaMap size={'26px'} /> : <FaList size={'26px'} />}
+        <nav style={styles.navBarColor}>
+          <div className="nav-wrapper">
+            <Link to="/" className="brand-logo center" style={styles.logo}><img src="/images/logo/thehapslogo-white.svg" style={styles.logo}/></Link>
+            <a href="#" data-activates="mobile" className="button-collapse show-on-large">
+              <FaBars size={'29px'} />
+            </a>
+            <div style={{cursor: 'pointer', display: this.props.routing.locationBeforeTransitions.pathname === '/' ? 'block' : 'none'}} className="right viewIcon" onClick={this.viewChange}>
+              {this.props.view.icon === 'map' ? <FaMap size={'26px'} /> : <FaList size={'26px'} />}
+            </div>
+            <ul className="side-nav" id="mobile">
+              <li><Link to="/contact" style={styles.fontWeight}><FaInfo size={'26px'} /><span className="menu-item">Contact</span></Link></li>
+              <li className="divider" style={{margin: 0}}></li>
+              <li onClick={this.navbarViewChangeMap}><Link to="/" style={styles.fontWeight}><FaMap size={'26px'} /><span className="menu-item">Map/List View</span></Link></li>
+              {this.links()}
+            </ul>
           </div>
-          <ul className="side-nav" id="mobile">
-            <li><Link to="/contact" style={styles.fontWeight}><FaInfo size={'26px'} /><span className="menu-item">Contact</span></Link></li>
-            <li className="divider" style={{margin: 0}}></li>
-            <li
-              onClick={() => {
-                this.navbarViewChangeMap();
-                this.props.dispatch({type: 'TRIGGER_MAP', mapRefreshTrigger: true});
-              }}>
-              <Link to="/" style={styles.fontWeight}><FaMap size={'26px'} /><span className="menu-item">Map View</span></Link></li>
-            <li onClick={this.navbarViewChangeList}><Link to="/" style={styles.fontWeight}><FaList size={'26px'} /><span className="menu-item">List View</span></Link></li>
-            {this.links()}
-          </ul>
-        </div>
-      </nav>
+        </nav>
       </div>
     );
   }

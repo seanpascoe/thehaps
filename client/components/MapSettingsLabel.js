@@ -5,7 +5,7 @@ const MapSettingsLabel = (props) => {
   let startDate = moment(props.filter.startDate, 'x', true).format('MMM Do');
   let endDate = moment(props.filter.endDate, 'x', true).format('MMM Do');
 
-  let display = props.iw || props.view.mapDisplay === 'none' ? 'none' : 'block';
+  let display = props.iw || props.view.icon === 'map' ? 'none' : 'block';
   let eventLabelColor = props.numMapEvents < props.numFilteredEvents ? 'red' : 'white';
 
   return (
@@ -22,9 +22,6 @@ const MapSettingsLabel = (props) => {
         <span>{`Cat: ' ${props.filter.selectedCategory} '`}</span>
         <span style={{marginLeft: '10px'}}>{`Rng: ${startDate} - ${endDate}`}</span>
         <span style={{marginLeft: '10px', color: eventLabelColor}}>{`Evts: ${props.numMapEvents}/${props.numFilteredEvents}`}</span>
-        {/* <div style={{color: 'red', fontWeight: 300, display: `${props.numMapEvents === 100 ? 'block' : 'none'}`}}>
-          Map events limit exceeded! Filter, Zoom, or switch to List View
-        </div> */}
       </div>
     </div>
   )

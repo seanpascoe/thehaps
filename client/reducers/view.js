@@ -4,8 +4,8 @@ const view = (state={icon: 'view_list', mapDisplay: 'block', listDisplay: 'none'
       return {
         ...state,
         icon: action.icon,
-        mapDisplay: action.mapDisplay,
-        listDisplay: action.listDisplay
+        // mapDisplay: action.mapDisplay,
+        // listDisplay: action.listDisplay
       };
     case 'TRIGGER_MAP':
       return {

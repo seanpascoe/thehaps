@@ -29,7 +29,6 @@ export class MapView extends React.PureComponent {
 
   componentWillMount() {
     //fetches initial events for current day, and default location
-
     let startDate = this.props.filter.startDate || moment().startOf('day').format('x');
     let endDate = this.props.filter.endDate || moment().endOf('day').format('x');
     let maxLat = this.props.mapBounds.maxLat || 40.785293884504796;
@@ -44,9 +43,15 @@ export class MapView extends React.PureComponent {
     //initialialize modals
     window.jQuery('.filter-sideNav').sideNav({
       edge: 'right',
-      closeOnClick: true
+      closeOnClick: true,
+      draggable: false
     });
     window.jQuery('#event-detail').modal();
+
+    let mapDisplay = 'block';
+    let listDisplay = 'none';
+    let icon = 'view_list';
+    this.props.dispatch({type: 'VIEW_CHANGE', mapDisplay, listDisplay, icon});
 
     // if (navigator && navigator.geolocation) {
     //   navigator.geolocation.getCurrentPosition((pos) => {
@@ -65,10 +70,10 @@ export class MapView extends React.PureComponent {
 
   componentDidUpdate() {
     //this fixes the map refresh problem when moving from list to map view
-    if (this.props.view.mapRefreshTrigger === true) {
-      triggerEvent(this.refs.map, 'resize');
-      this.props.dispatch({type: 'TRIGGER_MAP', mapRefreshTrigger: false});
-    }
+    // if (this.props.view.mapRefreshTrigger === true) {
+    //   triggerEvent(this.refs.map, 'resize');
+    //   this.props.dispatch({type: 'TRIGGER_MAP', mapRefreshTrigger: false});
+    // }
   }
 
 
@@ -133,7 +138,7 @@ export class MapView extends React.PureComponent {
           key={event._id}
           icon={icon}
           position={{lat: event.lat, lng: event.lng}}
-          onClick={this.handleMarkerClick.bind(this, event)} >
+          onClick={this.handleMarkerClick.bind(this, event)}>
           {this.state.activeIW === event._id ? this.renderInfoWindow(event): null}
         </Marker> );
     });
@@ -145,11 +150,7 @@ export class MapView extends React.PureComponent {
         <MapSettingsLabel
           iw={this.state.activeIW} numMapEvents={this.props.eventsNumCheck.length} numFilteredEvents={this.props.filteredEvents.length}/>
         <GoogleMapLoader
-          containerElement={<div id="g-map"
-            // style={{display: this.props.view.mapDisplay}}
-                            >
-
-          </div>}
+          containerElement={<div id="g-map"></div>}
           googleMapElement={
             <GoogleMap
               // center={mapCenter || this.state.center}

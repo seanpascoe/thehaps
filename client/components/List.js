@@ -9,10 +9,10 @@ class List extends React.PureComponent {
     super(props);
   }
 
-  componentDidMount() {
-    //change navbar icon and path
-    this.props.dispatch({type: 'LIST_VIEW'});
-  }
+  // componentDidMount() {
+  //   //change navbar icon and path
+  //   this.props.dispatch({type: 'LIST_VIEW'});
+  // }
 
   eventDetails(id) {
     window.jQuery('#event-detail').modal('open');
