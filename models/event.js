@@ -3,6 +3,13 @@
 let mongoose = require('mongoose');
 let Schema = mongoose.Schema;
 
+let Comment = new Schema({
+  userId: String,
+  userName: String,
+  commentBody: String,
+  created: Date
+});
+
 let Event = new Schema({
   title: { type: String, required: true },
   primCategory: { type: String, required: true },
@@ -26,6 +33,7 @@ let Event = new Schema({
   lng: Number,
   creatorId: String,
   creatorEmail: String,
+  comments: [Comment],
   active: Boolean
 });
 

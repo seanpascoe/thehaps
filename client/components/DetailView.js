@@ -16,7 +16,7 @@ class DetailView extends React.Component {
   }
 
   render() {
-    let event = this.props.details.eventDetail;
+    let event = this.props.details;
     let date = moment(event.date, 'MMMM D, YYYY', true).format('dddd MMMM D, YYYY');
     let startTime = moment(event.startTime, 'HH:mm', true).format('h:mm a');
     let endTime = event.endTime ? moment(event.endTime, 'HH:mm', true).format('h:mm a') : '';

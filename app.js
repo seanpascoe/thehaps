@@ -14,6 +14,7 @@ mongoose.connect(mongoUri);
 var routes = require('./routes/index');
 var auth = require('./routes/auth');
 var events = require('./routes/events');
+var comments = require('./routes/comments');
 
 var app = express();
 
@@ -54,6 +55,7 @@ passport.deserializeUser(User.deserializeUser());
 // API ROUTES
 app.use('/api/auth', auth);
 app.use('/events', events);
+app.use('/api/comments', comments);
 
 // error handlers
 
