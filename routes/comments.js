@@ -12,7 +12,7 @@ router.post('/', (req, res) => {
       userId: req.body.userId,
       userName: req.body.userName,
       commentBody: req.body.commentBody,
-      created: Date.now()
+      created: new Date()
     });
     event.save((err, event) => {
       if(err)
