@@ -18,10 +18,9 @@ export const login = (email, password, history, redirect) => {
       localStorage.email = email;
       localStorage.username = username;
       dispatch({ type: 'LOGIN', id, token, email, username });
-      history.push(redirect);
+      if(history) history.push(redirect);
       Materialize.toast('You have signed in', 4000);
     }).fail( (data) => {
-      console.log(data);
       Materialize.toast(data.responseJSON, 4000);
     });
   };

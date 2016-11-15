@@ -22,7 +22,7 @@ router.get('/', (req, res) => {
       lng: {$gte:minLng, $lte:maxLng},
       active: true
     },
-    { description: false },
+    { description: false, comments: false },
 
     (err, events) => {
       res.json(events);

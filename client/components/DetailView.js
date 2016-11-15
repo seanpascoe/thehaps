@@ -83,9 +83,9 @@ class DetailView extends React.Component {
               <div><span style={styles.infoLabels}>{event.contactEmail ? 'Contact Email: ' : ''}</span><a href={`mailto:${event.contactEmail}`}>{event.contactEmail}</a></div>
 
               <div><span style={styles.infoLabels}>Description: </span>{event.description ? event.description : 'no description'}</div>
+              <Comments />
             </div>
           </div>
-          <Comments />
         </div>
       </div>
     );

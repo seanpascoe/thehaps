@@ -1,18 +1,30 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { addComment } from '../actions/comment';
+import { Link } from 'react-router';
+import { login } from '../actions/userauth';
 
 class Comments extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      commentValue: ''
+      commentValue: '',
+      showSignIn: false
     };
 
     this.handleCommentChange = this.handleCommentChange.bind(this);
     this.handleCommentCancel = this.handleCommentCancel.bind(this);
     this.showSubmitBox = this.showSubmitBox.bind(this);
     this.submitComment = this.submitComment.bind(this);
+    this.showSignIn = this.showSignIn.bind(this);
+    this.signIn = this.signIn.bind(this);
+  }
+
+  signIn(e) {
+    e.preventDefault();
+    let email = this.refs.email.value;
+    let password = this.refs.password.value;
+    this.props.dispatch(login(email, password));
   }
 
   handleCommentChange(e) {
@@ -36,6 +48,45 @@ class Comments extends React.Component {
     this.setState({commentValue: ''});
   }
 
+  closeDetails() {
+    window.jQuery('#event-detail').modal('close');
+  }
+
+  showSignIn() {
+    this.setState({showSignIn: !this.state.showSignIn});
+  }
+
+  signInBox() {
+    let styles = {
+      fontWeight: {fontWeight: '300'},
+      formBackground: {backgroundColor: 'rgba(128, 128, 128, 0.09)', borderRadius: '5px', padding: '5px', marginTop: '5px'},
+      submitButton: {margin: '20px 0px 15px 0px', backgroundColor: 'lightgray'}
+    };
+
+    if(this.state.showSignIn) {
+      return (
+        <form className='row' onSubmit={this.signIn} style={styles.formBackground}>
+          <div className='input-field col s4'>
+            <input type="email" ref="email" className='validate' required />
+            <label>Email</label>
+          </div>
+          <div className='input-field col s4'>
+            <input type="password" ref="password" className='validate' required />
+            <label>Password</label>
+          </div>
+          <div className="col s4">
+            <button className="btn waves-effect waves-light btn-flat" style={styles.submitButton} type="submit">Login</button>
+          </div>
+          <div className="right" style={{marginRight: '5px'}}>
+            <Link to="/signup" onClick={this.closeDetails} style={styles.fontWeight}>Don't have an account?</Link>
+          </div>
+        </form>
+      );
+    } else {
+      return '';
+    }
+  }
+
   showSubmitBox(styles) {
     if(this.props.auth.isAuthenticated) {
       return (
@@ -52,7 +103,10 @@ class Comments extends React.Component {
       );
     } else {
       return (
-        <a style={styles.addAComment}>Add a comment...</a>
+        <div>
+          <a style={styles.addAComment} onClick={this.showSignIn}>Add a comment...</a>
+          {this.signInBox()}
+        </div>
       );
     }
   }
@@ -84,15 +138,13 @@ class Comments extends React.Component {
     });
 
     return (
-      <div className="row">
-        <div className="col s12">
-          <h5>Comments</h5>
-          <div className="clearfix">
-            {this.showSubmitBox(styles)}
-          </div>
-          <div style={styles.commentSection}>
-            {comments}
-          </div>
+      <div>
+        <h5>Comments</h5>
+        <div className="clearfix">
+          {this.showSubmitBox(styles)}
+        </div>
+        <div style={styles.commentSection}>
+          {comments}
         </div>
       </div>
     );

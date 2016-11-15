@@ -9,7 +9,7 @@ const details = (state = { }, action ) => {
       return {
         ...state,
         comments: action.comments
-      }
+      };
     default:
       return state;
   }

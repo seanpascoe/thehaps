@@ -13,7 +13,7 @@ let Comment = new Schema({
 let Event = new Schema({
   title: { type: String, required: true },
   primCategory: { type: String, required: true },
-  primSubCategory: { type: String, required: true },
+  primSubCategory: String,
   secCategory: String,
   secSubCategory: String,
   locationName: { type: String, required: true },

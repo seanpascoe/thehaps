@@ -174,7 +174,7 @@ export class MapView extends React.PureComponent {
           }
         />
         <List />
-        <DetailView />
+        <DetailView />      
       </div>
     );
   }
