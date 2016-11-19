@@ -55,7 +55,13 @@ export const addEvent = (title, primCategory, primSubCategory,
   };
 };
 
-export const fetchEvents = (startDate, endDate, maxLat, minLat, maxLng, minLng) => {
+export const fetchEvents = (
+  startDate,
+  endDate,
+  maxLat = 40.785293884504796,
+  minLat = 40.703228647350485,
+  maxLng = -111.78194041035158,
+  minLng = -111.98381418964846) => {
   return(dispatch) => {
     $.ajax({
       type: 'GET',

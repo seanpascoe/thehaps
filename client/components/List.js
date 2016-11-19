@@ -5,14 +5,6 @@ import { fetchEventDetails } from '../actions/event';
 import ListSettingsLabel from './ListSettingsLabel';
 
 class List extends React.PureComponent {
-  constructor(props) {
-    super(props);
-  }
-
-  // componentDidMount() {
-  //   //change navbar icon and path
-  //   this.props.dispatch({type: 'LIST_VIEW'});
-  // }
 
   eventDetails(id) {
     window.jQuery('#event-detail').modal('open');
@@ -24,6 +16,14 @@ class List extends React.PureComponent {
 
     //gets full event details from db
     this.props.dispatch(fetchEventDetails(id));
+  }
+
+  showOnMap(e, id) {
+    window.jQuery('#listcontainer').toggle();
+    window.jQuery('#g-map').toggle();
+    e.stopPropagation();
+    this.props.handleMarkerClick(id);
+    this.props.dispatch({type: 'VIEW_CHANGE', icon: 'view_list'});
   }
 
   render() {
@@ -42,11 +42,12 @@ class List extends React.PureComponent {
       let catIcon = event.primCategory.replace(/ /g, '-').replace('&', 'and');
       let startTime = moment(event.startTime, 'HH:mm', true).format('h:mm a');
       let date = moment(event.date, 'MMMM D, YYYY', true).format('MMM Do');
+      let id = event._id
       return (
         <li
-          key={event._id}
+          key={id}
           className="modal-trigger collection-item avatar"
-          onClick={() => this.eventDetails(event._id)}
+          onClick={() => this.eventDetails(id)}
           style={{ cursor: 'pointer' }}>
           <div className="row event-row" style={styles.row}>
             <div className="col s1">
@@ -64,6 +65,7 @@ class List extends React.PureComponent {
               <div className="right" style={styles.dateTime}>
                 <div style={styles.time}>{startTime === '12:00 am' ? 'see det.' : startTime}</div>
                 <div style={styles.date}>{date}</div>
+                <div onClick={(e) => this.showOnMap(e, id)}><a>map</a></div>
               </div>
             </div>
           </div>

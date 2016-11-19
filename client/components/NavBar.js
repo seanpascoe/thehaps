@@ -50,13 +50,11 @@ class NavBar extends React.Component {
 
   viewChange() {
     let icon = this.props.view.icon;
+    window.jQuery('#g-map').toggle();
+    window.jQuery('#listcontainer').toggle();
     if(icon === 'view_list') {
-      window.jQuery('#listcontainer').show();
-      window.jQuery('#g-map').hide();
       icon = 'map';
     } else {
-      window.jQuery('#g-map').show();
-      window.jQuery('#listcontainer').hide();
       icon = 'view_list';
     }
     this.props.dispatch({type: 'VIEW_CHANGE', icon});

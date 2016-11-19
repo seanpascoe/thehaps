@@ -17,26 +17,22 @@ export class MapView extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      center: {
-        lat: 40.760984,
-        lng: -111.8828773
-      },
-      activeIW: '',
-      boundsChangedTimeout: 0
+      activeIW: ''
     };
     this.eventDetails = this.eventDetails.bind(this);
     this.handleMarkerClose = this.handleMarkerClose.bind(this);
     this.boundsChanged = this.boundsChanged.bind(this);
+    this.handleMarkerClick = this.handleMarkerClick.bind(this);
   }
 
   componentWillMount() {
     //fetches initial events for current day, and default location
     let startDate = this.props.filter.startDate || moment().startOf('day').format('x');
     let endDate = this.props.filter.endDate || moment().endOf('day').format('x');
-    let maxLat = this.props.mapBounds.maxLat || 40.785293884504796;
-    let minLat = this.props.mapBounds.minLat || 40.703228647350485;
-    let maxLng = this.props.mapBounds.maxLng || -111.78194041035158;
-    let minLng = this.props.mapBounds.minLng || -111.98381418964846;
+    let maxLat = this.props.mapBounds.maxLat;
+    let minLat = this.props.mapBounds.minLat;
+    let maxLng = this.props.mapBounds.maxLng;
+    let minLng = this.props.mapBounds.minLng;
 
     this.props.dispatch(fetchEvents(startDate, endDate, maxLat, minLat, maxLng, minLng));
   }
@@ -75,6 +71,13 @@ export class MapView extends React.PureComponent {
     }
   }
 
+  componentWillUnmount() {
+    const lat = this.refs.map.getCenter().lat();
+    const lng = this.refs.map.getCenter().lng();
+    const zoom = this.refs.map.getZoom();
+    this.props.dispatch({type: 'SET_DEFAULT_MAPCENTER_AND_MAPZOOM', lat, lng, zoom});
+  }
+
 
   boundsChanged() {
     const maxLat = this.refs.map.getBounds().getNorthEast().lat();
@@ -87,8 +90,8 @@ export class MapView extends React.PureComponent {
       maxLat, minLat, maxLng, minLng));
   }
 
-  handleMarkerClick(marker) {
-    this.setState({activeIW: marker._id});
+  handleMarkerClick(id) {
+    this.setState({activeIW: id});
   }
 
   handleMarkerClose() {
@@ -137,7 +140,7 @@ export class MapView extends React.PureComponent {
           key={event._id}
           icon={icon}
           position={{lat: event.lat, lng: event.lng}}
-          onClick={this.handleMarkerClick.bind(this, event)}>
+          onClick={this.handleMarkerClick.bind(this, event._id)}>
           {this.state.activeIW === event._id ? this.renderInfoWindow(event): null}
         </Marker> );
     });
@@ -153,8 +156,8 @@ export class MapView extends React.PureComponent {
           googleMapElement={
             <GoogleMap
               // center={mapCenter || this.state.center}
-              defaultCenter={this.state.center}
-              defaultZoom={13}
+              defaultCenter={this.props.map.defMapCenter}
+              defaultZoom={this.props.map.defMapZoom}
               ref='map'
               onClick={this.handleMarkerClose}
               onDragend={this.boundsChanged}
@@ -173,8 +176,8 @@ export class MapView extends React.PureComponent {
             </GoogleMap>
           }
         />
-        <List />
-        <DetailView />      
+        <List handleMarkerClick={this.handleMarkerClick} />
+        <DetailView />
       </div>
     );
   }
@@ -185,6 +188,7 @@ const mapStateToProps = (state) => {
     filteredEvents: getFilteredEvents(state),
     eventsNumCheck: getEventsNumCheck(state),
     mapBounds: state.map.mapBounds,
+    map: state.map,
     filter: state.filter,
     view: state.view
   };

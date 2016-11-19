@@ -1,4 +1,4 @@
-const map = (state = {mapBounds: ''}, action) => {
+const map = (state = {mapBounds: '', defMapCenter: {lat: 40.760984, lng: -111.8828773}, defMapZoom: 13}, action) => {
   switch (action.type) {
     case 'GET_EVENTS':
       return {
@@ -9,14 +9,15 @@ const map = (state = {mapBounds: ''}, action) => {
           maxLng: action.maxLng,
           minLng: action.minLng
         }
-      }
-    case 'SET_MAPCENTER':
+      };
+    case 'SET_DEFAULT_MAPCENTER_AND_MAPZOOM':
       return {
         ...state,
-        mapCenter: {
+        defMapCenter: {
           lat: action.lat,
           lng: action.lng
-        }
+        },
+        defMapZoom: action.zoom
       };
     case 'SET_USERLOCATION':
       return {

@@ -60,7 +60,7 @@ class DetailView extends React.Component {
               <div className="center" style={styles.categories}>{event.primCategory}{event.primSubCategory ? ` : ${event.primSubCategory}` : ''}</div>
               <div className="center" style={styles.categories}>{event.secCategory ? ` ${event.secCategory}` : ''}{event.secSubCategory ? ` : ${event.secSubCategory}` : ''}</div>
             </div>
-            <div className="col s12 m4" style={styles.divMargin}>
+            <div className="col s12 l4" style={styles.divMargin}>
               <div style={styles.date}>{date}</div>
               <div style={styles.time}>{`Time: ${startTime}` }{endTime ? ` - ${endTime}` : ''}</div>
 
@@ -75,7 +75,7 @@ class DetailView extends React.Component {
               {event.url ? <div style={styles.url}><a href={event.url} target="_blank">Event Link <FaLink size={'17px'} /></a></div> : ''}
             </div>
 
-            <div className="col s12 m8" style={styles.divMargin}>
+            <div className="col s12 l8" style={styles.divMargin}>
               <div><span style={styles.infoLabels}>{event.host ? 'Hosted By: ' : ''}</span>{event.host}</div>
 
               <div><span style={styles.infoLabels}>{event.contactNumber ? 'Contact Phone: ' : ''}</span><a href={`tel:${event.contactNumber}`}>{event.contactNumber}</a></div>
