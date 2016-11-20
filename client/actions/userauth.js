@@ -19,9 +19,11 @@ export const login = (email, password, history, redirect) => {
       localStorage.username = username;
       dispatch({ type: 'LOGIN', id, token, email, username });
       if(history) history.push(redirect);
-      Materialize.toast('You have signed in', 4000);
+      Materialize.toast('Login success. Welcome!', 4000);
+      dispatch({type: 'LOGIN_LOADING_DONE'});
     }).fail( (data) => {
       Materialize.toast(data.responseJSON, 4000);
+      dispatch({type: 'LOGIN_LOADING_DONE'});
     });
   };
 };
@@ -46,7 +48,7 @@ export const signup = (email, password, username, history, redirect) => {
       Materialize.toast('Successfully signed up!', 4000);
     }).fail( (data) => {
       if(data.responseJSON.code === 11000) {
-        Materialize.toast('Email already exists', 4000);
+        Materialize.toast('A user with that email already exists', 4000);
       } else if(data.responseJSON.message) {
         Materialize.toast(data.responseJSON.message, 4000);
       } else {

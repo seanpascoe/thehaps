@@ -10,7 +10,7 @@ import MdClose from 'react-icons/lib/md/close';
 class Filter extends React.Component {
   constructor(props) {
     super(props);
-    this.state= {categories};
+    this.state = {categories};
     this.dateSelect = this.dateSelect.bind(this);
   }
 

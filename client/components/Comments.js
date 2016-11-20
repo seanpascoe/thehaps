@@ -9,7 +9,8 @@ class Comments extends React.Component {
     super(props);
     this.state = {
       commentValue: '',
-      showSignIn: false
+      showSignIn: false,
+      signInLoading: false
     };
 
     this.handleCommentChange = this.handleCommentChange.bind(this);
@@ -22,6 +23,7 @@ class Comments extends React.Component {
 
   signIn(e) {
     e.preventDefault();
+    this.props.dispatch({type: 'LOGIN_LOADING'});
     let email = this.refs.email.value;
     let password = this.refs.password.value;
     this.props.dispatch(login(email, password));
@@ -63,6 +65,18 @@ class Comments extends React.Component {
       submitButton: {margin: '20px 0px 15px 0px', backgroundColor: 'lightgray'}
     };
 
+    let spinner = (<div className="preloader-wrapper small active" style={{width: '25px', height: '25px', marginTop: '5px',}}>
+                    <div className="spinner-layer spinner-blue-only">
+                      <div className="circle-clipper left">
+                        <div className="circle"></div>
+                      </div><div className="gap-patch">
+                        <div className="circle"></div>
+                      </div><div className="circle-clipper right">
+                        <div className="circle"></div>
+                      </div>
+                    </div>
+                  </div>);
+
     if(this.state.showSignIn) {
       return (
         <form className='row' onSubmit={this.signIn} style={styles.formBackground}>
@@ -75,7 +89,7 @@ class Comments extends React.Component {
             <label>Password</label>
           </div>
           <div className="col s4">
-            <button className="btn waves-effect waves-light btn-flat" style={styles.submitButton} type="submit">Login</button>
+            <button className="btn waves-effect btn-flat" style={styles.submitButton} type="submit">{this.props.loginLoading ? spinner : 'Login'}</button>
           </div>
           <div className="right" style={{marginRight: '5px'}}>
             <Link to="/signup" onClick={this.closeDetails} style={styles.fontWeight}>Don't have an account?</Link>
@@ -115,7 +129,7 @@ class Comments extends React.Component {
   render() {
     const styles = {
       cancel: {marginRight: '15px', cursor: 'pointer'},
-      submit: {cursor: 'pointer'},
+      submit: {cursor: 'pointer', marginRight: '10px'},
       commentSection: {borderTop: '2px solid #9e9e9e', marginTop: '20px'},
       commentBlock: {borderBottom: '1px solid #9e9e9e', padding: '20px 10px 10px'},
       commentBody: {fontSize: '14px'},
@@ -155,6 +169,7 @@ const mapStateToProps = (state) => {
   return {
     details: state.details,
     auth: state.auth,
+    loginLoading: state.view.loginLoading
   };
 };
 
