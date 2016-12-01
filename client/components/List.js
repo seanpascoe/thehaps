@@ -62,7 +62,7 @@ class List extends React.PureComponent {
               </p>
             </div>
             <div className="col s3">
-              <div className="right" style={styles.dateTime}>
+              <div id="listRightCol" className="right" style={styles.dateTime}>
                 <div style={styles.time}>{startTime === '12:00 am' ? 'see det.' : startTime}</div>
                 <div style={styles.date}>{date}</div>
                 <div onClick={(e) => this.showOnMap(e, id)}><a>map</a></div>

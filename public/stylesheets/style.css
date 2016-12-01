@@ -88,6 +88,15 @@ nav a.button-collapse i,
   }
 }
 
+@media (max-width: 401px) {
+  #listRightCol {
+    font-size: 13px;
+  }
+  #settingslabel {
+    font-size: 12px;
+  }
+}
+
 .collection .collection-item:hover {
   background-color: rgba(0,0,0, 0.02);
 }
