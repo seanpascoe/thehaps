@@ -27,8 +27,10 @@ export class MapView extends React.PureComponent {
 
   componentWillMount() {
     //fetches initial events for current day, and default location
-    let startDate = this.props.filter.startDate || moment().startOf('day').format('x');
-    let endDate = this.props.filter.endDate || moment().endOf('day').format('x');
+    let today = Date.now();
+
+    let startDate = this.props.filter.startDate || moment(today).startOf('day').format('x');
+    let endDate = this.props.filter.endDate || moment(today).endOf('day').format('x');
     let maxLat = this.props.mapBounds.maxLat;
     let minLat = this.props.mapBounds.minLat;
     let maxLng = this.props.mapBounds.maxLng;
