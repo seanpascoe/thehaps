@@ -45,7 +45,7 @@ var config = {
       {
         test: /\.js$/,
         loader: 'babel',
-        exclude: /node_modules/
+        exclude: [/node_modules/, /eventutils/]
       },
       { test: /\.less$/, loader: 'style!css!less' }
     ]
