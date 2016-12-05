@@ -1,9 +1,7 @@
 'use strict'
-var fs = require('fs');
 var moment = require('moment');
-var https = require('https');
 var mongoose = require('mongoose');
-var Event = require('./event');
+var Event = require('../models/event');
 
 var mongoUri = process.env.MONGODB_URI || 'mongodb://localhost/thehaps';
 mongoose.connect(mongoUri);
