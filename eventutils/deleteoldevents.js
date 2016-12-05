@@ -21,6 +21,7 @@ function getOldEvents() {
 }
 
 getOldEvents().then(result => {
+  console.log(endOfYesterday);
   console.log(result);
   mongoose.disconnect()
 });
