@@ -61,7 +61,7 @@ var eventsSkip = parseInt(process.argv[3]) || 0;
 
 var daysSkip = parseInt(process.argv[4]) || 0;
 
-var startDate = moment().utcOffset("-07:00").add(daysSkip, 'days').format('YYYY-MM-DD');
+var startDate = moment().utcOffset("+07:00").add(daysSkip, 'days').format('YYYY-MM-DD');
 
 var eventsParam = `{"searchKeywords":null,"venueKeywords":null,"search":"","longitude":-111.888221740723,"latitude":40.760311126709,"distance":50,"limit":${eventsLimit},"categories":[],"skip":${eventsSkip},"start":"${startDate}T00:00:00.000Z","end":null,"sortby":"start","sortdir":"asc","onlySparked":false,"oneSort":false,"deals":false,"hier":[2,5299,5300],"possible":false,"ppid":8315,"blockedCategories":[],"blockedKeywords":["x96","x96 live","x96 event","Eagle live","Eagle event","mix 1079","mix live","mix event","mix pop-up","u92","u92 live","u92 event","espn 700","espn 960","Cougar Sports Live","Bill Riley","rewind:","rewind 100.7","rewind live","rewind event","rewind night"],"hoursOffset":7,"venue":null,"exact":false,"interest":50,"eventPIds":null,"defaultCat":true,"metric":false,"handPicked":false,"bhier":[2,5299,5300],"labels":[]}`
 
@@ -217,10 +217,10 @@ function processEvents(err, result) {
         var city = event.CityState.split(', ')[0];
         var state = event.CityState.split(', ')[1];
         var description = event.Description;
-        var date = moment(event.Date).utcOffset("-07:00").format('MMMM D, YYYY');
-        var startTime = moment(event.DateStart).utcOffset("-07:00").format('HH:mm');
-        var endTime = typeof event.DateEnd == 'string' ? moment(event.DateEnd).utcOffset("-07:00").format('HH:mm') : '';
-        var timeValue = parseInt(moment(`${date}, ${startTime}`, 'MMMM D, YYYY, HH:mm', true).utcOffset("-07:00").format('x'));
+        var date = moment(event.Date).utcOffset("+07:00").format('MMMM D, YYYY');
+        var startTime = moment(event.DateStart).utcOffset("+07:00").format('HH:mm');
+        var endTime = typeof event.DateEnd == 'string' ? moment(event.DateEnd).utcOffset("+07:00").format('HH:mm') : '';
+        var timeValue = parseInt(moment(`${date}, ${startTime}`, 'MMMM D, YYYY, HH:mm', true).utcOffset("+07:00").format('x'));
         var url = (function() {
           if(typeof event.Links.jsLink !== 'undefined') {
             return event.Links.jsLink.url
