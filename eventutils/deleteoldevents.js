@@ -6,7 +6,7 @@ var Event = require('../models/event');
 var mongoUri = process.env.MONGODB_URI || 'mongodb://localhost/thehaps';
 mongoose.connect(mongoUri);
 
-var endOfYesterday = moment().utc().utcOffset("-07:00").subtract(1, 'days').endOf('day').format('x');
+var endOfYesterday = moment().utc().utcOffset('-07:00').subtract(1, 'days').endOf('day').format('x');
 
 //find old events
 function getOldEvents() {
@@ -21,7 +21,6 @@ function getOldEvents() {
 }
 
 getOldEvents().then(result => {
-  console.log(endOfYesterday);
   console.log(result);
   mongoose.disconnect()
 });
