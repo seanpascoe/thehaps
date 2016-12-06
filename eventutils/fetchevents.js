@@ -220,7 +220,8 @@ function processEvents(err, result) {
         var date = moment.utc(event.Date).format('MMMM D, YYYY');
         var startTime = moment.utc(event.DateStart).format('HH:mm');
         var endTime = typeof event.DateEnd == 'string' ? moment.utc(event.DateEnd).format('HH:mm') : '';
-        var timeValue = parseInt(moment(`${date}, ${startTime}`, 'MMMM D, YYYY, HH:mm', true).tz('America/Denver').format('x'));
+        var tzOffset = moment(`${date}, ${startTime}`, 'MMMM D, YYYY, HH:mm', true).tz("America/Denver").format('ZZ');
+        var timeValue = parseInt(moment(`${date}, ${startTime} ${tzOffset}`, 'MMMM D, YYYY, HH:mm ZZ', true).format('x'));
         var url = (function() {
           if(typeof event.Links.jsLink !== 'undefined') {
             return event.Links.jsLink.url
