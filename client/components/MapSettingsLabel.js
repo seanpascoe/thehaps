@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import moment from 'moment';
 
 const MapSettingsLabel = (props) => {
   let startDate = moment(props.filter.startDate, 'x', true).format('MMM Do');

@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { addEvent } from '../actions/event';
 import categories from './categories';
 import $ from 'jquery';
-import moment from 'moment';
 import FaCalendar from 'react-icons/lib/fa/calendar-plus-o';
 import FaClock from 'react-icons/lib/fa/clock-o';
 import FaPhone from 'react-icons/lib/fa/phone';

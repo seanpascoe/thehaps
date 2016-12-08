@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { addComment } from '../actions/comment';
 import { Link } from 'react-router';
 import { login } from '../actions/userauth';
-import moment from 'moment';
 
 class Comments extends React.Component {
   constructor(props) {
