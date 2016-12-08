@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { getSortedEvents } from '../selectors/selectors';
 import { fetchEventDetails } from '../actions/event';
 import ListSettingsLabel from './ListSettingsLabel';
+import moment from 'moment';
 
 class List extends React.PureComponent {
 

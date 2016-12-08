@@ -5,6 +5,7 @@ import FaDirections from 'react-icons/lib/md/directions';
 import FaLink from 'react-icons/lib/fa/external-link';
 import FaCalendar from 'react-icons/lib/fa/calendar-plus-o';
 import MdClose from 'react-icons/lib/md/close';
+import moment from 'moment';
 
 class DetailView extends React.Component {
   constructor(props) {

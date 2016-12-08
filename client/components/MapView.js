@@ -10,6 +10,7 @@ import DetailView from './DetailView';
 import Filter from './Filter';
 import FilterButton from './FilterButton';
 import MapSettingsLabel from './MapSettingsLabel';
+import moment from 'moment';
 
 
 

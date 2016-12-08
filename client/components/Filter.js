@@ -6,6 +6,7 @@ import FaFilter from 'react-icons/lib/fa/filter';
 import FaCalendar from 'react-icons/lib/fa/calendar';
 import FaSlider from 'react-icons/lib/fa/sliders';
 import MdClose from 'react-icons/lib/md/close';
+import moment from 'moment';
 
 class Filter extends React.Component {
   constructor(props) {
