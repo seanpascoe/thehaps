@@ -50,7 +50,7 @@ export const addEvent = (title, primCategory, primSubCategory,
       console.log('post problem', data);
       console.log('text', text);
       console.log('error', err);
-      Materialize.toast('Uh, oh! There was a problem.', 4000);
+      Materialize.toast(`Uh, oh! There was a problem: ${text}`, 4000);
     });
   };
 };

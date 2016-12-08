@@ -65,7 +65,9 @@ router.post('/', (req, res) => {
   }).save((err, event) => {
     if (err) {
       console.log('this err', err);
+      res.status(500);
       res.json(err);
+      res.end();
     }
     res.json(event);
   });
