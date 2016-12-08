@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { addEvent } from '../actions/event';
 import categories from './categories';
-import $ from 'jquery';
+// import $ from 'jquery';
 import FaCalendar from 'react-icons/lib/fa/calendar-plus-o';
 import FaClock from 'react-icons/lib/fa/clock-o';
 import FaPhone from 'react-icons/lib/fa/phone';
@@ -67,7 +67,7 @@ class AddEvent extends React.Component {
     let mapCity = city.split(' ').join('+').replace(/\./g, '');
     let mapState = state.split(' ').join('+').replace(/\./g, '');
 
-    $.ajax({
+    window.jQuery.ajax({
       url: `https://maps.googleapis.com/maps/api/geocode/json?address=${mapAddress},+${mapCity},+${mapState}&key=AIzaSyBDnrHjFasPDwXmFQ1XUAyt1Q1uAPju8TI`,
       type: 'GET',
       dataType: 'JSON'

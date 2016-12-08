@@ -1,10 +1,10 @@
-import $ from 'jquery';
+// import $ from 'jquery';
 
 const getToken = () => Math.random().toString(36).substring(7);
 
 export const login = (email, password, history, redirect) => {
   return (dispatch) => {
-    $.ajax({
+    window.jQuery.ajax({
       url: '/api/auth/signin',
       type: 'POST',
       data: ({ email, password })
@@ -30,7 +30,7 @@ export const login = (email, password, history, redirect) => {
 
 export const signup = (email, password, username, history, redirect) => {
   return (dispatch) => {
-    $.ajax({
+    window.jQuery.ajax({
       url: '/api/auth/signup',
       type: 'POST',
       data: { email, password, username }

@@ -1,4 +1,4 @@
-import $ from 'jquery';
+// import $ from 'jquery';
 
 const event = (type, data) => {
   return {
@@ -34,7 +34,7 @@ export const addEvent = (title, primCategory, primSubCategory,
                            url, host, contactEmail, contactNumber, lat, lng,
                            creatorId, creatorEmail) => {
   return(dispatch) => {
-    $.ajax({
+    window.jQuery.ajax({
       url: '/events',
       type: 'POST',
       data: { title, primCategory, primSubCategory,
@@ -63,7 +63,7 @@ export const fetchEvents = (
   maxLng = -111.78194041035158,
   minLng = -111.98381418964846) => {
   return(dispatch) => {
-    $.ajax({
+    window.jQuery.ajax({
       type: 'GET',
       url: '/events',
       data: {startDate, endDate, maxLat, minLat, maxLng, minLng}
@@ -83,7 +83,7 @@ const getEvents = (events, startDate, endDate, maxLat, minLat, maxLng, minLng) =
 
 export const fetchEventDetails = (id) => {
   return(dispatch) => {
-    $.ajax({
+    window.jQuery.ajax({
       type: 'GET',
       url: '/events/details',
       data: {id}
