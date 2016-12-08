@@ -35,7 +35,7 @@ export const addEvent = (title, primCategory, primSubCategory,
                            creatorId, creatorEmail) => {
   return(dispatch) => {
     window.jQuery.ajax({
-      url: '/events',
+      url: '/api/events',
       type: 'POST',
       data: { title, primCategory, primSubCategory,
                secCategory, secSubCategory, locationName,
@@ -65,7 +65,7 @@ export const fetchEvents = (
   return(dispatch) => {
     window.jQuery.ajax({
       type: 'GET',
-      url: '/events',
+      url: '/api/events',
       data: {startDate, endDate, maxLat, minLat, maxLng, minLng}
     }).done( events => {
       dispatch(getEvents(events, startDate, endDate, maxLat, minLat, maxLng, minLng));
@@ -85,7 +85,7 @@ export const fetchEventDetails = (id) => {
   return(dispatch) => {
     window.jQuery.ajax({
       type: 'GET',
-      url: '/events/details',
+      url: '/api/events/details',
       data: {id}
     }).done( event => {
       dispatch(setEventDetail(event));
