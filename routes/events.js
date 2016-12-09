@@ -17,10 +17,10 @@ router.get('/', (req, res) => {
 
   Event.find(
     {
+      active: true,
       timeValue: {$gte:startDate, $lte:endDate},
       lat: {$gte:minLat, $lte:maxLat},
-      lng: {$gte:minLng, $lte:maxLng},
-      active: true
+      lng: {$gte:minLng, $lte:maxLng}
     },
     { description: false, comments: false },
 
