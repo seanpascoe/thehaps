@@ -1,7 +1,5 @@
 'use strict'
-// var fs = require('fs');
 var xml2js = require('xml2js');
-// var util = require('util');
 var processors = require('xml2js/lib/processors');
 var request = require('request');
 var moment = require('moment-timezone');

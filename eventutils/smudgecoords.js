@@ -1,7 +1,4 @@
 'use strict'
-// var fs = require('fs');
-// var moment = require('moment');
-// var https = require('https');
 var mongoose = require('mongoose');
 var Event = require('../models/event');
 
@@ -59,7 +56,7 @@ function getIds(arr) {
       mongoose.disconnect();
     })
   });
-};
+}
 
 
 function modifyCoords(id) {
