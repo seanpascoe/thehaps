@@ -25,11 +25,11 @@ function getDups() {
             count: { $gt : 1 }
         }}
     ], function (err, result) {
-        if (err) {
-          console.log(err);
-          reject(err)
-        }
-        resolve(result)
+      if (err) {
+        console.log(err);
+        reject(err)
+      }
+      resolve(result)
     });
   });
 }
