@@ -28,10 +28,7 @@ export class MapView extends React.PureComponent {
     //fetches initial events for current day, and default location
     let startDate = this.props.filter.startDate || moment().startOf('day').format('x');
     let endDate = this.props.filter.endDate || moment().endOf('day').format('x');
-    let maxLat = this.props.mapBounds.maxLat;
-    let minLat = this.props.mapBounds.minLat;
-    let maxLng = this.props.mapBounds.maxLng;
-    let minLng = this.props.mapBounds.minLng;
+    let { maxLat, minLat, maxLng, minLng } = this.props.mapBounds;
 
     this.props.dispatch(fetchEvents(startDate, endDate, maxLat, minLat, maxLng, minLng));
   }
@@ -48,19 +45,26 @@ export class MapView extends React.PureComponent {
     this.props.dispatch({type: 'VIEW_CHANGE', icon: 'view_list'});
 
 
-    // if (navigator && navigator.geolocation) {
-    //   navigator.geolocation.getCurrentPosition((pos) => {
-    //     const coords = pos.coords;
-    //     this.setState({
-    //       center: {
-    //         lat: coords.latitude,
-    //         lng: coords.longitude
-    //       }
-    //     });
-    //     this.refs.map.panTo(this.state.center);
-    //     this.boundsChanged();
-    //   });
-    // }
+    if (navigator && navigator.geolocation) {
+      // navigator.geolocation.getCurrentPosition(function(success) { /* Do some magic. */ },
+      //   function(failure) {
+      //     console.log(failure)
+      //   }
+      // );
+
+      navigator.geolocation.getCurrentPosition((pos) => {
+        console.log(pos)
+        const coords = pos.coords;
+        this.setState({
+          center: {
+            lat: coords.latitude,
+            lng: coords.longitude
+          }
+        });
+        this.refs.map.panTo(this.state.center);
+        this.boundsChanged();
+      });
+    }
   }
 
   componentDidUpdate(prevProps) {
