@@ -148,6 +148,7 @@ export class MapView extends React.PureComponent {
       <Marker
         key={'userPosition'}
         icon={{url: `/images/icons/user-location.svg`}}
+        clickable={false}
         position={{lat: parseFloat(this.state.userLocation.lat), lng: parseFloat(this.state.userLocation.lng)}}>
       </Marker>
 
