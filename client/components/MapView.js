@@ -16,7 +16,9 @@ export class MapView extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      activeIW: ''
+      activeIW: '',
+      userLocation: {},
+      hasUserLocation: false
     };
     this.eventDetails = this.eventDetails.bind(this);
     this.handleMarkerClose = this.handleMarkerClose.bind(this);
@@ -46,22 +48,16 @@ export class MapView extends React.PureComponent {
 
 
     if (navigator && navigator.geolocation) {
-      // navigator.geolocation.getCurrentPosition(function(success) { /* Do some magic. */ },
-      //   function(failure) {
-      //     console.log(failure)
-      //   }
-      // );
-
       navigator.geolocation.getCurrentPosition((pos) => {
-        console.log(pos)
         const coords = pos.coords;
         this.setState({
-          center: {
+          userLocation: {
             lat: coords.latitude,
             lng: coords.longitude
-          }
+          },
+          hasUserLocation: true
         });
-        this.refs.map.panTo(this.state.center);
+        this.refs.map.panTo(this.state.userLocation);
         this.boundsChanged();
       });
     }
@@ -148,6 +144,13 @@ export class MapView extends React.PureComponent {
         </Marker> );
     });
 
+    let userLocationMarker = () =>
+      <Marker
+        key={'userPosition'}
+        icon={{url: `/images/icons/user-location.svg`}}
+        position={{lat: parseFloat(this.state.userLocation.lat), lng: parseFloat(this.state.userLocation.lng)}}>
+      </Marker>
+
     return (
       <div ref="mapListWrapper" id="map-list-wrapper">
         <FilterButton />
@@ -175,7 +178,7 @@ export class MapView extends React.PureComponent {
                 }
               }}
             >
-              {eventMarkers}
+              {[...eventMarkers, userLocationMarker()]}
             </GoogleMap>
           }
         />
