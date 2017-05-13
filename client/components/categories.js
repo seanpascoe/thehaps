@@ -14,7 +14,7 @@ const categories =
        'folk',
        'funk',
        'heavy metal',
-       'hip hip',
+       'hip hop',
        'jazz',
        'karaoke',
        'latin',
