@@ -13,18 +13,11 @@ import MapSettingsLabel from './MapSettingsLabel';
 
 
 export class MapView extends React.PureComponent {
-  constructor(props) {
-    super(props);
-    this.state = {
-      activeIW: '',
-      userLocation: {},
-      hasUserLocation: false
-    };
-    this.eventDetails = this.eventDetails.bind(this);
-    this.handleMarkerClose = this.handleMarkerClose.bind(this);
-    this.boundsChanged = this.boundsChanged.bind(this);
-    this.handleMarkerClick = this.handleMarkerClick.bind(this);
-  }
+  state = {
+    activeIW: '',
+    userLocation: {},
+    hasUserLocation: false
+  };
 
   componentWillMount() {
     //fetches initial events for current day, and default location
@@ -78,7 +71,7 @@ export class MapView extends React.PureComponent {
   }
 
 
-  boundsChanged() {
+  boundsChanged = () => {
     const maxLat = this.refs.map.getBounds().getNorthEast().lat();
     const minLat = this.refs.map.getBounds().getSouthWest().lat();
     const maxLng = this.refs.map.getBounds().getNorthEast().lng();
@@ -89,15 +82,15 @@ export class MapView extends React.PureComponent {
       maxLat, minLat, maxLng, minLng));
   }
 
-  handleMarkerClick(id) {
+  handleMarkerClick = (id) => {
     this.setState({activeIW: id});
   }
 
-  handleMarkerClose() {
+  handleMarkerClose = () => {
     this.setState({activeIW: ''});
   }
 
-  eventDetails(id) {
+  eventDetails = (id) => {
     window.jQuery('#event-detail').modal('open');
     window.jQuery('#event-detail').scrollTop(0);
 
@@ -109,7 +102,7 @@ export class MapView extends React.PureComponent {
     this.props.dispatch(fetchEventDetails(id));
   }
 
-  renderInfoWindow(event) {
+  renderInfoWindow = (event) => {
     let startTime = moment(event.startTime, 'HH:mm', true).format('h:mm a');
     return (
       <InfoWindow
