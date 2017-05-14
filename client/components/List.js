@@ -6,7 +6,7 @@ import ListSettingsLabel from './ListSettingsLabel';
 
 class List extends React.PureComponent {
 
-  eventDetails(id) {
+  eventDetails = (id) => {
     window.jQuery('#event-detail').modal('open');
     window.jQuery('#event-detail').scrollTop(0);
 
@@ -18,7 +18,7 @@ class List extends React.PureComponent {
     this.props.dispatch(fetchEventDetails(id));
   }
 
-  showOnMap(e, id) {
+  showOnMap = (e, id) => {
     window.jQuery('#listcontainer').toggle();
     window.jQuery('#g-map').toggle();
     e.stopPropagation();
