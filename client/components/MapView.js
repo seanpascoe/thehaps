@@ -164,6 +164,7 @@ export class MapView extends React.PureComponent {
               onZoomChanged={this.boundsChanged}
               defaultOptions={{
                 mapTypeControl: false,
+                fullscreenControl: false,
                 streetViewControl: false,
                 styles: mapstyle.styles,
                 clickableIcons: false,
