@@ -54,7 +54,7 @@ function deleteDups(arr) {
         if(err) {
           reject(err);
         }
-        resolve(doc._id + ' was removed!');
+        resolve(doc._id + ' event was removed!');
       });
     });
   });
